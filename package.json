@@ -56,6 +56,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/styles/tokens.css src/styles/theme.css dist/",
+    "prepare": "npm run build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "check:package": "publint",
