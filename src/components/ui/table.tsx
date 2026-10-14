@@ -1,10 +1,25 @@
 import type { ComponentProps } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn.js";
 
-export function Table({ className, ...props }: ComponentProps<"table">) {
+const tableVariants = cva("w-full border-collapse text-sm", {
+  variants: {
+    variant: {
+      default: "",
+      grid: "[&_td]:border-r [&_th]:border-r [&_td]:border-border-subtle [&_th]:border-border-subtle [&_td:last-child]:border-r-0 [&_th:last-child]:border-r-0"
+    }
+  },
+  defaultVariants: { variant: "default" }
+});
+
+export function Table({
+  variant,
+  className,
+  ...props
+}: ComponentProps<"table"> & VariantProps<typeof tableVariants>) {
   return (
     <div className="w-full overflow-x-auto">
-      <table {...props} className={cn("w-full border-collapse text-sm", className)} />
+      <table {...props} className={cn(tableVariants({ variant }), className)} />
     </div>
   );
 }
@@ -26,16 +41,22 @@ export function TableRow({ className, ...props }: ComponentProps<"tr">) {
   );
 }
 
-export function TableHead({ className, ...props }: ComponentProps<"th">) {
-  return (
-    <th
-      {...props}
-      className={cn(
-        "h-10 px-4 text-left font-mono text-xs font-normal uppercase tracking-caps text-muted-foreground",
-        className
-      )}
-    />
-  );
+const tableHeadVariants = cva("px-4 text-left font-normal text-muted-foreground", {
+  variants: {
+    variant: {
+      caps: "h-10 text-xs uppercase tracking-caps",
+      plain: "h-9 text-sm"
+    }
+  },
+  defaultVariants: { variant: "caps" }
+});
+
+export function TableHead({
+  variant,
+  className,
+  ...props
+}: ComponentProps<"th"> & VariantProps<typeof tableHeadVariants>) {
+  return <th {...props} className={cn(tableHeadVariants({ variant }), className)} />;
 }
 
 export function TableCell({ className, ...props }: ComponentProps<"td">) {

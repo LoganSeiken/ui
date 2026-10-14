@@ -11,7 +11,8 @@ export const badgeVariants = cva(
         success: "border-transparent bg-success-subtle text-success-subtle-foreground",
         warning: "border-warning-border bg-warning-subtle text-warning-subtle-foreground",
         danger: "border-transparent bg-destructive-subtle text-destructive-subtle-foreground",
-        outline: "border-border bg-surface text-muted-foreground"
+        outline: "border-border bg-surface text-muted-foreground",
+        "success-outline": "border-chart-success bg-surface text-success-subtle-foreground"
       },
       shape: { pill: "rounded-pill", square: "rounded-sm" }
     },

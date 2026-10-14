@@ -4,8 +4,22 @@ import type { ComponentProps, ReactNode } from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { cn } from "../../utils/cn.js";
 
-export function RadioGroup({ className, ...props }: ComponentProps<typeof RadioGroupPrimitive.Root>) {
-  return <RadioGroupPrimitive.Root {...props} className={cn("grid gap-2", className)} />;
+export function RadioGroup({
+  variant = "separate",
+  className,
+  ...props
+}: ComponentProps<typeof RadioGroupPrimitive.Root> & { variant?: "separate" | "joined" }) {
+  return (
+    <RadioGroupPrimitive.Root
+      {...props}
+      data-variant={variant}
+      className={cn(
+        "group/radio grid",
+        variant === "joined" ? "divide-y divide-border overflow-hidden rounded-md border border-border" : "gap-2",
+        className
+      )}
+    />
+  );
 }
 
 function Indicator() {
@@ -43,7 +57,7 @@ export function RadioCard({ title, description, icon, className, ...props }: Rad
     <RadioGroupPrimitive.Item
       {...props}
       className={cn(
-        "group flex w-full items-start gap-3 rounded-md border border-border bg-surface p-4 text-left transition-colors duration-(--ui-duration-fast) hover:bg-surface-subtle focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 data-[state=checked]:border-primary data-[state=checked]:bg-muted",
+        "group flex w-full items-start gap-3 rounded-md border border-border bg-surface p-4 text-left group-data-[variant=joined]/radio:rounded-none group-data-[variant=joined]/radio:border-0 transition-colors duration-(--ui-duration-fast) hover:bg-surface-subtle focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 data-[state=checked]:border-primary data-[state=checked]:bg-surface-subtle",
         className
       )}
     >

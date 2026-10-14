@@ -39,7 +39,7 @@ export function TabsTrigger({ className, ...props }: ComponentProps<typeof TabsP
         "text-sm text-muted-foreground transition-colors duration-(--ui-duration-fast) focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 data-[state=active]:text-foreground",
         variant === "underline"
           ? "-mb-px border-b-2 border-transparent px-1 py-2 data-[state=active]:border-primary"
-          : "flex flex-col items-center gap-1 bg-surface p-3 text-center hover:bg-surface-subtle data-[state=active]:bg-muted",
+          : "flex flex-col items-center gap-2 bg-surface p-4 text-center hover:bg-surface-subtle data-[state=active]:bg-surface-subtle data-[state=active]:shadow-[inset_0_-2px_0_0_var(--ui-primary)]",
         className
       )}
     />

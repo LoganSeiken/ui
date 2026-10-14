@@ -14,7 +14,7 @@ El ADR 0001 limitaba el paquete a `Button` y posponía Storybook, Vitest y Chang
 - Comportamiento accesible con Radix UI, variantes con `class-variance-authority` e íconos con `lucide-react`. Son dependencias del paquete.
 - Los componentes solo consumen tokens semánticos (`--ui-*`) mediante el tema de Tailwind. Los valores observados viven en primitivos de `tokens.css`.
 - Client Components solo donde hay estado o primitivas Radix; el resto es renderizable en servidor.
-- Se mantiene npm como gestor. Storybook, Vitest y Playwright se incorporan en el lote de calidad, no antes de aprobar este ADR.
+- Se mantiene npm como gestor. Vitest con Testing Library queda adoptado (68 pruebas). Storybook y una línea base de regresión visual con Playwright siguen pendientes.
 - Los valores de los tokens existentes cambian respecto a la versión provisional; mientras el paquete esté en 0.x se trata como cambio minor.
 
 ## Alternativas descartadas

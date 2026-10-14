@@ -15,7 +15,7 @@ export function StatTile({ label, value, icon, help, interactive = false, classN
     <div
       {...props}
       className={cn(
-        "flex items-start gap-3 rounded-md border border-border bg-surface p-4 shadow-sm",
+        "flex items-start gap-3 rounded-md border border-border bg-surface px-4 py-3.5 shadow-sm",
         interactive && "cursor-pointer transition-colors duration-(--ui-duration-fast) hover:bg-surface-subtle",
         className
       )}

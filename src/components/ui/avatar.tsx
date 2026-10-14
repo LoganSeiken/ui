@@ -8,7 +8,7 @@ export function Avatar({ className, ...props }: ComponentProps<typeof AvatarPrim
   return (
     <AvatarPrimitive.Root
       {...props}
-      className={cn("relative inline-flex size-8 shrink-0 overflow-hidden rounded-pill bg-muted", className)}
+      className={cn("relative inline-flex size-8 shrink-0 overflow-hidden rounded-pill border border-border bg-muted", className)}
     />
   );
 }

@@ -8,6 +8,7 @@
   --color-surface-subtle: var(--ui-surface-subtle);
   --color-muted: var(--ui-muted);
   --color-muted-foreground: var(--ui-muted-foreground);
+  --color-foreground-subtle: var(--ui-foreground-subtle);
   --color-border: var(--ui-border);
   --color-border-subtle: var(--ui-border-subtle);
   --color-input: var(--ui-input);
