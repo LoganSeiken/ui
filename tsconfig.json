@@ -17,6 +17,10 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "vitest.config.ts"
+    "vitest.config.ts",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
+    "playwright.config.ts",
+    "e2e/**/*.ts"
   ]
 }
