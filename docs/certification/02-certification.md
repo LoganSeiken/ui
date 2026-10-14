@@ -14,6 +14,8 @@ Fecha: 2026-10-14 · Paquete: `@loganseiken/ui` (rama `feat/component-library`) 
 | Cobertura contra las 20 capturas (`01-coverage-audit.md`) | 19 huecos detectados y cerrados (G1–G19, más G20 tabla con divisores) |
 | `tsc`, ESLint, `publint`, build | sin errores; el tarball no incluye tests |
 | Pruebas unitarias (Vitest + Testing Library) | 68 de 68 pasan |
+| Storybook 10 | 43 archivos de stories (74 stories, una o más por componente); `build-storybook` compila |
+| Regresión visual (Playwright, Chrome) | 117 capturas de referencia (74 claras y 43 oscuras); 117 de 117 pasan en dos ejecuciones consecutivas |
 | axe-core WCAG 2.2 AA + buenas prácticas | 0 violaciones en 7 páginas (galería clara y oscura, S01, S05, S06 con sheet abierto, S14, S15) |
 | Teclado y foco | Select, Tabs, DropdownMenu (con submenú), Popover, Sheet (foco atrapado y devuelto), Tooltip, Switch, RadioGroup (incl. unido), ToggleGroup, Collapsible, SortableHead, CodeBlock: correctos |
 | Geometría contra la referencia (±2 px) | topbar 48, sidebar 206, subnav 256, ítem de sidebar 32/34, tile 78 (ref. 76–77), cabecera 36 y fila 44 de S15, input 40, botón 32, fila S01 63 (ref. 65) |
@@ -95,7 +97,7 @@ Leyenda: ✔ verificado · — no aplica. "Pantalla" indica en qué ensamblaje d
 
 ## Lo que no está hecho
 
-- **Storybook** y una **línea base de regresión visual con Playwright** dentro del repo: los scripts de `scripts/` verifican a mano, pero no fijan capturas de referencia. No se pidió Storybook en esta ronda y no está instalado.
+- **Regresión visual en CI:** las capturas se generan con Chrome en macOS y se ejecutan localmente (`npm run test:visual`); CI ejecuta lint, tipos, tests, build, `publint` y `build-storybook`.
 - **Ensamblaje de las 15 capturas restantes** (S02–S04, S07–S13, S16–S20): se cubrieron por componentes y por la auditoría, no reconstruyéndolas.
 - **Responsivo:** solo hay una captura estrecha (S19) y no se modeló.
 - **Axe no sustituye una prueba con lector de pantalla.** Se recomienda una pasada manual con VoiceOver antes de publicar.

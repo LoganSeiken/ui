@@ -49,3 +49,26 @@ The neutral palette is provisional and has no brand identity. Semver policy: pat
 ## Local package validation
 
 Run `npm pack --dry-run` to inspect the package contents. Avoid `npm link`, which can load a second React copy and cause invalid hook/runtime behavior in consumers.
+
+## Components
+
+Three levels, all exported from the package root:
+
+- `ui`: Avatar, Badge, Button, Checkbox, Code, Collapsible, DropdownMenu, Indicator, Input, Kbd, Popover, RadioGroup, Select, Sheet, StatusDot, Switch, Table, Tabs, ToggleGroup, Tooltip.
+- `patterns`: ButtonGroup, Callout, Card, ChartTile, CodeBlock, ContextBreadcrumb, EmptyState, Field, InputGroup, ListItem, MiniBarChart, SearchInput, SortableHead, StatTile, Steps, Toolbar.
+- `layout`: AppShell, AsidePanel, PageContainer, PageHeader, Sidebar, SubNav, TopBar.
+
+Components only consume semantic tokens (`--ui-*`). See `docs/adr/0002-biblioteca-de-componentes.md` for the decisions and `docs/certification/` for the coverage audit and certification report.
+
+## Development
+
+```sh
+npm install
+npm run storybook        # component workbench on http://localhost:6006
+npm test                 # unit tests (Vitest + Testing Library)
+npm run lint && npm run typecheck && npm run build && npm run check:package
+npm run test:visual      # builds Storybook and compares every story with e2e/visual.spec.ts-snapshots
+npm run test:visual:update   # regenerate the visual baselines after an intended change
+```
+
+Visual baselines are rendered with Google Chrome on macOS (`-chrome-darwin` suffix) and are not run in CI; regenerate them on the same platform.
