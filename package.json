@@ -83,7 +83,7 @@
     "vitest": "^5.0.4"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && cp src/styles/tokens.css src/styles/theme.css dist/",
+    "build": "tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "check:package": "publint",
