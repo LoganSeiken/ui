@@ -1,0 +1,51 @@
+import type { ComponentProps, ReactNode } from "react";
+import { cn } from "../../utils/cn.js";
+
+export type SidebarMode = "expanded" | "collapsed" | "hover";
+
+export type SidebarProps = ComponentProps<"nav"> & { mode?: SidebarMode };
+
+export function Sidebar({ mode = "expanded", className, ...props }: SidebarProps) {
+  return (
+    <nav
+      aria-label="Primary"
+      data-mode={mode}
+      {...props}
+      className={cn(
+        "group/sidebar flex shrink-0 flex-col gap-0.5 overflow-hidden border-r border-border bg-surface p-2 transition-[width] duration-(--ui-duration-fast)",
+        mode === "expanded" && "w-52",
+        mode === "collapsed" && "w-14",
+        mode === "hover" && "w-14 hover:w-52",
+        className
+      )}
+    />
+  );
+}
+
+export function SidebarSeparator({ className, ...props }: ComponentProps<"hr">) {
+  return <hr {...props} className={cn("my-2 border-border", className)} />;
+}
+
+export type SidebarItemProps = ComponentProps<"a"> & {
+  icon: ReactNode;
+  active?: boolean;
+};
+
+export function SidebarItem({ icon, active = false, className, children, ...props }: SidebarItemProps) {
+  return (
+    <a
+      aria-current={active ? "page" : undefined}
+      {...props}
+      className={cn(
+        "flex h-8 items-center gap-3 rounded-md px-2.5 text-sm text-muted-foreground transition-colors duration-(--ui-duration-fast) hover:bg-muted hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",
+        active && "bg-muted font-medium text-foreground",
+        className
+      )}
+    >
+      <span className="flex size-4 shrink-0 items-center justify-center">{icon}</span>
+      <span className="truncate group-data-[mode=collapsed]/sidebar:sr-only group-data-[mode=hover]/sidebar:opacity-0 group-data-[mode=hover]/sidebar:group-hover/sidebar:opacity-100">
+        {children}
+      </span>
+    </a>
+  );
+}

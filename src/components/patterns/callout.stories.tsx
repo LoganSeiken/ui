@@ -1,0 +1,9 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Button } from "../ui/button.js";
+import { Callout } from "./callout.js";
+
+const meta = { title: "patterns/Callout", component: Callout, args: { title: "Give your agent everything it needs" } } satisfies Meta<typeof Callout>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const WithAction: Story = { args: { action: <Button variant="outline" size="sm">Copy prompt</Button> } };

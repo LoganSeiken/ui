@@ -2,7 +2,7 @@ import tseslint from "typescript-eslint";
 import reactHooks from "eslint-plugin-react-hooks";
 
 export default tseslint.config(
-  { ignores: ["dist/**", "node_modules/**"] },
+  { ignores: ["dist/**", "node_modules/**", "docs/certification/scripts/**", "storybook-static/**", "playwright-report/**", "test-results/**"] },
   ...tseslint.configs.recommended,
   reactHooks.configs["recommended-latest"],
   {

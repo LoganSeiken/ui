@@ -1,4 +1,4 @@
-import { Button } from "./button.js";
+import { Button } from "./ui/button.js";
 import { DemoCounter } from "./demo-counter.js";
 
 export const DEMO_REVISION = "0.1.0";
