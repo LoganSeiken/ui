@@ -1,7 +1,7 @@
 import { Button } from "./button.js";
 import { DemoCounter } from "./demo-counter.js";
 
-export const DEMO_REVISION = "pilot.1";
+export const DEMO_REVISION = "0.1.0";
 
 export function SharedDemo({ appName }: { appName: string }) {
   return (
