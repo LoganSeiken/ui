@@ -5,9 +5,11 @@
   --color-foreground: var(--ui-foreground);
   --color-surface: var(--ui-surface);
   --color-surface-foreground: var(--ui-surface-foreground);
+  --color-surface-subtle: var(--ui-surface-subtle);
   --color-muted: var(--ui-muted);
   --color-muted-foreground: var(--ui-muted-foreground);
   --color-border: var(--ui-border);
+  --color-border-subtle: var(--ui-border-subtle);
   --color-input: var(--ui-input);
   --color-ring: var(--ui-ring);
   --color-primary: var(--ui-primary);
@@ -16,6 +18,25 @@
   --color-secondary-foreground: var(--ui-secondary-foreground);
   --color-destructive: var(--ui-destructive);
   --color-destructive-foreground: var(--ui-destructive-foreground);
+  --color-destructive-subtle: var(--ui-destructive-subtle);
+  --color-destructive-subtle-foreground: var(--ui-destructive-subtle-foreground);
+  --color-success-subtle: var(--ui-success-subtle);
+  --color-success-subtle-foreground: var(--ui-success-subtle-foreground);
+  --color-warning-subtle: var(--ui-warning-subtle);
+  --color-warning-subtle-foreground: var(--ui-warning-subtle-foreground);
+  --color-warning-border: var(--ui-warning-border);
+  --color-chart-success: var(--ui-chart-success);
+  --color-chart-danger: var(--ui-chart-danger);
+  --color-overlay: var(--ui-overlay);
+  --font-sans: var(--ui-font-sans);
+  --font-mono: var(--ui-font-mono);
+  --radius-sm: var(--ui-radius-sm);
+  --radius-md: var(--ui-radius-md);
+  --radius-lg: var(--ui-radius-lg);
+  --radius-pill: var(--ui-radius-pill);
+  --shadow-sm: var(--ui-shadow-sm);
+  --shadow-md: var(--ui-shadow-md);
+  --tracking-caps: var(--ui-tracking-caps);
 }
 
 /* Tailwind scans the consuming package's installed dist directory. */
