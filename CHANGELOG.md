@@ -8,11 +8,16 @@
 
 - Layout patterns: AccountMenu, TableCard, FilterCard, FormCard, FormSection and FormActions.
 - Form and feedback components: Callout variants, Spinner, Skeleton, TableSkeleton, Textarea, Dialog, ConfirmDialog, Pagination, Combobox, Toast, SubmitButton and FocusOnInvalid.
-- Added `@radix-ui/react-toast` for accessible toast announcements and dismissal.
+- `Field` links its description and error to the control through `aria-describedby`.
+- `Combobox` options `loadingLabel`, `errorText` and `aria-describedby`.
+- `@radix-ui/react-toast` for accessible toast announcements; `react-dom` as a peer dependency (used by `SubmitButton`).
 
 ### Changed
 
-- Expanded the root package exports with the new form and feedback components.
+- Root exports include every new component.
+- Test suite: 95 tests. Visual regression baselines: 184.
+
+## 0.1.x
 
 - Component library in three levels: `ui/` (Avatar, Badge, Button, DropdownMenu, Input, Kbd, Popover, RadioGroup, Select, Sheet, StatusDot, Switch, Table, Tabs, Tooltip), `patterns/` (Card, CodeBlock, ContextBreadcrumb, EmptyState, Field, ListItem, MiniBarChart, SearchInput, SortableHead, StatTile, Steps, Toolbar) and `layout/` (AppShell, AsidePanel, PageContainer, PageHeader, Sidebar, SubNav, TopBar).
 - New semantic tokens: surface-subtle, border-subtle, status tints for destructive, success and warning, chart colors and overlay. Primitive palette added to `tokens.css`.

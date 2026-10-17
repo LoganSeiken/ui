@@ -25,3 +25,10 @@ La biblioteca necesita primitivas y composiciones para formularios, estados de c
 ## Consecuencias
 
 La API de raíz cubre los estados de carga y los flujos de formularios solicitados. La dependencia de Toast aumenta el tamaño de instalación del paquete.
+
+## Documented exceptions (design-token rule)
+
+- `Tabs` underline variant uses an inset shadow expression referencing the primary token; it reproduces the reference screen S04 and has no standard utility equivalent.
+- `Toast` caps its width with `calc(100vw - 2rem)` so it never overflows narrow viewports.
+- `react-dom` and `@types/react-dom` appear as dev dependencies because `react-dom` is a declared peer dependency used by `SubmitButton` (`useFormStatus`) and by the test suite.
+- The development-only gallery in consumer apps is outside the rule.

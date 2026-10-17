@@ -7,4 +7,4 @@ export const Middle: Story = {};
 export const First: Story = { args: { page: 1 } };
 export const Last: Story = { args: { page: 8 } };
 export const WithTotal: Story = { args: { total: 120, pageSize: 15 } };
-export const ButtonMode: Story = { args: { hrefFor: undefined, onPageChange: (page) => console.info(page) } };
+export const ButtonMode: Story = { args: { hrefFor: undefined, onPageChange: () => undefined } };
