@@ -102,3 +102,14 @@ Estados: **C** cubierto · **P** parcial (se cubre pero con diferencia medida) �
 | Input S01 | 40 | 40 |
 | Fila de tabla S15 | 44 | 44 |
 | Cabecera de tabla S15 | 36 | 40 |
+
+## Ola A (formularios y retroalimentación)
+
+- `Spinner`: geometría del estado de carga de `Button`.
+- `Skeleton` y `TableSkeleton`: tokens y estructura de `Table`.
+- `Textarea`: borde, foco y superficie de `Input`.
+- `Dialog` y `ConfirmDialog`: overlay, cierre y foco de `Sheet`.
+- `Pagination`: botones de `Button`.
+- `Combobox`: disparador de `Select` y popup de `Popover`.
+- `Toaster`: estados semánticos de `Callout` y apilado con z-index de overlay.
+- `SubmitButton` y `FocusOnInvalid`: composición de `Button` e `Input`.

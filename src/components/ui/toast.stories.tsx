@@ -1,0 +1,12 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useEffect, useRef } from "react";
+import { Button } from "./button.js";
+import { Toaster, toast } from "./toast.js";
+const meta = { title: "ui/Toast", component: Toaster } satisfies Meta<typeof Toaster>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export const Default: Story = { render: () => <><Button onClick={() => toast({ title: "Changes saved" })}>Show default</Button><Toaster /></> };
+export const Success: Story = { render: () => <><Button onClick={() => toast({ title: "Changes saved", variant: "success" })}>Show success</Button><Toaster /></> };
+export const Danger: Story = { render: () => <><Button onClick={() => toast({ title: "Unable to save", variant: "danger" })}>Show danger</Button><Toaster /></> };
+export const Warning: Story = { render: () => <><Button onClick={() => toast({ title: "Review required", variant: "warning" })}>Show warning</Button><Toaster /></> };
+export const StaticPreview: Story = { render: () => { function Preview() { const shown = useRef(false); useEffect(() => { if (!shown.current) { toast({ title: "Changes saved", description: "Your settings are up to date.", duration: Infinity }); shown.current = true; } }, []); return <><div className="h-64" /><Toaster duration={Infinity} /></>; } return <Preview />; } };

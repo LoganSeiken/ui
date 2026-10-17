@@ -7,3 +7,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const WithAction: Story = { args: { action: <Button variant="outline" size="sm">Copy prompt</Button> } };
+export const Success: Story = { args: { variant: "success", title: "Changes saved" } };
+export const Warning: Story = { args: { variant: "warning", title: "Review required" } };
+export const Danger: Story = { args: { variant: "danger", title: "Unable to save" } };
