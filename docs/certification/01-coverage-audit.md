@@ -113,3 +113,6 @@ Estados: **C** cubierto · **P** parcial (se cubre pero con diferencia medida) �
 - `Combobox`: disparador de `Select` y popup de `Popover`.
 - `Toaster`: estados semánticos de `Callout` y apilado con z-index de overlay.
 - `SubmitButton` y `FocusOnInvalid`: composición de `Button` e `Input`.
+- `FilterCard` y `TableCard`: filtros y tabla de la captura S01.
+- `AccountMenu`: menú de cuenta de las capturas S01/S02.
+- `FormCard`, `FormSection` y `FormActions`: filas de formulario de la captura S06.

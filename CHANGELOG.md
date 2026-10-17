@@ -6,6 +6,7 @@
 
 ### Added
 
+- Layout patterns: AccountMenu, TableCard, FilterCard, FormCard, FormSection and FormActions.
 - Form and feedback components: Callout variants, Spinner, Skeleton, TableSkeleton, Textarea, Dialog, ConfirmDialog, Pagination, Combobox, Toast, SubmitButton and FocusOnInvalid.
 - Added `@radix-ui/react-toast` for accessible toast announcements and dismissal.
 
