@@ -7,7 +7,6 @@ const meta = { title: "patterns/FocusOnInvalid", component: FocusOnInvalid, args
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Muestra el efecto: al activarse, el foco va al primer campo con aria-invalid.
 export const Default: Story = {
   render: (args) => (
     <form className="grid max-w-sm gap-4 p-6" noValidate>

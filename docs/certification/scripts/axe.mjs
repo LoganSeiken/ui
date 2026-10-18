@@ -3,8 +3,8 @@ import path from "node:path";
 const axePath = path.resolve("node_modules/axe-core/axe.min.js");
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const targets = [
-  ["galeria-claro", "/ui-gallery", null],
-  ["galeria-oscuro", "/ui-gallery", "dark"],
+  ["light-gallery", "/ui-gallery", null],
+  ["dark-gallery", "/ui-gallery", "dark"],
   ["s01", "/ui-gallery/s01", null], ["s05", "/ui-gallery/s05", null],
   ["s06 (sheet abierto)", "/ui-gallery/s06", null], ["s14", "/ui-gallery/s14", null], ["s15", "/ui-gallery/s15", null]
 ];
