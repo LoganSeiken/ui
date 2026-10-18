@@ -1,6 +1,7 @@
 import { Children, cloneElement, isValidElement, type ComponentProps, type ReactElement, type ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn.js";
+import { FieldControlProvider } from "../../utils/field-context.js";
 
 const fieldVariants = cva("grid content-start gap-2", {
   variants: {
@@ -43,7 +44,7 @@ export function Field({ label, htmlFor, description, error, orientation, classNa
         {label}
       </label>
       <div className="grid gap-1.5">
-        {content}
+        <FieldControlProvider value={htmlFor && describedBy ? { htmlFor, describedBy } : null}>{content}</FieldControlProvider>
         {description ? <p id={descriptionId} className="text-sm text-muted-foreground">{description}</p> : null}
         {error ? <p id={errorId} role="alert" className="text-sm text-destructive-subtle-foreground">{error}</p> : null}
       </div>
