@@ -20,7 +20,7 @@
 ### Changed
 
 - Root exports include every new component.
-- Test suite: 99 tests. Visual regression baselines: 189.
+- Test suite: 104 tests. Visual regression baselines: 189.
 
 ## 0.1.x
 
