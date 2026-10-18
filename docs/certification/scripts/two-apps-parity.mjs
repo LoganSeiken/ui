@@ -40,8 +40,8 @@ for (let i = 0; i < total; i++) {
     if (samples.length < 5) samples.push({ index: i, a: a.elements[i], b: b.elements[i] });
   }
 }
-console.log(`texto idéntico: ${a.text === b.text}`);
+console.log(`identical text: ${a.text === b.text}`);
 console.log(`elementos comparados: ${total} (A=${a.elements.length}, B=${b.elements.length})`);
-console.log(`elementos con estilo o tamaño distinto: ${different}`);
+console.log(`elements with different styles or sizes: ${different}`);
 if (samples.length) console.log(JSON.stringify(samples, null, 1));
 process.exit(different === 0 && a.text === b.text ? 0 : 1);

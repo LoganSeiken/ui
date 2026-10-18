@@ -58,7 +58,7 @@ Three levels, all exported from the package root:
 - `patterns`: ButtonGroup, Callout, Card, ChartTile, CodeBlock, ContextBreadcrumb, EmptyState, Field, InputGroup, ListItem, MiniBarChart, SearchInput, SortableHead, StatTile, Steps, Toolbar.
 - `layout`: AppShell, AsidePanel, PageContainer, PageHeader, Sidebar, SubNav, TopBar.
 
-Components only consume semantic tokens (`--ui-*`). See `docs/adr/0002-biblioteca-de-componentes.md` for the decisions and `docs/certification/` for the coverage audit and certification report.
+Components only consume semantic tokens (`--ui-*`). See `docs/adr/0002-component-library.md` for the decisions and `docs/certification/` for the coverage audit and certification report.
 
 ## Development
 

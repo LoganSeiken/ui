@@ -27,7 +27,7 @@ export function Field({ label, htmlFor, description, error, orientation, classNa
   const errorId = htmlFor && error ? `${htmlFor}-error` : undefined;
   const describedBy = [descriptionId, errorId].filter(Boolean).join(" ") || undefined;
 
-  // Asocia descripcion y error al control cuyo id coincide con htmlFor (lectores de pantalla).
+  // Link the description and error to the control for screen readers.
   const content = describedBy
     ? Children.map(children, (child) => {
         if (!isValidElement(child)) return child;
