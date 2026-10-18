@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { Button, Callout, Combobox, ConfirmDialog, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, FocusOnInvalid, Pagination, Skeleton, Spinner, SubmitButton, TableSkeleton, Textarea, Toaster, toast } from "../../index.js";
@@ -61,6 +61,24 @@ describe("form and feedback components", () => {
     await user.click(screen.getByRole("button", { name: "External" }));
     await user.click(screen.getByRole("button", { name: "Confirm" }));
     expect(submit).toHaveBeenCalledTimes(1);
+  });
+
+  it("keeps a pending confirmation open and disables every dismissal control", async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(<ConfirmDialog trigger={<Button>Open pending</Button>} title="Pending action" pending />);
+    await user.click(screen.getByRole("button", { name: "Open pending" }));
+    expect(screen.getByRole("button", { name: "Cancel" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Close" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Confirm" })).toBeDisabled();
+    fireEvent.pointerDown(document.body);
+    await user.keyboard("{Escape}");
+    expect(screen.getByRole("dialog", { name: "Pending action" })).toBeInTheDocument();
+
+    rerender(<ConfirmDialog trigger={<Button>Open pending</Button>} title="Pending action" />);
+    expect(screen.getByRole("button", { name: "Cancel" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Close" })).toBeEnabled();
+    await user.click(screen.getByRole("button", { name: "Cancel" }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   it("paginates with links and button callbacks and clamps the current page", async () => {

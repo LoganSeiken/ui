@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { ComponentProps } from "react";
 import { Button } from "../ui/button.js";
 import { Input } from "../ui/input.js";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select.js";
@@ -9,6 +10,10 @@ const meta = { title: "patterns/FilterCard", component: FilterCard } satisfies M
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+function CustomForm(props: ComponentProps<"form">) {
+  return <form {...props} data-custom-form />;
+}
+
 export const WithFilters: Story = {
   render: () => (
     <FilterCard className="w-full" onSubmit={(event) => event.preventDefault()} actions={<><Button variant="outline">Apply</Button><Button variant="ghost">Clear</Button></>}>
@@ -18,4 +23,8 @@ export const WithFilters: Story = {
       </Field>
     </FilterCard>
   )
+};
+
+export const CustomFormComponent: Story = {
+  render: () => <FilterCard formComponent={CustomForm} aria-label="Custom filters"><Field label="Name" htmlFor="custom-filter-name"><Input id="custom-filter-name" /></Field></FilterCard>
 };

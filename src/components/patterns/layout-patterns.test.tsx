@@ -1,5 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
+import type { ComponentProps } from "react";
 import { describe, expect, it } from "vitest";
 import {
   AccountMenu,
@@ -11,6 +12,8 @@ import {
   FormCard,
   FormSection,
   Input,
+  ListItem,
+  Section,
   TableCard,
   Table,
   TableBody,
@@ -19,6 +22,10 @@ import {
   TableHeader,
   TableRow
 } from "../../index.js";
+
+function CustomForm(props: ComponentProps<"form">) {
+  return <form {...props} data-testid="custom-form" />;
+}
 
 describe("TableCard", () => {
   it("renders children inside an overflow-hidden card", () => {
@@ -58,6 +65,35 @@ describe("FilterCard", () => {
     const { container } = render(<FilterCard><Field label="Name"><Input /></Field></FilterCard>);
     expect(container.querySelector("form")?.children).toHaveLength(1);
     expect(container.querySelector("form > div.border-t")).toBeNull();
+  });
+
+  it("renders through a supplied form component and forwards its props", () => {
+    render(<FilterCard formComponent={CustomForm} aria-label="Custom filters"><Field label="Name"><Input /></Field></FilterCard>);
+    expect(screen.getByTestId("custom-form")).toHaveAttribute("aria-label", "Custom filters");
+    expect(screen.getByText("Name")).toBeInTheDocument();
+  });
+});
+
+describe("ListItem", () => {
+  it("uses a link root with implied interaction when href is provided", () => {
+    render(<ListItem href="/docs" title="Docs" description="Browse guides" />);
+    const link = screen.getByRole("link", { name: /Docs.*Browse guides/ });
+    expect(link).toHaveAttribute("href", "/docs");
+    expect(link).toHaveClass("cursor-pointer", "focus-visible:ring-2", "focus-visible:ring-ring");
+  });
+
+  it("keeps a static div root when href is omitted", () => {
+    const { container } = render(<ListItem title="Static row" />);
+    expect(screen.queryByRole("link")).not.toBeInTheDocument();
+    expect(container.firstElementChild?.tagName).toBe("DIV");
+  });
+});
+
+describe("Section", () => {
+  it("names its section landmark and applies the separated border", () => {
+    render(<Section title="Company contacts" separated><span>Contact rows</span></Section>);
+    expect(screen.getByRole("region", { name: "Company contacts" })).toHaveClass("border-t", "border-border", "pt-6");
+    expect(screen.getByRole("heading", { level: 2, name: "Company contacts" })).toBeInTheDocument();
   });
 });
 

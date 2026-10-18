@@ -11,8 +11,8 @@ export function ConfirmDialog({ trigger, title, description, confirmLabel = "Con
   const cancelRef = useRef<HTMLButtonElement>(null);
   const currentOpen = open ?? internalOpen;
   const setOpen = (next: boolean) => { if (open === undefined) setInternalOpen(next); onOpenChange?.(next); };
-  return <Dialog open={currentOpen} onOpenChange={setOpen}><DialogTrigger asChild>{trigger}</DialogTrigger><DialogContent closeLabel={closeLabel} onOpenAutoFocus={variant === "destructive" ? (event) => { event.preventDefault(); cancelRef.current?.focus(); } : undefined}>
+  return <Dialog open={currentOpen} onOpenChange={setOpen}><DialogTrigger asChild>{trigger}</DialogTrigger><DialogContent closeLabel={closeLabel} closeDisabled={pending} onEscapeKeyDown={(event) => { if (pending) event.preventDefault(); }} onPointerDownOutside={(event) => { if (pending) event.preventDefault(); }} onOpenAutoFocus={variant === "destructive" ? (event) => { event.preventDefault(); cancelRef.current?.focus(); } : undefined}>
     <DialogHeader><DialogTitle>{title}</DialogTitle>{description ? <DialogDescription>{description}</DialogDescription> : null}</DialogHeader>
-    <DialogFooter><DialogClose asChild><Button ref={cancelRef} variant="outline">{cancelLabel}</Button></DialogClose><Button type={confirmFormId ? "submit" : "button"} form={confirmFormId} variant={variant === "destructive" ? "destructive" : "primary"} loading={pending} onClick={confirmFormId ? undefined : async () => { await onConfirm?.(); setOpen(false); }}>{confirmLabel}</Button></DialogFooter>
+    <DialogFooter><DialogClose asChild><Button ref={cancelRef} variant="outline" disabled={pending}>{cancelLabel}</Button></DialogClose><Button type={confirmFormId ? "submit" : "button"} form={confirmFormId} variant={variant === "destructive" ? "destructive" : "primary"} loading={pending} onClick={confirmFormId ? undefined : async () => { await onConfirm?.(); setOpen(false); }}>{confirmLabel}</Button></DialogFooter>
   </DialogContent></Dialog>;
 }

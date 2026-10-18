@@ -6,6 +6,10 @@
 
 ### Added
 
+- Section pattern with accessible headings and optional actions and separators.
+- FilterCard supports custom form components.
+- ListItem supports linked roots with `href`.
+- Pending ConfirmDialog states that prevent cancel, close, Escape and outside dismissal.
 - Layout patterns: AccountMenu, TableCard, FilterCard, FormCard, FormSection and FormActions.
 - Form and feedback components: Callout variants, Spinner, Skeleton, TableSkeleton, Textarea, Dialog, ConfirmDialog, Pagination, Combobox, Toast, SubmitButton and FocusOnInvalid.
 - `Field` links its description and error to the control through `aria-describedby`, including a nested `SelectTrigger`.
@@ -16,7 +20,7 @@
 ### Changed
 
 - Root exports include every new component.
-- Test suite: 99 tests. Visual regression baselines: 184.
+- Test suite: 99 tests. Visual regression baselines: 189.
 
 ## 0.1.x
 

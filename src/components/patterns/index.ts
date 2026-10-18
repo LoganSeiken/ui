@@ -35,6 +35,8 @@ export { MiniBarChart } from "./mini-bar-chart.js";
 export type { MiniBarChartProps, MiniBarDatum } from "./mini-bar-chart.js";
 export { SearchInput } from "./search-input.js";
 export type { SearchInputProps } from "./search-input.js";
+export { Section } from "./section.js";
+export type { SectionProps } from "./section.js";
 export { SortableHead } from "./sortable-head.js";
 export type { SortDirection, SortableHeadProps } from "./sortable-head.js";
 export { StatTile } from "./stat-tile.js";
