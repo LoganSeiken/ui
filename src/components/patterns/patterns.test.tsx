@@ -213,6 +213,16 @@ describe("CodeBlock", () => {
     await user.click(screen.getByRole("button", { name: "Copy code" }));
     expect(writeText).toHaveBeenCalledWith("pnpm add x");
   });
+
+  it("uses supplied labels for code variants and copy feedback", async () => {
+    const user = userEvent.setup();
+    const writeText = vi.spyOn(navigator.clipboard, "writeText");
+    render(<CodeBlock tabs={[{ label: "npm", code: "npm install x" }]} tablistLabel="Variantes de código" copyLabel="Copiar código" copiedLabel="Copiado" />);
+    expect(screen.getByRole("tablist", { name: "Variantes de código" })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Copiar código" }));
+    expect(writeText).toHaveBeenCalledWith("npm install x");
+    expect(await screen.findByRole("button", { name: "Copiado" })).toBeInTheDocument();
+  });
 });
 
 describe("MiniBarChart", () => {

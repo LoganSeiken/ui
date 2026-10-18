@@ -213,6 +213,22 @@ describe("Sheet", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
+  it("uses a supplied close label without passing it to the dialog element", async () => {
+    const user = userEvent.setup();
+    render(
+      <Sheet>
+        <SheetTrigger asChild><Button>Open sheet</Button></SheetTrigger>
+        <SheetContent closeLabel="Close panel">
+          <SheetHeader><SheetTitle>Sheet title</SheetTitle></SheetHeader>
+        </SheetContent>
+      </Sheet>
+    );
+    await user.click(screen.getByRole("button", { name: "Open sheet" }));
+    const dialog = await screen.findByRole("dialog", { name: "Sheet title" });
+    expect(screen.getByRole("button", { name: "Close panel" })).toBeInTheDocument();
+    expect(dialog).not.toHaveAttribute("closeLabel");
+  });
+
   it("closes on Escape", async () => {
     const user = userEvent.setup();
     render(<Sample />);

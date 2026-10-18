@@ -23,15 +23,22 @@ const variants: Record<ToastVariant, string> = {
   warning: "border-warning-border bg-warning-subtle text-warning-subtle-foreground"
 };
 
-export type ToasterProps = { duration?: number; closeLabel?: string; swipeDirection?: "up" | "down" | "left" | "right" };
-export function Toaster({ duration = 5000, closeLabel = "Close", swipeDirection = "right" }: ToasterProps) {
+export type ToasterProps = {
+  duration?: number;
+  closeLabel?: string;
+  label?: string;
+  /** Supports Radix's `{hotkey}` placeholder, replaced with the active shortcut. */
+  viewportLabel?: string;
+  swipeDirection?: "up" | "down" | "left" | "right";
+};
+export function Toaster({ duration = 5000, closeLabel = "Close", label = "Notification", viewportLabel = "Notifications ({hotkey})", swipeDirection = "right" }: ToasterProps) {
   const toasts = useToasts();
   const dismiss = (id: number) => { items = items.filter((item) => item.id !== id); publish(); };
-  return <ToastPrimitive.Provider duration={duration} swipeDirection={swipeDirection}>
+  return <ToastPrimitive.Provider duration={duration} swipeDirection={swipeDirection} label={label}>
     {toasts.map((item) => <ToastPrimitive.Root key={item.id} type={item.variant === "danger" ? "foreground" : "background"} duration={item.duration ?? duration} onOpenChange={(open) => { if (!open) dismiss(item.id); }} className={cn("flex items-start gap-3 rounded-lg border p-4 shadow-md", variants[item.variant ?? "default"])}>
       <div className="flex-1"><ToastPrimitive.Title className="text-sm font-medium">{item.title}</ToastPrimitive.Title>{item.description ? <ToastPrimitive.Description className="text-sm opacity-90">{item.description}</ToastPrimitive.Description> : null}</div>
       <ToastPrimitive.Close aria-label={closeLabel} className="inline-flex size-6 items-center justify-center rounded-md text-muted-foreground hover:bg-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"><X className="size-4" aria-hidden="true" /></ToastPrimitive.Close>
     </ToastPrimitive.Root>)}
-    <ToastPrimitive.Viewport className="fixed bottom-4 right-4 z-(--ui-z-toast) flex w-96 max-w-[calc(100vw-2rem)] flex-col gap-2 outline-hidden" />
+    <ToastPrimitive.Viewport label={viewportLabel} className="fixed bottom-4 right-4 z-(--ui-z-toast) flex w-96 max-w-[calc(100vw-2rem)] flex-col gap-2 outline-hidden" />
   </ToastPrimitive.Provider>;
 }

@@ -7,9 +7,10 @@ export type AsidePanelProps = Omit<ComponentProps<"aside">, "title"> & {
   title: ReactNode;
   headerExtra?: ReactNode;
   onClose?: () => void;
+  closeLabel?: string;
 };
 
-export function AsidePanel({ title, headerExtra, onClose, className, children, ...props }: AsidePanelProps) {
+export function AsidePanel({ title, headerExtra, onClose, closeLabel = "Close panel", className, children, ...props }: AsidePanelProps) {
   return (
     <aside
       {...props}
@@ -20,7 +21,7 @@ export function AsidePanel({ title, headerExtra, onClose, className, children, .
         <div className="flex items-center gap-2">
           {headerExtra}
           {onClose ? (
-            <Button variant="ghost" size="icon" aria-label="Close panel" onClick={onClose}>
+            <Button variant="ghost" size="icon" aria-label={closeLabel} onClick={onClose}>
               <X className="size-4" aria-hidden="true" />
             </Button>
           ) : null}
