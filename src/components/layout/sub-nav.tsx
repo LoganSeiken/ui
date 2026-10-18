@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, ElementType, ReactNode } from "react";
 import { cn } from "../../utils/cn.js";
 
 export function SubNav({ className, ...props }: ComponentProps<"nav">) {
@@ -26,9 +26,9 @@ export function SubNavSection({ title, className, children, ...props }: SubNavSe
   );
 }
 
-export function SubNavItem({ active = false, className, ...props }: ComponentProps<"a"> & { active?: boolean }) {
+export function SubNavItem({ active = false, linkComponent: Link = "a", className, ...props }: ComponentProps<"a"> & { active?: boolean; linkComponent?: ElementType }) {
   return (
-    <a
+    <Link
       aria-current={active ? "page" : undefined}
       {...props}
       className={cn(

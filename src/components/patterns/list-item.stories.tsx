@@ -16,3 +16,11 @@ export const List: Story = {
     </div>
   )
 };
+
+export const Linked: Story = {
+  render: () => (
+    <div className="w-96 rounded-md border border-border bg-surface">
+      <ListItem href="/docs" icon={<LifeBuoy className="size-4" aria-hidden="true" />} title="Documentation" description="Browse guides and references." />
+    </div>
+  )
+};

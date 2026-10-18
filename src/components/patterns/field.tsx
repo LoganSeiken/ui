@@ -1,6 +1,7 @@
-import type { ComponentProps, ReactNode } from "react";
+import { Children, cloneElement, isValidElement, type ComponentProps, type ReactElement, type ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn.js";
+import { FieldControlProvider } from "../../utils/field-context.js";
 
 const fieldVariants = cva("grid content-start gap-2", {
   variants: {
@@ -22,15 +23,30 @@ export type FieldProps = Omit<ComponentProps<"div">, "children"> &
   };
 
 export function Field({ label, htmlFor, description, error, orientation, className, children, ...props }: FieldProps) {
+  const descriptionId = htmlFor && description ? `${htmlFor}-description` : undefined;
+  const errorId = htmlFor && error ? `${htmlFor}-error` : undefined;
+  const describedBy = [descriptionId, errorId].filter(Boolean).join(" ") || undefined;
+
+  // Asocia descripcion y error al control cuyo id coincide con htmlFor (lectores de pantalla).
+  const content = describedBy
+    ? Children.map(children, (child) => {
+        if (!isValidElement(child)) return child;
+        const element = child as ReactElement<{ id?: string; "aria-describedby"?: string }>;
+        if (element.props.id !== htmlFor) return child;
+        const existing = element.props["aria-describedby"];
+        return cloneElement(element, { "aria-describedby": [existing, describedBy].filter(Boolean).join(" ") });
+      })
+    : children;
+
   return (
     <div {...props} className={cn(fieldVariants({ orientation }), className)}>
       <label htmlFor={htmlFor} className="text-sm font-medium text-foreground">
         {label}
       </label>
       <div className="grid gap-1.5">
-        {children}
-        {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
-        {error ? <p role="alert" className="text-sm text-destructive-subtle-foreground">{error}</p> : null}
+        <FieldControlProvider value={htmlFor && describedBy ? { htmlFor, describedBy } : null}>{content}</FieldControlProvider>
+        {description ? <p id={descriptionId} className="text-sm text-muted-foreground">{description}</p> : null}
+        {error ? <p id={errorId} role="alert" className="text-sm text-destructive-subtle-foreground">{error}</p> : null}
       </div>
     </div>
   );

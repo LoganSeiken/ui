@@ -5,6 +5,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn.js";
+import { useFieldDescribedBy } from "../../utils/field-context.js";
 
 const selectTriggerVariants = cva(
   "flex w-full items-center justify-between gap-2 rounded-md border border-input bg-surface text-sm text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground",
@@ -23,8 +24,9 @@ export function SelectTrigger({
   children,
   ...props
 }: ComponentProps<typeof SelectPrimitive.Trigger> & VariantProps<typeof selectTriggerVariants>) {
+  const describedBy = useFieldDescribedBy(props.id, props["aria-describedby"]);
   return (
-    <SelectPrimitive.Trigger {...props} className={cn(selectTriggerVariants({ size }), className)}>
+    <SelectPrimitive.Trigger {...props} aria-describedby={describedBy} className={cn(selectTriggerVariants({ size }), className)}>
       {children}
       <SelectPrimitive.Icon asChild>
         <ChevronDown className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
