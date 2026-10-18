@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, ElementType, ReactNode } from "react";
 import { cn } from "../../utils/cn.js";
 
 export type SidebarMode = "expanded" | "collapsed" | "hover";
@@ -29,11 +29,13 @@ export function SidebarSeparator({ className, ...props }: ComponentProps<"hr">) 
 export type SidebarItemProps = ComponentProps<"a"> & {
   icon: ReactNode;
   active?: boolean;
+  /** Router link (for example next/link) for client-side navigation; defaults to a plain anchor. */
+  linkComponent?: ElementType;
 };
 
-export function SidebarItem({ icon, active = false, className, children, ...props }: SidebarItemProps) {
+export function SidebarItem({ icon, active = false, linkComponent: Link = "a", className, children, ...props }: SidebarItemProps) {
   return (
-    <a
+    <Link
       aria-current={active ? "page" : undefined}
       {...props}
       className={cn(
@@ -46,6 +48,6 @@ export function SidebarItem({ icon, active = false, className, children, ...prop
       <span className="truncate group-data-[mode=collapsed]/sidebar:sr-only group-data-[mode=hover]/sidebar:opacity-0 group-data-[mode=hover]/sidebar:group-hover/sidebar:opacity-100">
         {children}
       </span>
-    </a>
+    </Link>
   );
 }

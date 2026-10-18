@@ -9,13 +9,14 @@
 - Layout patterns: AccountMenu, TableCard, FilterCard, FormCard, FormSection and FormActions.
 - Form and feedback components: Callout variants, Spinner, Skeleton, TableSkeleton, Textarea, Dialog, ConfirmDialog, Pagination, Combobox, Toast, SubmitButton and FocusOnInvalid.
 - `Field` links its description and error to the control through `aria-describedby`, including a nested `SelectTrigger`.
+- `SidebarItem` and `SubNavItem` accept `linkComponent` (like `Pagination`) so apps can use their router link and avoid full page reloads.
 - `Combobox` options `loadingLabel`, `errorText` and `aria-describedby`.
 - `@radix-ui/react-toast` for accessible toast announcements; `react-dom` as a peer dependency (used by `SubmitButton`).
 
 ### Changed
 
 - Root exports include every new component.
-- Test suite: 97 tests. Visual regression baselines: 184.
+- Test suite: 99 tests. Visual regression baselines: 184.
 
 ## 0.1.x
 
