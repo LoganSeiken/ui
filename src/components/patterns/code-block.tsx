@@ -7,10 +7,14 @@ import { Button } from "../ui/button.js";
 
 export type CodeBlockTab = { label: string; code: string };
 
-export type CodeBlockProps = Omit<ComponentProps<"div">, "children"> &
+export type CodeBlockProps = Omit<ComponentProps<"div">, "children"> & {
+  tablistLabel?: string;
+  copyLabel?: string;
+  copiedLabel?: string;
+} &
   ({ code: string; tabs?: undefined } | { tabs: CodeBlockTab[]; code?: undefined });
 
-export function CodeBlock({ code, tabs, className, ...props }: CodeBlockProps) {
+export function CodeBlock({ code, tabs, tablistLabel = "Code variants", copyLabel = "Copy code", copiedLabel = "Copied", className, ...props }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const [active, setActive] = useState(0);
   const current = tabs ? (tabs[active] ?? tabs[0]) : undefined;
@@ -29,7 +33,7 @@ export function CodeBlock({ code, tabs, className, ...props }: CodeBlockProps) {
   return (
     <div {...props} className={cn("relative rounded-md border border-border bg-surface", className)}>
       {tabs ? (
-        <div role="tablist" aria-label="Code variants" className="flex gap-4 border-b border-border px-4">
+        <div role="tablist" aria-label={tablistLabel} className="flex gap-4 border-b border-border px-4">
           {tabs.map((tab, i) => (
             <button
               key={tab.label}
@@ -53,7 +57,7 @@ export function CodeBlock({ code, tabs, className, ...props }: CodeBlockProps) {
       <Button
         variant="ghost"
         size="icon"
-        aria-label={copied ? "Copied" : "Copy code"}
+        aria-label={copied ? copiedLabel : copyLabel}
         onClick={copy}
         className={cn("absolute right-2", tabs ? "top-1" : "top-2")}
       >

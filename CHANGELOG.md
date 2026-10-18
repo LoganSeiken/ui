@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Added
+
+- `Toaster` accepts localized labels for toast announcements and the viewport, including Radix's `{hotkey}` placeholder.
+- `SheetContent` and `AsidePanel` accept a localized close button label.
+- `CodeBlock` accepts localized tab list, copy, and copied labels.
+
 ## 0.2.0
 
 ### Added

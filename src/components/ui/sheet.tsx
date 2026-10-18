@@ -9,7 +9,7 @@ export const Sheet = DialogPrimitive.Root;
 export const SheetTrigger = DialogPrimitive.Trigger;
 export const SheetClose = DialogPrimitive.Close;
 
-export function SheetContent({ className, children, ...props }: ComponentProps<typeof DialogPrimitive.Content>) {
+export function SheetContent({ className, children, closeLabel = "Close", ...props }: ComponentProps<typeof DialogPrimitive.Content> & { closeLabel?: string }) {
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="fixed inset-0 z-(--ui-z-overlay) bg-overlay backdrop-blur-xs" />
@@ -22,7 +22,7 @@ export function SheetContent({ className, children, ...props }: ComponentProps<t
       >
         {children}
         <DialogPrimitive.Close
-          aria-label="Close"
+          aria-label={closeLabel}
           className="absolute top-4 right-4 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground hover:bg-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
         >
           <X className="size-4" aria-hidden="true" />

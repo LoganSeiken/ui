@@ -121,6 +121,12 @@ describe("AsidePanel", () => {
     render(<AsidePanel title="Help">content</AsidePanel>);
     expect(screen.queryByRole("button", { name: "Close panel" })).not.toBeInTheDocument();
   });
+
+  it("uses the supplied close label without passing it to the aside element", () => {
+    render(<AsidePanel title="Ayuda" closeLabel="Cerrar panel" onClose={() => undefined}>contenido</AsidePanel>);
+    expect(screen.getByRole("button", { name: "Cerrar panel" })).toBeInTheDocument();
+    expect(screen.getByRole("complementary")).not.toHaveAttribute("closeLabel");
+  });
 });
 
 describe("PageContainer", () => {
