@@ -56,6 +56,15 @@ icon-only mobile navigation. `AccountMenuActionItem` submits a form by its
 `formId` using `requestSubmit()`. Keep that form outside the Radix menu because
 menu content may unmount after selection.
 
+## Router adapters in apps
+
+The package never imports a router. Components that navigate (`LinkButton`,
+`SidebarItem`, `SidebarNav`, `ListItem`, `Pagination`) accept `linkComponent`.
+In a Next.js app, wrap them once in a tiny client adapter that passes Next's
+`Link` (for example `AppLinkButton`). These adapters are expected in every app
+and are not duplicated components. Do not intercept clicks with
+`preventDefault` plus a router push: that breaks modifier clicks and prefetch.
+
 ## Compatibility
 
 | Technology | Compatibility |
