@@ -1,12 +1,19 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 - 2026-10-25
 
 ### Added
 
 - `Toaster` accepts localized labels for toast announcements and the viewport, including Radix's `{hotkey}` placeholder.
 - `SheetContent` and `AsidePanel` accept a localized close button label.
 - `CodeBlock` accepts localized tab list, copy, and copied labels.
+- Shared pattern wave: `ActionFeedback`, `AccountMenuActionItem`, `LocaleMenuItems`,
+  `SidebarNav`, `MessageThread`, `MessageBubble`, and `SystemEventRow`.
+- Shared form and navigation controls: `AsyncCombobox`, `LinkButton`, `FileInput`,
+  and `Slider`.
+- `Callout` accepts an optional description while preserving its existing API.
+
+## Unreleased
 
 ## 0.2.0
 

@@ -1,8 +1,16 @@
 export { ButtonGroup } from "./button-group.js";
 export { AccountMenu } from "./account-menu.js";
 export type { AccountMenuProps } from "./account-menu.js";
+export { AccountMenuActionItem } from "./account-menu-action-item.js";
+export type { AccountMenuActionItemProps } from "./account-menu-action-item.js";
+export { ActionFeedback } from "./action-feedback.js";
+export type { ActionFeedbackProps, ActionFeedbackStatus } from "./action-feedback.js";
 export { Callout } from "./callout.js";
 export type { CalloutProps } from "./callout.js";
+export { LocaleMenuItems } from "./locale-menu-items.js";
+export type { LocaleMenuItemsProps, LocaleMenuOption } from "./locale-menu-items.js";
+export { MessageBubble, MessageThread, SystemEventRow } from "./message-thread.js";
+export type { MessageBubbleProps, MessageThreadProps, SystemEventRowProps } from "./message-thread.js";
 export { TableSkeleton } from "./table-skeleton.js";
 export type { TableSkeletonProps } from "./table-skeleton.js";
 export { ConfirmDialog } from "./confirm-dialog.js";
