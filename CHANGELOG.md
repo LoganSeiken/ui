@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 - 2026-10-25
+
+### Added
+
+- Generic, accessible `KanbanBoard` with Pointer Events and keyboard movement, localized labels, card and loading patterns; card body dragging with a 4px threshold, floating preview and placeholder, edge autoscroll, and memoized items.
+
 ## 0.4.0 - 2026-10-25
 
 ### Added
