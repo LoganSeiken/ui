@@ -1,10 +1,15 @@
 # Changelog
 
-## 0.4.0 - 2026-10-25
+## 0.5.0 - 2026-10-25
 
 ### Added
 
 - Generic, accessible `KanbanBoard` with Pointer Events and keyboard movement, localized labels, card and loading patterns; card body dragging with a 4px threshold, floating preview and placeholder, edge autoscroll, and memoized items.
+
+## 0.4.0 - 2026-10-25
+
+### Added
+
 - `Toaster` accepts localized labels for toast announcements and the viewport, including Radix's `{hotkey}` placeholder.
 - `SheetContent` and `AsidePanel` accept a localized close button label.
 - `CodeBlock` accepts localized tab list, copy, and copied labels.
