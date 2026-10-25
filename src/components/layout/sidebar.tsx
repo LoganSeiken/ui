@@ -51,3 +51,39 @@ export function SidebarItem({ icon, active = false, linkComponent: Link = "a", c
     </Link>
   );
 }
+
+export type SidebarNavItem = {
+  href: string;
+  label: string;
+  icon: ReactNode;
+  match?: "exact" | "prefix";
+};
+
+export type SidebarNavProps = {
+  items: SidebarNavItem[];
+  pathname: string;
+  linkComponent?: ElementType;
+  ariaLabel?: string;
+  className?: string;
+};
+
+/** Responsive navigation built from the shared Sidebar primitives. */
+export function SidebarNav({ items, pathname, linkComponent, ariaLabel = "Primary", className }: SidebarNavProps) {
+  const renderItems = () => items.map((item) => {
+    const active = item.match === "exact"
+      ? pathname === item.href
+      : pathname === item.href || pathname.startsWith(`${item.href.replace(/\/$/, "")}/`);
+    return (
+      <SidebarItem key={item.href} href={item.href} icon={item.icon} active={active} linkComponent={linkComponent} aria-label={item.label}>
+        {item.label}
+      </SidebarItem>
+    );
+  });
+
+  return (
+    <>
+      <Sidebar aria-label={ariaLabel} className={cn("hidden md:flex", className)}>{renderItems()}</Sidebar>
+      <Sidebar aria-label={ariaLabel} mode="collapsed" className={cn("flex md:hidden", className)}>{renderItems()}</Sidebar>
+    </>
+  );
+}

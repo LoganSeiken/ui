@@ -34,6 +34,28 @@ import { Button } from "@loganseiken/ui";
 
 `Button` supports `primary`, `secondary`, `outline`, `ghost`, and `destructive` variants; `sm`, `md`, and `lg` sizes; native button props; and a `loading` state.
 
+## Shared patterns
+
+The package also provides the small compositions used by the suite applications:
+
+```tsx
+import { ActionFeedback, AsyncCombobox, FileInput, LinkButton, MessageBubble, MessageThread, SidebarNav, Slider } from "@loganseiken/ui";
+
+<ActionFeedback status="success" message="Saved" />
+<LinkButton href="/settings" variant="outline">Settings</LinkButton>
+<FileInput id="knowledge" name="file" chooseLabel="Choose file" noFileLabel="No file selected" />
+<Slider name="priority" steps={[{ value: 0, label: "Low" }, { value: 100, label: "High" }]} aria-label="Priority" />
+<MessageThread><MessageBubble direction="inbound" author="Customer" body="Hello" /></MessageThread>
+```
+
+`AsyncCombobox` accepts a framework-neutral `fetcher(query, signal)` and handles
+debouncing, cancellation, loading, errors, selected-option preservation and
+optional creation. `SidebarNav` receives the current pathname and a router
+`linkComponent`; it renders an accessible expanded desktop navigation and an
+icon-only mobile navigation. `AccountMenuActionItem` submits a form by its
+`formId` using `requestSubmit()`. Keep that form outside the Radix menu because
+menu content may unmount after selection.
+
 ## Compatibility
 
 | Technology | Compatibility |
@@ -54,9 +76,9 @@ Run `npm pack --dry-run` to inspect the package contents. Avoid `npm link`, whic
 
 Three levels, all exported from the package root:
 
-- `ui`: Avatar, Badge, Button, Checkbox, Code, Collapsible, DropdownMenu, Indicator, Input, Kbd, Popover, RadioGroup, Select, Sheet, StatusDot, Switch, Table, Tabs, ToggleGroup, Tooltip.
-- `patterns`: ButtonGroup, Callout, Card, ChartTile, CodeBlock, ContextBreadcrumb, EmptyState, Field, InputGroup, ListItem, MiniBarChart, SearchInput, SortableHead, StatTile, Steps, Toolbar.
-- `layout`: AppShell, AsidePanel, PageContainer, PageHeader, Sidebar, SubNav, TopBar.
+- `ui`: Avatar, AsyncCombobox, Badge, Button, Checkbox, Code, Collapsible, DropdownMenu, FileInput, Indicator, Input, Kbd, LinkButton, Popover, RadioGroup, Select, Sheet, Slider, StatusDot, Switch, Table, Tabs, ToggleGroup, Tooltip.
+- `patterns`: AccountMenu, AccountMenuActionItem, ActionFeedback, ButtonGroup, Callout, Card, ChartTile, CodeBlock, ContextBreadcrumb, EmptyState, Field, InputGroup, ListItem, LocaleMenuItems, MessageBubble, MessageThread, MiniBarChart, SearchInput, SidebarNav, SortableHead, StatTile, Steps, SystemEventRow, Toolbar.
+- `layout`: AppShell, AsidePanel, PageContainer, PageHeader, Sidebar, SidebarNav, SubNav, TopBar.
 
 Components only consume semantic tokens (`--ui-*`). See `docs/adr/0002-component-library.md` for the decisions and `docs/certification/` for the coverage audit and certification report.
 
