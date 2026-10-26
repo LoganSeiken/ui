@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.2 - 2026-10-25
+
+### Added
+
+- `AccountMenuFormItem` runs a server action from an account menu with required localized pending feedback while keeping the menu mounted.
+
+### Changed
+
+- `AccountMenuActionItem` requires an explicit `pendingLabel` whenever it is pending; it no longer supplies an English default.
+
 ## 0.7.1 - 2026-10-25
 
 ### Added

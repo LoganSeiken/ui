@@ -3,6 +3,8 @@ export { AccountMenu } from "./account-menu.js";
 export type { AccountMenuProps } from "./account-menu.js";
 export { AccountMenuActionItem } from "./account-menu-action-item.js";
 export type { AccountMenuActionItemProps } from "./account-menu-action-item.js";
+export { AccountMenuFormItem } from "./account-menu-form-item.js";
+export type { AccountMenuFormAction, AccountMenuFormItemProps } from "./account-menu-form-item.js";
 export { ActionFeedback } from "./action-feedback.js";
 export type { ActionFeedbackProps, ActionFeedbackStatus } from "./action-feedback.js";
 export { ActionForm } from "./action-form.js";
