@@ -3,6 +3,8 @@ export type { AppShellProps } from "./app-shell.js";
 export { AsidePanel } from "./aside-panel.js";
 export type { AsidePanelProps } from "./aside-panel.js";
 export { PageContainer } from "./page-container.js";
+export { CenteredPage } from "./centered-page.js";
+export type { CenteredPageProps } from "./centered-page.js";
 export { PageHeader } from "./page-header.js";
 export type { PageHeaderProps } from "./page-header.js";
 export { Sidebar, SidebarItem, SidebarSeparator } from "./sidebar.js";

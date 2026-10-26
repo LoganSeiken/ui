@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.0 - 2026-10-25
+
+### Added
+
+- `CenteredPage` for responsive focused pages with an optional corner slot.
+- `TextLink` with router-compatible `linkComponent` and default/muted variants.
+- `FormCardSkeleton` matching the responsive `FormSection` field grid.
+
 ## 0.6.1 - 2026-10-25
 
 ### Fixed

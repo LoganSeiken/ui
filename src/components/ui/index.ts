@@ -40,6 +40,8 @@ export { FileInput } from "./file-input.js";
 export type { FileInputProps } from "./file-input.js";
 export { LinkButton } from "./link-button.js";
 export type { LinkButtonProps } from "./link-button.js";
+export { TextLink } from "./text-link.js";
+export type { TextLinkProps } from "./text-link.js";
 export { Kbd } from "./kbd.js";
 export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from "./popover.js";
 export { RadioCard, RadioGroup, RadioGroupItem } from "./radio-group.js";
