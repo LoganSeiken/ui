@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.1 - 2026-10-25
+
+### Fixed
+
+- `FilterCard` stacks its fields below `md`, so a field whose content settles after hydration (such as a `SelectValue`) no longer wraps to a new row and shifts the layout on mobile.
+
 ## 0.6.0 - 2026-10-25
 
 ### Added
