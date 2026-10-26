@@ -18,15 +18,16 @@ export type EmptyStateProps = Omit<ComponentProps<"div">, "title"> &
     description?: ReactNode;
     icon?: ReactNode;
     action?: ReactNode;
+    actions?: ReactNode;
   };
 
-export function EmptyState({ title, description, icon, action, variant, className, ...props }: EmptyStateProps) {
+export function EmptyState({ title, description, icon, action, actions, variant, className, ...props }: EmptyStateProps) {
   return (
     <div {...props} className={cn(emptyStateVariants({ variant }), className)}>
       {icon ? <span className="text-muted-foreground">{icon}</span> : null}
       <p className="text-sm font-medium text-foreground">{title}</p>
       {description ? <p className="max-w-sm text-sm text-muted-foreground">{description}</p> : null}
-      {action ? <div className="mt-1">{action}</div> : null}
+      {action || actions ? <div className="mt-1 flex flex-wrap items-center justify-center gap-2">{action}{actions}</div> : null}
     </div>
   );
 }

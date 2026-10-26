@@ -39,14 +39,26 @@ import { Button } from "@loganseiken/ui";
 The package also provides the small compositions used by the suite applications:
 
 ```tsx
-import { ActionFeedback, AsyncCombobox, FileInput, LinkButton, MessageBubble, MessageThread, SidebarNav, Slider } from "@loganseiken/ui";
+import { ActionFeedback, ActionForm, AsyncCombobox, ConfirmActionForm, FileInput, LinkButton, MessageBubble, MessageThread, SidebarNav, Slider } from "@loganseiken/ui";
 
 <ActionFeedback status="success" message="Saved" />
+<ActionForm initialState={{ status: "idle" }} action={save} submitLabel="Save">
+  {({ state, pending }) => <ProfileFields state={state} pending={pending} />}
+</ActionForm>
 <LinkButton href="/settings" variant="outline">Settings</LinkButton>
 <FileInput id="knowledge" name="file" chooseLabel="Choose file" noFileLabel="No file selected" />
 <Slider name="priority" steps={[{ value: 0, label: "Low" }, { value: 100, label: "High" }]} aria-label="Priority" />
 <MessageThread><MessageBubble direction="inbound" author="Customer" body="Hello" /></MessageThread>
 ```
+
+`ConfirmActionForm` renders the action form outside the confirmation dialog, so server actions remain reliable when a row revalidates. Pass `hiddenFields`, localized `labels`, and choose `feedback="inline"` or `feedback="toast"` according to whether the surrounding row stays mounted. `EmptyState` also accepts an `actions` slot for more than one action.
+
+`ActionForm` owns the framework-neutral action state shell: it exposes `state` and
+`pending` through its render prop, focuses the first invalid control, renders
+`ActionFeedback` and a pending-aware `SubmitButton`, preserves submitted values
+on client validation errors, and accepts an optional `validate(FormData)`
+function. Applications provide labels, fields, identity fields and the action;
+the package does not import Next.js or provide translations.
 
 `AsyncCombobox` accepts a framework-neutral `fetcher(query, signal)` and handles
 debouncing, cancellation, loading, errors, selected-option preservation and
@@ -86,7 +98,7 @@ Run `npm pack --dry-run` to inspect the package contents. Avoid `npm link`, whic
 Three levels, all exported from the package root:
 
 - `ui`: Avatar, AsyncCombobox, Badge, Button, Checkbox, Code, Collapsible, DropdownMenu, FileInput, Indicator, Input, Kbd, LinkButton, Popover, RadioGroup, Select, Sheet, Slider, StatusDot, Switch, Table, Tabs, ToggleGroup, Tooltip.
-- `patterns`: AccountMenu, AccountMenuActionItem, ActionFeedback, ButtonGroup, Callout, Card, ChartTile, CodeBlock, ContextBreadcrumb, EmptyState, Field, InputGroup, ListItem, LocaleMenuItems, MessageBubble, MessageThread, MiniBarChart, SearchInput, SidebarNav, SortableHead, StatTile, Steps, SystemEventRow, Toolbar.
+- `patterns`: AccountMenu, AccountMenuActionItem, ActionFeedback, ActionForm, ButtonGroup, Callout, Card, ChartTile, CodeBlock, ContextBreadcrumb, EmptyState, Field, InputGroup, ListItem, LocaleMenuItems, MessageBubble, MessageThread, MiniBarChart, SearchInput, SidebarNav, SortableHead, StatTile, Steps, SystemEventRow, Toolbar.
 - `layout`: AppShell, AsidePanel, PageContainer, PageHeader, Sidebar, SidebarNav, SubNav, TopBar.
 
 Components only consume semantic tokens (`--ui-*`). See `docs/adr/0002-component-library.md` for the decisions and `docs/certification/` for the coverage audit and certification report.

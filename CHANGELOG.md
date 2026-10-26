@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.0 - 2026-10-25
+
+### Added
+
+- `ConfirmActionForm`, a reusable confirmation pattern that keeps the action form outside the dialog portal, supports hidden fields, pending dismissal locks, and inline or toast feedback.
+- `EmptyState` accepts an `actions` slot for multiple actions.
+
 ## 0.5.0 - 2026-10-25
 
 ### Added
