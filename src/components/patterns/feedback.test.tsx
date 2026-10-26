@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { Button, Callout, Combobox, ConfirmActionForm, ConfirmDialog, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, FocusOnInvalid, Pagination, Skeleton, Spinner, SubmitButton, TableSkeleton, Textarea, Toaster, toast } from "../../index.js";
+import { Button, Callout, Combobox, ConfirmActionForm, ConfirmDialog, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, EmptyState, FocusOnInvalid, Pagination, Skeleton, Spinner, SubmitButton, TableSkeleton, Textarea, Toaster, toast } from "../../index.js";
 
 describe("form and feedback components", () => {
   it("keeps the neutral callout presentation and assigns alert semantics to danger", () => {
@@ -90,6 +90,12 @@ describe("form and feedback components", () => {
     await user.click(screen.getByRole("button", { name: "Confirm" }));
     expect(await screen.findByText("Archived")).toBeInTheDocument();
     expect(action).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders multiple empty-state actions through the actions slot", () => {
+    render(<EmptyState title="Nothing here" actions={<><Button type="button">Create</Button><Button type="button" variant="outline">Import</Button></>} />);
+    expect(screen.getByRole("button", { name: "Create" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Import" })).toBeInTheDocument();
   });
 
   it("paginates with links and button callbacks and clamps the current page", async () => {
