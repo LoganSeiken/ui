@@ -4,6 +4,7 @@ import { Field } from "./field.js";
 import { FormSection } from "./form-card.js";
 import { ActionForm, type ActionFormState } from "./action-form.js";
 import { Input } from "../ui/input.js";
+import { CenteredPage } from "../layout/centered-page.js";
 
 const initialState: ActionFormState = { status: "idle", values: { name: "" } };
 
@@ -42,6 +43,31 @@ export const ClientValidation: Story = {
 
 export const WithFooterContent: Story = {
   render: () => <FooterStory />
+};
+
+export const InsideCenteredPage: Story = {
+  parameters: { layout: "fullscreen" },
+  render: () => (
+    <CenteredPage>
+      <ActionForm<ActionFormState>
+        variant="plain"
+        initialState={initialState}
+        action={async () => ({ status: "success" as const, message: "Saved" })}
+        submitLabel="Save"
+        pendingText="Saving…"
+      >
+        {({ state }) => (
+          <>
+            <FormSection title="Profile">
+              <Field label="Name" htmlFor="centered-name" error={state.fieldErrors?.name?.[0]}>
+                <Input id="centered-name" name="name" defaultValue={String(state.values?.name ?? "")} />
+              </Field>
+            </FormSection>
+          </>
+        )}
+      </ActionForm>
+    </CenteredPage>
+  )
 };
 
 function FooterStory() {

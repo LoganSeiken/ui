@@ -1,13 +1,21 @@
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "../../utils/cn.js";
 
-export type FormCardProps = ComponentProps<"form">;
+export type FormCardProps = ComponentProps<"form"> & {
+  /** Use when the form is already contained by a Card, such as CenteredPage. */
+  variant?: "default" | "plain";
+};
 
-export function FormCard({ className, ...props }: FormCardProps) {
+export function FormCard({ className, variant = "default", ...props }: FormCardProps) {
   return (
     <form
       {...props}
-      className={cn("overflow-hidden rounded-md border border-border bg-surface text-surface-foreground", className)}
+      className={cn(
+        variant === "plain"
+          ? "text-surface-foreground"
+          : "overflow-hidden rounded-md border border-border bg-surface text-surface-foreground",
+        className
+      )}
     />
   );
 }

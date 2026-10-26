@@ -47,6 +47,8 @@ export { FilterCard } from "./filter-card.js";
 export type { FilterCardProps } from "./filter-card.js";
 export { FormActions, FormCard, FormSection } from "./form-card.js";
 export type { FormActionsProps, FormCardProps, FormSectionProps } from "./form-card.js";
+export { FormCardSkeleton } from "./form-card-skeleton.js";
+export type { FormCardSkeletonProps } from "./form-card-skeleton.js";
 export { InputGroup, InputGroupAddon, InputGroupInput } from "./input-group.js";
 export { KanbanBoard, KanbanBoardSkeleton, KanbanCard } from "./kanban-board.js";
 export type { KanbanBoardProps, KanbanBoardSkeletonProps, KanbanCardProps, KanbanColumn, KanbanLabels, KanbanMove } from "./kanban-board.js";
