@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { Button, Callout, Combobox, ConfirmDialog, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, FocusOnInvalid, Pagination, Skeleton, Spinner, SubmitButton, TableSkeleton, Textarea, Toaster, toast } from "../../index.js";
+import { Button, Callout, Combobox, ConfirmActionForm, ConfirmDialog, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, FocusOnInvalid, Pagination, Skeleton, Spinner, SubmitButton, TableSkeleton, Textarea, Toaster, toast } from "../../index.js";
 
 describe("form and feedback components", () => {
   it("keeps the neutral callout presentation and assigns alert semantics to danger", () => {
@@ -79,6 +79,17 @@ describe("form and feedback components", () => {
     expect(screen.getByRole("button", { name: "Close" })).toBeEnabled();
     await user.click(screen.getByRole("button", { name: "Cancel" }));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("keeps the action form outside the dialog and supports hidden fields", async () => {
+    const user = userEvent.setup();
+    const action = vi.fn(async (_previous, formData: FormData) => ({ status: "success" as const, message: formData.get("recordId") === "r1" ? "Archived" : "Wrong record" }));
+    render(<ConfirmActionForm action={action} hiddenFields={{ recordId: "r1" }} labels={{ trigger: <Button>Archive</Button>, title: "Archive?", confirm: "Confirm", cancel: "Cancel" }} />);
+    await user.click(screen.getByRole("button", { name: "Archive" }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Confirm" }));
+    expect(await screen.findByText("Archived")).toBeInTheDocument();
+    expect(action).toHaveBeenCalledTimes(1);
   });
 
   it("paginates with links and button callbacks and clamps the current page", async () => {

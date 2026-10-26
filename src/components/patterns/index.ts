@@ -15,6 +15,8 @@ export { TableSkeleton } from "./table-skeleton.js";
 export type { TableSkeletonProps } from "./table-skeleton.js";
 export { ConfirmDialog } from "./confirm-dialog.js";
 export type { ConfirmDialogProps } from "./confirm-dialog.js";
+export { ConfirmActionForm } from "./confirm-action-form.js";
+export type { ConfirmAction, ConfirmActionFormLabels, ConfirmActionFormProps, ConfirmActionState } from "./confirm-action-form.js";
 export { Pagination } from "./pagination.js";
 export type { PaginationProps } from "./pagination.js";
 export { SubmitButton } from "./submit-button.js";

@@ -39,7 +39,7 @@ import { Button } from "@loganseiken/ui";
 The package also provides the small compositions used by the suite applications:
 
 ```tsx
-import { ActionFeedback, AsyncCombobox, FileInput, LinkButton, MessageBubble, MessageThread, SidebarNav, Slider } from "@loganseiken/ui";
+import { ActionFeedback, AsyncCombobox, ConfirmActionForm, FileInput, LinkButton, MessageBubble, MessageThread, SidebarNav, Slider } from "@loganseiken/ui";
 
 <ActionFeedback status="success" message="Saved" />
 <LinkButton href="/settings" variant="outline">Settings</LinkButton>
@@ -47,6 +47,8 @@ import { ActionFeedback, AsyncCombobox, FileInput, LinkButton, MessageBubble, Me
 <Slider name="priority" steps={[{ value: 0, label: "Low" }, { value: 100, label: "High" }]} aria-label="Priority" />
 <MessageThread><MessageBubble direction="inbound" author="Customer" body="Hello" /></MessageThread>
 ```
+
+`ConfirmActionForm` renders the action form outside the confirmation dialog, so server actions remain reliable when a row revalidates. Pass `hiddenFields`, localized `labels`, and choose `feedback="inline"` or `feedback="toast"` according to whether the surrounding row stays mounted. `EmptyState` also accepts an `actions` slot for more than one action.
 
 `AsyncCombobox` accepts a framework-neutral `fetcher(query, signal)` and handles
 debouncing, cancellation, loading, errors, selected-option preservation and
