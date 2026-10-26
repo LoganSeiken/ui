@@ -61,6 +61,11 @@ describe("FilterCard", () => {
     expect(container.querySelector("form > div.border-t")).toBeInTheDocument();
   });
 
+  it("stacks fields below md and wraps them in a row from md", () => {
+    const { container } = render(<FilterCard><Field label="Name"><Input /></Field></FilterCard>);
+    expect(container.querySelector("form > div")).toHaveClass("grid", "md:flex", "md:flex-wrap");
+  });
+
   it("does not render a second row without actions", () => {
     const { container } = render(<FilterCard><Field label="Name"><Input /></Field></FilterCard>);
     expect(container.querySelector("form")?.children).toHaveLength(1);
