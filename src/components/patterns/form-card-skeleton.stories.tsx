@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FormCardSkeleton } from "./form-card-skeleton.js";
 
-const meta = { title: "patterns/FormCardSkeleton", component: FormCardSkeleton } satisfies Meta<typeof FormCardSkeleton>;
+const meta = { title: "patterns/FormCardSkeleton", component: FormCardSkeleton, args: { label: "Loading form" } } satisfies Meta<typeof FormCardSkeleton>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 

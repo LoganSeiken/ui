@@ -17,7 +17,7 @@ describe("form and feedback components", () => {
     expect(document.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
     rerender(<Spinner label="Loading" />);
     expect(screen.getByRole("status")).toHaveTextContent("Loading");
-    rerender(<><Skeleton data-testid="skeleton" /><TableSkeleton columns={2} rows={3} headers={["Name", "Email"]} /></>);
+    rerender(<><Skeleton data-testid="skeleton" /><TableSkeleton columns={2} rows={3} headers={["Name", "Email"]} label="Loading table" /></>);
     expect(screen.getByTestId("skeleton")).toHaveAttribute("aria-hidden", "true");
     expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true");
     expect(screen.getAllByRole("row")).toHaveLength(4);
