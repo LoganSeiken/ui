@@ -67,7 +67,8 @@ export type KanbanBoardProps<T extends { id: string }> = {
   renderItem: (item: T) => ReactNode;
   getItemLabel: (item: T) => string;
   getColumnLabel: (column: KanbanColumn<T>) => string;
-  onMove: (move: KanbanMove) => void;
+  /** Return `false` when the move is not applied yet (for example it awaits confirmation): no completion is announced. */
+  onMove: (move: KanbanMove) => void | false;
   labels: KanbanLabels;
   readOnly?: boolean;
   className?: string;
@@ -124,7 +125,7 @@ type LatestProps<T extends { id: string }> = {
   renderItem: (item: T) => ReactNode;
   getItemLabel: (item: T) => string;
   getColumnLabel: (column: KanbanColumn<T>) => string;
-  onMove: (move: KanbanMove) => void;
+  onMove: (move: KanbanMove) => void | false;
   labels: KanbanLabels;
   readOnly: boolean;
   token: object;
@@ -535,7 +536,10 @@ export function KanbanBoard<T extends { id: string }>({
     (column: KanbanColumn<T>) => latestRef.current.getColumnLabel(column),
     [],
   );
-  const stableMove = useCallback((move: KanbanMove) => latestRef.current.onMove(move), []);
+  const stableMove = useCallback(
+    (move: KanbanMove): void | false => latestRef.current.onMove(move),
+    [],
+  );
   const stableLabels = useMemo<StableLabels>(
     () => ({
       dragHandle: (item) => latestRef.current.labels.dragHandle(item),
@@ -841,13 +845,17 @@ export function KanbanBoard<T extends { id: string }>({
         return;
       }
       if (sourceColumn.id !== targetColumn.id || sourceIndex !== index) {
-        stableMove({
+        const accepted = stableMove({
           itemId: drag.itemId,
           fromColumnId: sourceColumn.id,
           toColumnId: targetColumn.id,
           beforeId: targetItems[index - 1]?.id ?? null,
           afterId: targetItems[index]?.id ?? null,
         });
+        if (accepted === false) {
+          clearDrag(drag.pointerId);
+          return;
+        }
       }
       const details = {
         item: drag.itemLabel,

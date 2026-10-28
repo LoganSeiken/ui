@@ -286,6 +286,18 @@ describe("KanbanBoard", () => {
     expect(container.querySelector("[data-kanban-placeholder]")).not.toBeInTheDocument();
   });
 
+  it("does not announce a move as completed when onMove defers it by returning false", async () => {
+    const user = userEvent.setup();
+    const onMove = vi.fn(() => false as const);
+    renderBoard({ onMove });
+    await user.click(screen.getByRole("button", { name: "Move Alpha" }));
+    await user.click(await screen.findByRole("menuitem", { name: "Qualified" }));
+    expect(onMove).toHaveBeenCalledOnce();
+    expect(screen.getByRole("region", { name: "Sales pipeline" })).not.toHaveTextContent(
+      /Moved Alpha/,
+    );
+  });
+
   it("does not capture the pointer for portaled menu items that bubble through the card", async () => {
     const user = userEvent.setup();
     const setPointerCapture = vi.fn();
