@@ -12,18 +12,19 @@ export const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-muted",
         outline: "border border-border bg-surface text-foreground hover:bg-muted",
         dashed: "border border-dashed border-input bg-transparent text-foreground hover:bg-muted",
-        ghost: "bg-transparent text-foreground hover:bg-muted aria-pressed:bg-primary aria-pressed:text-primary-foreground",
-        destructive: "bg-destructive text-destructive-foreground hover:opacity-90"
+        ghost:
+          "bg-transparent text-foreground hover:bg-muted aria-pressed:bg-primary aria-pressed:text-primary-foreground",
+        destructive: "bg-destructive text-destructive-foreground hover:opacity-90",
       },
       size: {
         sm: "h-6 px-2 text-xs",
         md: "h-8 px-3 text-sm",
         lg: "h-10 px-4 text-sm",
-        icon: "size-8 p-0 text-sm"
-      }
+        icon: "size-8 p-0 text-sm",
+      },
     },
-    defaultVariants: { variant: "primary", size: "md" }
-  }
+    defaultVariants: { variant: "primary", size: "md" },
+  },
 );
 
 export type ButtonProps = ComponentProps<"button"> &

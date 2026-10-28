@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "../ui/dropdown-menu.js";
 
 export type AccountMenuProps = {
@@ -18,7 +18,13 @@ export type AccountMenuProps = {
   children?: ReactNode;
 };
 
-export function AccountMenu({ email, name, label, defaultOpen = false, children }: AccountMenuProps) {
+export function AccountMenu({
+  email,
+  name,
+  label,
+  defaultOpen = false,
+  children,
+}: AccountMenuProps) {
   const initial = (name || email).charAt(0).toUpperCase();
 
   return (
@@ -29,7 +35,9 @@ export function AccountMenu({ email, name, label, defaultOpen = false, children 
           aria-label={label}
           className="rounded-pill focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
         >
-          <Avatar><AvatarFallback>{initial}</AvatarFallback></Avatar>
+          <Avatar>
+            <AvatarFallback>{initial}</AvatarFallback>
+          </Avatar>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

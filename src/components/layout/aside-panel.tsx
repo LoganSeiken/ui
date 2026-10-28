@@ -10,7 +10,15 @@ export type AsidePanelProps = Omit<ComponentProps<"aside">, "title"> & {
   closeLabel: string;
 };
 
-export function AsidePanel({ title, headerExtra, onClose, closeLabel, className, children, ...props }: AsidePanelProps) {
+export function AsidePanel({
+  title,
+  headerExtra,
+  onClose,
+  closeLabel,
+  className,
+  children,
+  ...props
+}: AsidePanelProps) {
   return (
     <aside
       {...props}

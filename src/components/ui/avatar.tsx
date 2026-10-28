@@ -8,7 +8,10 @@ export function Avatar({ className, ...props }: ComponentProps<typeof AvatarPrim
   return (
     <AvatarPrimitive.Root
       {...props}
-      className={cn("relative inline-flex size-8 shrink-0 overflow-hidden rounded-pill border border-border bg-muted", className)}
+      className={cn(
+        "relative inline-flex size-8 shrink-0 overflow-hidden rounded-pill border border-border bg-muted",
+        className,
+      )}
     />
   );
 }
@@ -17,11 +20,17 @@ export function AvatarImage({ className, ...props }: ComponentProps<typeof Avata
   return <AvatarPrimitive.Image {...props} className={cn("size-full object-cover", className)} />;
 }
 
-export function AvatarFallback({ className, ...props }: ComponentProps<typeof AvatarPrimitive.Fallback>) {
+export function AvatarFallback({
+  className,
+  ...props
+}: ComponentProps<typeof AvatarPrimitive.Fallback>) {
   return (
     <AvatarPrimitive.Fallback
       {...props}
-      className={cn("flex size-full items-center justify-center text-xs font-medium text-foreground", className)}
+      className={cn(
+        "flex size-full items-center justify-center text-xs font-medium text-foreground",
+        className,
+      )}
     />
   );
 }

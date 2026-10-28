@@ -16,24 +16,30 @@ const items = (
 export const Default: Story = {
   render: () => (
     <Select defaultValue="all">
-      <SelectTrigger aria-label="Status" className="w-64"><SelectValue /></SelectTrigger>
+      <SelectTrigger aria-label="Status" className="w-64">
+        <SelectValue />
+      </SelectTrigger>
       {items}
     </Select>
-  )
+  ),
 };
 export const Compact: Story = {
   render: () => (
     <Select defaultValue="all">
-      <SelectTrigger size="sm" aria-label="Time range" className="w-40"><SelectValue /></SelectTrigger>
+      <SelectTrigger size="sm" aria-label="Time range" className="w-40">
+        <SelectValue />
+      </SelectTrigger>
       {items}
     </Select>
-  )
+  ),
 };
 export const Disabled: Story = {
   render: () => (
     <Select disabled>
-      <SelectTrigger aria-label="Feature groups" className="w-64"><SelectValue placeholder="All features enabled" /></SelectTrigger>
+      <SelectTrigger aria-label="Feature groups" className="w-64">
+        <SelectValue placeholder="All features enabled" />
+      </SelectTrigger>
       {items}
     </Select>
-  )
+  ),
 };

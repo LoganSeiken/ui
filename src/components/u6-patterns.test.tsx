@@ -6,16 +6,36 @@ import { FormCard } from "./patterns/form-card.js";
 
 describe("U6 centered page patterns", () => {
   it("keeps focused content in a max-width card and exposes the corner slot", () => {
-    render(<CenteredPage corner={<span>Corner</span>}><CardContent>Content</CardContent></CenteredPage>);
+    render(
+      <CenteredPage corner={<span>Corner</span>}>
+        <CardContent>Content</CardContent>
+      </CenteredPage>,
+    );
     expect(screen.getByText("Content").closest(".max-w-md")).toBeTruthy();
     expect(screen.getByText("Corner")).toBeInTheDocument();
   });
 
   it("renders router-compatible text links", () => {
-    function RouterLink({ href, children, ...props }: { href?: string; children?: React.ReactNode; className?: string }) {
-      return <a href={href} {...props}>{children}</a>;
+    function RouterLink({
+      href,
+      children,
+      ...props
+    }: {
+      href?: string;
+      children?: React.ReactNode;
+      className?: string;
+    }) {
+      return (
+        <a href={href} {...props}>
+          {children}
+        </a>
+      );
     }
-    render(<TextLink linkComponent={RouterLink} href="/hub" variant="muted">Back to Hub</TextLink>);
+    render(
+      <TextLink linkComponent={RouterLink} href="/hub" variant="muted">
+        Back to Hub
+      </TextLink>,
+    );
     expect(screen.getByRole("link", { name: "Back to Hub" })).toHaveClass("text-sm", "underline");
   });
 
@@ -26,7 +46,11 @@ describe("U6 centered page patterns", () => {
   });
 
   it("renders plain forms without their own card chrome", () => {
-    render(<FormCard variant="plain"><span>Form</span></FormCard>);
+    render(
+      <FormCard variant="plain">
+        <span>Form</span>
+      </FormCard>,
+    );
     const form = screen.getByText("Form").closest("form");
     expect(form).toBeTruthy();
     expect(form).not.toHaveClass("border", "bg-surface", "rounded-md");

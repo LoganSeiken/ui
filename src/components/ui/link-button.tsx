@@ -10,7 +10,17 @@ export type LinkButtonProps = Omit<ComponentProps<"a">, "href"> &
     disabled?: boolean;
   };
 
-export function LinkButton({ variant, size, linkComponent: Link = "a", href, disabled = false, className, onClick, children, ...props }: LinkButtonProps) {
+export function LinkButton({
+  variant,
+  size,
+  linkComponent: Link = "a",
+  href,
+  disabled = false,
+  className,
+  onClick,
+  children,
+  ...props
+}: LinkButtonProps) {
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     if (disabled) {
       event.preventDefault();
@@ -28,7 +38,11 @@ export function LinkButton({ variant, size, linkComponent: Link = "a", href, dis
       aria-disabled={disabled || undefined}
       tabIndex={disabled ? -1 : props.tabIndex}
       onClick={handleClick}
-      className={cn(buttonVariants({ variant, size }), disabled && "pointer-events-none opacity-50", className)}
+      className={cn(
+        buttonVariants({ variant, size }),
+        disabled && "pointer-events-none opacity-50",
+        className,
+      )}
     >
       {children}
     </Link>

@@ -6,9 +6,15 @@ const meta = {
   title: "patterns/AccountMenuFormItem",
   component: AccountMenuFormItem,
   parameters: { layout: "centered" },
-  render: (args) => <AccountMenu label="Account menu" email="owner@example.com" defaultOpen><AccountMenuFormItem {...args} /></AccountMenu>
+  render: (args) => (
+    <AccountMenu label="Account menu" email="owner@example.com" defaultOpen>
+      <AccountMenuFormItem {...args} />
+    </AccountMenu>
+  ),
 } satisfies Meta<typeof AccountMenuFormItem>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = { args: { action: async () => undefined, label: "Sign out", pendingLabel: "Signing out…" } };
+export const Default: Story = {
+  args: { action: async () => undefined, label: "Sign out", pendingLabel: "Signing out…" },
+};

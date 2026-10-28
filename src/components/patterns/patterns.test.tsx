@@ -29,12 +29,16 @@ import {
   Steps,
   TileGrid,
   Toolbar,
-  ToolbarSpacer
+  ToolbarSpacer,
 } from "../../index.js";
 
 describe("Field", () => {
   it("associates the label with its control", () => {
-    render(<Field label="Search name" htmlFor="f1"><Input id="f1" /></Field>);
+    render(
+      <Field label="Search name" htmlFor="f1">
+        <Input id="f1" />
+      </Field>,
+    );
     expect(screen.getByLabelText("Search name")).toBeInTheDocument();
   });
 
@@ -42,14 +46,18 @@ describe("Field", () => {
     render(
       <Field label="Name" htmlFor="f2" description="Visible to admins" error="Required">
         <Input id="f2" />
-      </Field>
+      </Field>,
     );
     expect(screen.getByText("Visible to admins")).toBeInTheDocument();
     expect(screen.getByRole("alert")).toHaveTextContent("Required");
   });
 
   it("lays label and control side by side in the horizontal orientation", () => {
-    const { container } = render(<Field label="Client" orientation="horizontal" htmlFor="f3"><Input id="f3" /></Field>);
+    const { container } = render(
+      <Field label="Client" orientation="horizontal" htmlFor="f3">
+        <Input id="f3" />
+      </Field>,
+    );
     expect(container.firstElementChild).toHaveClass("sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]");
   });
 });
@@ -67,7 +75,7 @@ describe("SearchInput and InputGroup", () => {
       <InputGroup>
         <InputGroupAddon>Email address</InputGroupAddon>
         <InputGroupInput aria-label="Search by email" />
-      </InputGroup>
+      </InputGroup>,
     );
     await user.type(screen.getByLabelText("Search by email"), "ana");
     expect(screen.getByLabelText("Search by email")).toHaveValue("ana");
@@ -79,10 +87,13 @@ describe("Card", () => {
   it("composes header, content and footer", () => {
     render(
       <Card>
-        <CardHeader><CardTitle>Title</CardTitle><CardDescription>Desc</CardDescription></CardHeader>
+        <CardHeader>
+          <CardTitle>Title</CardTitle>
+          <CardDescription>Desc</CardDescription>
+        </CardHeader>
         <CardContent>Body</CardContent>
         <CardFooter>Foot</CardFooter>
-      </Card>
+      </Card>,
     );
     expect(screen.getByRole("heading", { name: "Title" })).toBeInTheDocument();
     expect(screen.getByText("Body")).toBeInTheDocument();
@@ -90,7 +101,11 @@ describe("Card", () => {
   });
 
   it("supports the dashed variant", () => {
-    render(<Card variant="dashed" data-testid="card">x</Card>);
+    render(
+      <Card variant="dashed" data-testid="card">
+        x
+      </Card>,
+    );
     expect(screen.getByTestId("card")).toHaveClass("border-dashed");
   });
 });
@@ -108,8 +123,10 @@ describe("StatTile and ChartTile", () => {
   it("renders a chart tile inside a joined grid with its summary", () => {
     render(
       <TileGrid>
-        <ChartTile label="API Gateway" summary="1.2% warnings"><div>chart</div></ChartTile>
-      </TileGrid>
+        <ChartTile label="API Gateway" summary="1.2% warnings">
+          <div>chart</div>
+        </ChartTile>
+      </TileGrid>,
     );
     expect(screen.getByText("API Gateway")).toBeInTheDocument();
     expect(screen.getByText("1.2% warnings")).toBeInTheDocument();
@@ -119,7 +136,13 @@ describe("StatTile and ChartTile", () => {
 
 describe("EmptyState", () => {
   it("shows title, description and action", () => {
-    render(<EmptyState title="Create a file bucket" description="Store files" action={<Button>New bucket</Button>} />);
+    render(
+      <EmptyState
+        title="Create a file bucket"
+        description="Store files"
+        action={<Button>New bucket</Button>}
+      />,
+    );
     expect(screen.getByText("Create a file bucket")).toBeInTheDocument();
     expect(screen.getByText("Store files")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "New bucket" })).toBeInTheDocument();
@@ -144,14 +167,26 @@ describe("ListItem", () => {
 
 describe("Toolbar and ButtonGroup", () => {
   it("is a toolbar and hides the spacer from assistive tech", () => {
-    render(<Toolbar aria-label="Filters"><Button>A</Button><ToolbarSpacer data-testid="sp" /></Toolbar>);
+    render(
+      <Toolbar aria-label="Filters">
+        <Button>A</Button>
+        <ToolbarSpacer data-testid="sp" />
+      </Toolbar>,
+    );
     expect(screen.getByRole("toolbar", { name: "Filters" })).toBeInTheDocument();
     expect(screen.getByTestId("sp")).toHaveAttribute("aria-hidden", "true");
   });
 
   it("groups joined buttons", () => {
-    render(<ButtonGroup aria-label="Add"><Button>Add user</Button><Button aria-label="More">v</Button></ButtonGroup>);
-    expect(within(screen.getByRole("group", { name: "Add" })).getAllByRole("button")).toHaveLength(2);
+    render(
+      <ButtonGroup aria-label="Add">
+        <Button>Add user</Button>
+        <Button aria-label="More">v</Button>
+      </ButtonGroup>,
+    );
+    expect(within(screen.getByRole("group", { name: "Add" })).getAllByRole("button")).toHaveLength(
+      2,
+    );
   });
 });
 
@@ -163,13 +198,18 @@ describe("SortableHead", () => {
       <table>
         <thead>
           <tr>
-            <SortableHead sorted="desc" onSort={onSort}>Created</SortableHead>
+            <SortableHead sorted="desc" onSort={onSort}>
+              Created
+            </SortableHead>
             <SortableHead>Plan</SortableHead>
           </tr>
         </thead>
-      </table>
+      </table>,
     );
-    expect(screen.getByRole("columnheader", { name: "Created" })).toHaveAttribute("aria-sort", "descending");
+    expect(screen.getByRole("columnheader", { name: "Created" })).toHaveAttribute(
+      "aria-sort",
+      "descending",
+    );
     expect(screen.getByRole("columnheader", { name: "Plan" })).toHaveAttribute("aria-sort", "none");
     await user.click(screen.getByRole("button", { name: "Created" }));
     expect(onSort).toHaveBeenCalledTimes(1);
@@ -180,9 +220,11 @@ describe("Steps", () => {
   it("is an ordered list whose items show their number and content", () => {
     render(
       <Steps>
-        <Step number={1} title="Install package">code</Step>
+        <Step number={1} title="Install package">
+          code
+        </Step>
         <Step number={2} title="Set variables" description="Copy these" />
-      </Steps>
+      </Steps>,
     );
     expect(screen.getByRole("list")).toBeInTheDocument();
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
@@ -197,7 +239,14 @@ describe("CodeBlock", () => {
   it("copies the code and confirms to the user", async () => {
     const user = userEvent.setup();
     const writeText = vi.spyOn(navigator.clipboard, "writeText");
-    render(<CodeBlock tablistLabel="Code variants" copyLabel="Copy code" copiedLabel="Copied" code="npm install prisma" />);
+    render(
+      <CodeBlock
+        tablistLabel="Code variants"
+        copyLabel="Copy code"
+        copiedLabel="Copied"
+        code="npm install prisma"
+      />,
+    );
     await user.click(screen.getByRole("button", { name: "Copy code" }));
     expect(writeText).toHaveBeenCalledWith("npm install prisma");
     expect(await screen.findByRole("button", { name: "Copied" })).toBeInTheDocument();
@@ -206,7 +255,17 @@ describe("CodeBlock", () => {
   it("switches between tabs and copies the selected variant", async () => {
     const user = userEvent.setup();
     const writeText = vi.spyOn(navigator.clipboard, "writeText");
-    render(<CodeBlock tablistLabel="Code variants" copyLabel="Copy code" copiedLabel="Copied" tabs={[{ label: "npm", code: "npm i x" }, { label: "pnpm", code: "pnpm add x" }]} />);
+    render(
+      <CodeBlock
+        tablistLabel="Code variants"
+        copyLabel="Copy code"
+        copiedLabel="Copied"
+        tabs={[
+          { label: "npm", code: "npm i x" },
+          { label: "pnpm", code: "pnpm add x" },
+        ]}
+      />,
+    );
     expect(screen.getByRole("tab", { name: "npm" })).toHaveAttribute("aria-selected", "true");
     await user.click(screen.getByRole("tab", { name: "pnpm" }));
     expect(screen.getByText("pnpm add x")).toBeInTheDocument();
@@ -217,7 +276,14 @@ describe("CodeBlock", () => {
   it("uses supplied labels for code variants and copy feedback", async () => {
     const user = userEvent.setup();
     const writeText = vi.spyOn(navigator.clipboard, "writeText");
-    render(<CodeBlock tabs={[{ label: "npm", code: "npm install x" }]} tablistLabel="Variantes de código" copyLabel="Copiar código" copiedLabel="Copiado" />);
+    render(
+      <CodeBlock
+        tabs={[{ label: "npm", code: "npm install x" }]}
+        tablistLabel="Variantes de código"
+        copyLabel="Copiar código"
+        copiedLabel="Copiado"
+      />,
+    );
     expect(screen.getByRole("tablist", { name: "Variantes de código" })).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Copiar código" }));
     expect(writeText).toHaveBeenCalledWith("npm install x");
@@ -227,7 +293,12 @@ describe("CodeBlock", () => {
 
 describe("MiniBarChart", () => {
   it("is an image with an accessible name and one pair of bars per datum", () => {
-    const { container } = render(<MiniBarChart label="Requests, last 24 hours" data={[{ success: 3 }, { success: 5, danger: 2 }]} />);
+    const { container } = render(
+      <MiniBarChart
+        label="Requests, last 24 hours"
+        data={[{ success: 3 }, { success: 5, danger: 2 }]}
+      />,
+    );
     expect(screen.getByRole("img", { name: "Requests, last 24 hours" })).toBeInTheDocument();
     expect(container.querySelectorAll("rect")).toHaveLength(4);
   });
@@ -240,11 +311,17 @@ describe("ContextBreadcrumb", () => {
     render(
       <ContextBreadcrumb
         items={[
-          { key: "org", label: "Demo Org", badge: <span>FREE</span>, onSwitch, switchLabel: "Switch organization" },
-          { key: "proj", label: "Acme" }
+          {
+            key: "org",
+            label: "Demo Org",
+            badge: <span>FREE</span>,
+            onSwitch,
+            switchLabel: "Switch organization",
+          },
+          { key: "proj", label: "Acme" },
         ]}
         action={<Button>Connect</Button>}
-      />
+      />,
     );
     expect(screen.getByRole("navigation", { name: "Context" })).toBeInTheDocument();
     expect(screen.getByText("Acme")).toBeInTheDocument();
@@ -255,7 +332,9 @@ describe("ContextBreadcrumb", () => {
 
 describe("Callout", () => {
   it("shows its title and action", () => {
-    render(<Callout title="Give your agent everything it needs" action={<Button>Copy prompt</Button>} />);
+    render(
+      <Callout title="Give your agent everything it needs" action={<Button>Copy prompt</Button>} />,
+    );
     expect(screen.getByText("Give your agent everything it needs")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Copy prompt" })).toBeInTheDocument();
   });

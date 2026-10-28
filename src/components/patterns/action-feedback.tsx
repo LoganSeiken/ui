@@ -19,12 +19,13 @@ export function ActionFeedback({
   pendingLabel,
   successTitle,
   errorTitle,
-  className
+  className,
 }: ActionFeedbackProps) {
   if (status === "idle") return null;
 
   const variant = status === "error" ? "danger" : status === "success" ? "success" : "neutral";
-  const title = status === "pending" ? pendingLabel : status === "success" ? successTitle : errorTitle;
+  const title =
+    status === "pending" ? pendingLabel : status === "success" ? successTitle : errorTitle;
 
   return (
     <Callout

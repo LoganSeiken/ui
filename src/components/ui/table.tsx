@@ -6,10 +6,10 @@ const tableVariants = cva("w-full border-collapse text-sm", {
   variants: {
     variant: {
       default: "",
-      grid: "[&_td]:border-r [&_th]:border-r [&_td]:border-border-subtle [&_th]:border-border-subtle [&_td:last-child]:border-r-0 [&_th:last-child]:border-r-0"
-    }
+      grid: "[&_td]:border-r [&_th]:border-r [&_td]:border-border-subtle [&_th]:border-border-subtle [&_td:last-child]:border-r-0 [&_th:last-child]:border-r-0",
+    },
   },
-  defaultVariants: { variant: "default" }
+  defaultVariants: { variant: "default" },
 });
 
 export function Table({
@@ -36,7 +36,10 @@ export function TableRow({ className, ...props }: ComponentProps<"tr">) {
   return (
     <tr
       {...props}
-      className={cn("border-b border-border-subtle transition-colors duration-(--ui-duration-fast) hover:bg-surface-subtle", className)}
+      className={cn(
+        "border-b border-border-subtle transition-colors duration-(--ui-duration-fast) hover:bg-surface-subtle",
+        className,
+      )}
     />
   );
 }
@@ -45,10 +48,10 @@ const tableHeadVariants = cva("px-4 text-left font-normal text-muted-foreground"
   variants: {
     variant: {
       caps: "h-10 text-xs uppercase tracking-caps",
-      plain: "h-9 text-sm"
-    }
+      plain: "h-9 text-sm",
+    },
   },
-  defaultVariants: { variant: "caps" }
+  defaultVariants: { variant: "caps" },
 });
 
 export function TableHead({
@@ -67,7 +70,10 @@ export function TableFooter({ className, ...props }: ComponentProps<"tfoot">) {
   return (
     <tfoot
       {...props}
-      className={cn("border-t border-border bg-surface-subtle text-xs text-muted-foreground", className)}
+      className={cn(
+        "border-t border-border bg-surface-subtle text-xs text-muted-foreground",
+        className,
+      )}
     />
   );
 }

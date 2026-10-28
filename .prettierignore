@@ -1,0 +1,9 @@
+dist/
+.next/
+vendor/
+supabase/.temp/
+node_modules/
+package-lock.json
+docs/history/
+*.snap
+*.md

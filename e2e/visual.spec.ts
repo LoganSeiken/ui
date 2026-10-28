@@ -3,7 +3,9 @@ import { expect, test, type Page } from "@playwright/test";
 
 type Entry = { id: string; title: string; type: string };
 
-const index = JSON.parse(readFileSync("storybook-static/index.json", "utf8")) as { entries: Record<string, Entry> };
+const index = JSON.parse(readFileSync("storybook-static/index.json", "utf8")) as {
+  entries: Record<string, Entry>;
+};
 const stories = Object.values(index.entries).filter((entry) => entry.type === "story");
 const firstOfEachComponent = new Set<string>();
 const darkStories = stories.filter((story) => {

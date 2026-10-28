@@ -8,7 +8,7 @@ const config: StorybookConfig = {
   viteFinal: (viteConfig) => {
     viteConfig.plugins = [...(viteConfig.plugins ?? []), tailwindcss()];
     return viteConfig;
-  }
+  },
 };
 
 export default config;

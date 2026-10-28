@@ -18,19 +18,31 @@ export const Underline: Story = {
       <TabsContent value="settings">Settings panel</TabsContent>
       <TabsContent value="policies">Policies panel</TabsContent>
     </Tabs>
-  )
+  ),
 };
 export const Cards: Story = {
   render: () => (
     <Tabs defaultValue="fw" className="w-[32rem]">
       <TabsList variant="cards">
-        <TabsTrigger value="fw"><Box className="size-4" aria-hidden="true" /><span className="font-medium text-foreground">Framework</span><span className="text-sm text-muted-foreground">Use a client library</span></TabsTrigger>
-        <TabsTrigger value="server"><Database className="size-4" aria-hidden="true" /><span className="font-medium text-foreground">Server</span><span className="text-sm text-muted-foreground">Build APIs</span></TabsTrigger>
-        <TabsTrigger value="orm"><Table2 className="size-4" aria-hidden="true" /><span className="font-medium text-foreground">ORM</span><span className="text-sm text-muted-foreground">Third-party library</span></TabsTrigger>
+        <TabsTrigger value="fw">
+          <Box className="size-4" aria-hidden="true" />
+          <span className="font-medium text-foreground">Framework</span>
+          <span className="text-sm text-muted-foreground">Use a client library</span>
+        </TabsTrigger>
+        <TabsTrigger value="server">
+          <Database className="size-4" aria-hidden="true" />
+          <span className="font-medium text-foreground">Server</span>
+          <span className="text-sm text-muted-foreground">Build APIs</span>
+        </TabsTrigger>
+        <TabsTrigger value="orm">
+          <Table2 className="size-4" aria-hidden="true" />
+          <span className="font-medium text-foreground">ORM</span>
+          <span className="text-sm text-muted-foreground">Third-party library</span>
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="fw">Framework panel</TabsContent>
       <TabsContent value="server">Server panel</TabsContent>
       <TabsContent value="orm">ORM panel</TabsContent>
     </Tabs>
-  )
+  ),
 };

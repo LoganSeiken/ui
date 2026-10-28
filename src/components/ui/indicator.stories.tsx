@@ -11,11 +11,15 @@ export const OnIconButton: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Indicator label="3 unread notifications">
-        <Button variant="outline" size="icon" aria-label="Notifications" className="rounded-pill"><Bell className="size-4" aria-hidden="true" /></Button>
+        <Button variant="outline" size="icon" aria-label="Notifications" className="rounded-pill">
+          <Bell className="size-4" aria-hidden="true" />
+        </Button>
       </Indicator>
       <Indicator show={false}>
-        <Button variant="outline" size="icon" aria-label="Notifications" className="rounded-pill"><Bell className="size-4" aria-hidden="true" /></Button>
+        <Button variant="outline" size="icon" aria-label="Notifications" className="rounded-pill">
+          <Bell className="size-4" aria-hidden="true" />
+        </Button>
       </Indicator>
     </div>
-  )
+  ),
 };

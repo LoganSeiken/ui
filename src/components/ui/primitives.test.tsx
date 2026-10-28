@@ -27,7 +27,7 @@ import {
   TableHeader,
   TableRow,
   ToggleGroup,
-  ToggleGroupItem
+  ToggleGroupItem,
 } from "../../index.js";
 
 describe("Button", () => {
@@ -43,7 +43,11 @@ describe("Button", () => {
     const { rerender } = render(<Button onClick={onClick}>Go</Button>);
     await user.click(screen.getByRole("button", { name: "Go" }));
     expect(onClick).toHaveBeenCalledTimes(1);
-    rerender(<Button onClick={onClick} disabled>Go</Button>);
+    rerender(
+      <Button onClick={onClick} disabled>
+        Go
+      </Button>,
+    );
     await user.click(screen.getByRole("button", { name: "Go" }));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
@@ -61,7 +65,7 @@ describe("Button", () => {
         <Button size="sm">a</Button>
         <Button size="md">b</Button>
         <Button size="lg">c</Button>
-      </>
+      </>,
     );
     expect(screen.getByText("a")).toHaveClass("h-6");
     expect(screen.getByText("b")).toHaveClass("h-8");
@@ -89,7 +93,7 @@ describe("Input", () => {
       <>
         <Input aria-label="sm" size="sm" />
         <Input aria-label="md" aria-invalid />
-      </>
+      </>,
     );
     expect(screen.getByLabelText("sm")).toHaveClass("h-8");
     expect(screen.getByLabelText("md")).toHaveClass("h-10");
@@ -105,7 +109,7 @@ describe("Badge, Kbd, Code", () => {
         <Badge variant="warning">warn</Badge>
         <Badge variant="danger">bad</Badge>
         <Badge variant="success-outline">new</Badge>
-      </>
+      </>,
     );
     expect(screen.getByText("ok")).toHaveClass("bg-success-subtle");
     expect(screen.getByText("warn")).toHaveClass("bg-warning-subtle");
@@ -114,13 +118,23 @@ describe("Badge, Kbd, Code", () => {
   });
 
   it("switches between pill and square shapes", () => {
-    render(<><Badge>pill</Badge><Badge shape="square">sq</Badge></>);
+    render(
+      <>
+        <Badge>pill</Badge>
+        <Badge shape="square">sq</Badge>
+      </>,
+    );
     expect(screen.getByText("pill")).toHaveClass("rounded-pill");
     expect(screen.getByText("sq")).toHaveClass("rounded-sm");
   });
 
   it("renders semantic kbd and code elements", () => {
-    render(<><Kbd>⌘K</Kbd><Code>4347a66e</Code></>);
+    render(
+      <>
+        <Kbd>⌘K</Kbd>
+        <Code>4347a66e</Code>
+      </>,
+    );
     expect(screen.getByText("⌘K").tagName).toBe("KBD");
     expect(screen.getByText("4347a66e").tagName).toBe("CODE");
   });
@@ -135,9 +149,17 @@ describe("StatusDot and Indicator", () => {
   });
 
   it("shows the notification dot only when requested and announces it", () => {
-    const { rerender } = render(<Indicator label="3 unread"><button type="button">Bell</button></Indicator>);
+    const { rerender } = render(
+      <Indicator label="3 unread">
+        <button type="button">Bell</button>
+      </Indicator>,
+    );
     expect(screen.getByRole("status", { name: "3 unread" })).toBeInTheDocument();
-    rerender(<Indicator show={false} label="3 unread"><button type="button">Bell</button></Indicator>);
+    rerender(
+      <Indicator show={false} label="3 unread">
+        <button type="button">Bell</button>
+      </Indicator>,
+    );
     expect(screen.queryByRole("status")).not.toBeInTheDocument();
   });
 });
@@ -147,13 +169,19 @@ describe("Table", () => {
     return (
       <Table variant={variant}>
         <TableHeader>
-          <TableRow><TableHead variant="plain">Email</TableHead></TableRow>
+          <TableRow>
+            <TableHead variant="plain">Email</TableHead>
+          </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow><TableCell>ana@example.com</TableCell></TableRow>
+          <TableRow>
+            <TableCell>ana@example.com</TableCell>
+          </TableRow>
         </TableBody>
         <TableFooter>
-          <TableRow><TableCell>Total: 1</TableCell></TableRow>
+          <TableRow>
+            <TableCell>Total: 1</TableCell>
+          </TableRow>
         </TableFooter>
       </Table>
     );
@@ -175,7 +203,7 @@ describe("Table", () => {
             <TableHead>caps</TableHead>
           </tr>
         </thead>
-      </table>
+      </table>,
     );
     expect(screen.getByText("plain")).toHaveClass("h-9");
     expect(screen.getByText("caps")).toHaveClass("h-10", "uppercase");
@@ -189,7 +217,11 @@ describe("Table", () => {
 
 describe("Avatar", () => {
   it("shows the fallback when there is no image", () => {
-    render(<Avatar><AvatarFallback>CB</AvatarFallback></Avatar>);
+    render(
+      <Avatar>
+        <AvatarFallback>CB</AvatarFallback>
+      </Avatar>,
+    );
     expect(screen.getByText("CB")).toBeInTheDocument();
   });
 });
@@ -239,7 +271,7 @@ describe("RadioGroup and RadioCard", () => {
       <RadioGroup aria-label="Options" defaultValue="a">
         <RadioGroupItem value="a" aria-label="A" />
         <RadioGroupItem value="b" aria-label="B" />
-      </RadioGroup>
+      </RadioGroup>,
     );
     await user.click(screen.getByRole("radio", { name: "B" }));
     expect(screen.getByRole("radio", { name: "B" })).toBeChecked();
@@ -252,12 +284,15 @@ describe("RadioGroup and RadioCard", () => {
       <RadioGroup aria-label="Connection" defaultValue="direct" variant="joined">
         <RadioCard value="direct" title="Direct connection" description="Long-lived connections" />
         <RadioCard value="pooler" title="Transaction pooler" description="Serverless functions" />
-      </RadioGroup>
+      </RadioGroup>,
     );
     expect(screen.getByText("Long-lived connections")).toBeInTheDocument();
     await user.click(screen.getByRole("radio", { name: /Transaction pooler/ }));
     expect(screen.getByRole("radio", { name: /Transaction pooler/ })).toBeChecked();
-    expect(screen.getByRole("radiogroup", { name: "Connection" })).toHaveAttribute("data-variant", "joined");
+    expect(screen.getByRole("radiogroup", { name: "Connection" })).toHaveAttribute(
+      "data-variant",
+      "joined",
+    );
   });
 });
 
@@ -268,7 +303,7 @@ describe("ToggleGroup", () => {
       <ToggleGroup type="single" defaultValue="grid" aria-label="View">
         <ToggleGroupItem value="grid" aria-label="Grid" />
         <ToggleGroupItem value="list" aria-label="List" />
-      </ToggleGroup>
+      </ToggleGroup>,
     );
     await user.click(screen.getByRole("radio", { name: "List" }));
     expect(screen.getByRole("radio", { name: "List" })).toBeChecked();
@@ -283,7 +318,7 @@ describe("Collapsible", () => {
       <Collapsible>
         <CollapsibleTrigger>Private</CollapsibleTrigger>
         <CollapsibleContent>Saved query</CollapsibleContent>
-      </Collapsible>
+      </Collapsible>,
     );
     const trigger = screen.getByRole("button", { name: "Private" });
     expect(trigger).toHaveAttribute("aria-expanded", "false");

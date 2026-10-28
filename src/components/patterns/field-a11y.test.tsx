@@ -25,7 +25,9 @@ describe("Field accessibility wiring", () => {
       </Field>,
     );
     const described = screen.getByLabelText("Domain").getAttribute("aria-describedby") ?? "";
-    expect(described.split(" ")).toEqual(expect.arrayContaining(["custom-hint", "domain-description", "domain-error"]));
+    expect(described.split(" ")).toEqual(
+      expect.arrayContaining(["custom-hint", "domain-description", "domain-error"]),
+    );
   });
 
   it("adds no aria-describedby when there is neither description nor error", () => {
@@ -43,20 +45,30 @@ describe("Field with a nested Select", () => {
     render(
       <Field label="Size" htmlFor="size" description="Employees" error="Pick a size">
         <Select>
-          <SelectTrigger id="size" aria-invalid><SelectValue /></SelectTrigger>
-          <SelectContent><SelectItem value="a">A</SelectItem></SelectContent>
+          <SelectTrigger id="size" aria-invalid>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="a">A</SelectItem>
+          </SelectContent>
         </Select>
       </Field>,
     );
     const trigger = screen.getByRole("combobox");
-    expect((trigger.getAttribute("aria-describedby") ?? "").split(" ")).toEqual(expect.arrayContaining(["size-description", "size-error"]));
+    expect((trigger.getAttribute("aria-describedby") ?? "").split(" ")).toEqual(
+      expect.arrayContaining(["size-description", "size-error"]),
+    );
   });
 
   it("leaves a standalone select untouched", () => {
     render(
       <Select>
-        <SelectTrigger id="solo"><SelectValue /></SelectTrigger>
-        <SelectContent><SelectItem value="a">A</SelectItem></SelectContent>
+        <SelectTrigger id="solo">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="a">A</SelectItem>
+        </SelectContent>
       </Select>,
     );
     expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-describedby");
@@ -65,14 +77,46 @@ describe("Field with a nested Select", () => {
 
 describe("Combobox feedback", () => {
   it("shows a localized loading label and a search error message", () => {
-    const { rerender } = render(<Combobox placeholder="Select" searchPlaceholder="Search" emptyText="No results" options={[]} loading loadingLabel="Buscando..." defaultOpen aria-label="Company" />);
+    const { rerender } = render(
+      <Combobox
+        placeholder="Select"
+        searchPlaceholder="Search"
+        emptyText="No results"
+        options={[]}
+        loading
+        loadingLabel="Buscando..."
+        defaultOpen
+        aria-label="Company"
+      />,
+    );
     expect(screen.getByRole("status")).toHaveTextContent("Buscando...");
-    rerender(<Combobox placeholder="Select" searchPlaceholder="Search" emptyText="No results" loadingLabel="Loading" options={[]} errorText="No se pudo buscar" defaultOpen aria-label="Company" />);
+    rerender(
+      <Combobox
+        placeholder="Select"
+        searchPlaceholder="Search"
+        emptyText="No results"
+        loadingLabel="Loading"
+        options={[]}
+        errorText="No se pudo buscar"
+        defaultOpen
+        aria-label="Company"
+      />,
+    );
     expect(screen.getByRole("alert")).toHaveTextContent("No se pudo buscar");
   });
 
   it("forwards aria-describedby to the trigger", () => {
-    render(<Combobox placeholder="Select" searchPlaceholder="Search" emptyText="No results" loadingLabel="Loading" options={[]} aria-label="Company" aria-describedby="company-error" />);
+    render(
+      <Combobox
+        placeholder="Select"
+        searchPlaceholder="Search"
+        emptyText="No results"
+        loadingLabel="Loading"
+        options={[]}
+        aria-label="Company"
+        aria-describedby="company-error"
+      />,
+    );
     expect(screen.getByRole("combobox")).toHaveAttribute("aria-describedby", "company-error");
   });
 });

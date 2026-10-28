@@ -10,7 +10,10 @@ export type ConfirmActionState = {
   message?: string;
 };
 
-export type ConfirmAction = (previous: ConfirmActionState, formData: FormData) => ConfirmActionState | Promise<ConfirmActionState>;
+export type ConfirmAction = (
+  previous: ConfirmActionState,
+  formData: FormData,
+) => ConfirmActionState | Promise<ConfirmActionState>;
 
 export type ConfirmActionFormLabels = {
   trigger: ReactNode;
@@ -42,20 +45,27 @@ export function ConfirmActionForm({
   variant = "default",
   feedback = "inline",
   initialState = { status: "idle" },
-  formId: suppliedFormId
+  formId: suppliedFormId,
 }: ConfirmActionFormProps) {
   const generatedId = useId().replaceAll(":", "");
   const formId = suppliedFormId ?? `confirm-action-${generatedId}`;
   const [open, setOpen] = useState(false);
-  const [state, formAction, pending] = useActionState(async (previous: ConfirmActionState, formData: FormData) => {
-    const result = await action(previous, formData);
-    if (result.status === "success") setOpen(false);
-    if (feedback === "toast" && result.status !== "idle") {
-      toast({ title: result.message ?? String(result.status === "success" ? labels.success : labels.error), variant: result.status === "success" ? "success" : "danger" });
-      return initialState;
-    }
-    return result;
-  }, initialState);
+  const [state, formAction, pending] = useActionState(
+    async (previous: ConfirmActionState, formData: FormData) => {
+      const result = await action(previous, formData);
+      if (result.status === "success") setOpen(false);
+      if (feedback === "toast" && result.status !== "idle") {
+        toast({
+          title:
+            result.message ?? String(result.status === "success" ? labels.success : labels.error),
+          variant: result.status === "success" ? "success" : "danger",
+        });
+        return initialState;
+      }
+      return result;
+    },
+    initialState,
+  );
 
   return (
     <>
@@ -73,9 +83,21 @@ export function ConfirmActionForm({
         onOpenChange={setOpen}
       />
       <form id={formId} action={formAction} hidden>
-        {Object.entries(hiddenFields).map(([name, value]) => value == null ? null : <input key={name} type="hidden" name={name} value={String(value)} />)}
+        {Object.entries(hiddenFields).map(([name, value]) =>
+          value == null ? null : (
+            <input key={name} type="hidden" name={name} value={String(value)} />
+          ),
+        )}
       </form>
-      {feedback === "inline" ? <ActionFeedback status={pending ? "pending" : state.status} message={state.message} pendingLabel={labels.pending} successTitle={labels.success} errorTitle={labels.error} /> : null}
+      {feedback === "inline" ? (
+        <ActionFeedback
+          status={pending ? "pending" : state.status}
+          message={state.message}
+          pendingLabel={labels.pending}
+          successTitle={labels.success}
+          errorTitle={labels.error}
+        />
+      ) : null}
     </>
   );
 }

@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  useActionState,
-  type ReactNode
-} from "react";
+import { useActionState, type ReactNode } from "react";
 import { ActionFeedback } from "./action-feedback.js";
 import { FocusOnInvalid } from "./focus-on-invalid.js";
 import { FormActions, FormCard, type FormCardProps } from "./form-card.js";
@@ -22,7 +19,7 @@ export type ActionFormState = {
 
 export type ActionFormAction<TState extends ActionFormState> = (
   previous: TState,
-  formData: FormData
+  formData: FormData,
 ) => TState | Promise<TState>;
 
 export type ActionFormRenderContext<TState extends ActionFormState> = {
@@ -31,7 +28,10 @@ export type ActionFormRenderContext<TState extends ActionFormState> = {
   values: TState["values"];
 };
 
-export type ActionFormProps<TState extends ActionFormState = ActionFormState> = Omit<FormCardProps, "action" | "children"> & {
+export type ActionFormProps<TState extends ActionFormState = ActionFormState> = Omit<
+  FormCardProps,
+  "action" | "children"
+> & {
   action: ActionFormAction<TState>;
   initialState: TState;
   children: ReactNode | ((context: ActionFormRenderContext<TState>) => ReactNode);
@@ -51,7 +51,12 @@ function valuesFromFormData(formData: FormData): ActionFormValues {
   formData.forEach((value, name) => {
     if (typeof value !== "string") return;
     const previous = values[name];
-    values[name] = previous === undefined ? value : Array.isArray(previous) ? [...previous, value] : [previous, value];
+    values[name] =
+      previous === undefined
+        ? value
+        : Array.isArray(previous)
+          ? [...previous, value]
+          : [previous, value];
   });
   return values;
 }
@@ -74,19 +79,22 @@ export function ActionForm<TState extends ActionFormState>({
   footer,
   ...formProps
 }: ActionFormProps<TState>) {
-  const [state, formAction, pending] = useActionState<TState, FormData>(async (previous: Awaited<TState>, formData: FormData) => {
-    const current = previous as TState;
-    const fieldErrors = await validate?.(formData);
-    if (fieldErrors && Object.keys(fieldErrors).length > 0) {
-      return {
-        ...current,
-        status: "error",
-        fieldErrors,
-        values: valuesFromFormData(formData)
-      } as TState;
-    }
-    return action(current, formData);
-  }, initialState as Awaited<TState>);
+  const [state, formAction, pending] = useActionState<TState, FormData>(
+    async (previous: Awaited<TState>, formData: FormData) => {
+      const current = previous as TState;
+      const fieldErrors = await validate?.(formData);
+      if (fieldErrors && Object.keys(fieldErrors).length > 0) {
+        return {
+          ...current,
+          status: "error",
+          fieldErrors,
+          values: valuesFromFormData(formData),
+        } as TState;
+      }
+      return action(current, formData);
+    },
+    initialState as Awaited<TState>,
+  );
 
   const context: ActionFormRenderContext<TState> = { state, pending, values: state.values };
   const renderedChildren = typeof children === "function" ? children(context) : children;
@@ -106,9 +114,13 @@ export function ActionForm<TState extends ActionFormState>({
       {submitLabel !== null ? (
         <FormActions>
           {renderedFooter}
-          <SubmitButton disabled={submitDisabled} pendingText={pendingText}>{submitLabel}</SubmitButton>
+          <SubmitButton disabled={submitDisabled} pendingText={pendingText}>
+            {submitLabel}
+          </SubmitButton>
         </FormActions>
-      ) : renderedFooter ? <FormActions>{renderedFooter}</FormActions> : null}
+      ) : renderedFooter ? (
+        <FormActions>{renderedFooter}</FormActions>
+      ) : null}
     </FormCard>
   );
 }

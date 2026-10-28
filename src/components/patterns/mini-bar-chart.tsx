@@ -30,12 +30,31 @@ export function MiniBarChart({ data, label, height = 56, className, ...props }: 
         const x = i * (BAR + GAP);
         return (
           <g key={i}>
-            <rect x={x} y={height - danger} width={BAR} height={danger} className="fill-chart-danger" />
-            <rect x={x} y={height - danger - success} width={BAR} height={success} className="fill-chart-success" />
+            <rect
+              x={x}
+              y={height - danger}
+              width={BAR}
+              height={danger}
+              className="fill-chart-danger"
+            />
+            <rect
+              x={x}
+              y={height - danger - success}
+              width={BAR}
+              height={success}
+              className="fill-chart-success"
+            />
           </g>
         );
       })}
-      <line x1="0" x2={width} y1={height - 0.5} y2={height - 0.5} className="stroke-border" strokeWidth="1" />
+      <line
+        x1="0"
+        x2={width}
+        y1={height - 0.5}
+        y2={height - 0.5}
+        className="stroke-border"
+        strokeWidth="1"
+      />
     </svg>
   );
 }

@@ -8,7 +8,11 @@ export const TooltipProvider = TooltipPrimitive.Provider;
 export const Tooltip = TooltipPrimitive.Root;
 export const TooltipTrigger = TooltipPrimitive.Trigger;
 
-export function TooltipContent({ className, sideOffset = 4, ...props }: ComponentProps<typeof TooltipPrimitive.Content>) {
+export function TooltipContent({
+  className,
+  sideOffset = 4,
+  ...props
+}: ComponentProps<typeof TooltipPrimitive.Content>) {
   return (
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Content
@@ -16,7 +20,7 @@ export function TooltipContent({ className, sideOffset = 4, ...props }: Componen
         {...props}
         className={cn(
           "z-(--ui-z-popover) max-w-64 rounded-sm bg-primary px-2 py-1 text-xs text-primary-foreground",
-          className
+          className,
         )}
       />
     </TooltipPrimitive.Portal>

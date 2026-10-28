@@ -11,8 +11,8 @@ const selectTriggerVariants = cva(
   "flex w-full items-center justify-between gap-2 rounded-md border border-input bg-surface text-sm text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground",
   {
     variants: { size: { sm: "h-8 px-2.5", md: "h-10 px-3" } },
-    defaultVariants: { size: "md" }
-  }
+    defaultVariants: { size: "md" },
+  },
 );
 
 export const Select = SelectPrimitive.Root;
@@ -26,7 +26,11 @@ export function SelectTrigger({
 }: ComponentProps<typeof SelectPrimitive.Trigger> & VariantProps<typeof selectTriggerVariants>) {
   const describedBy = useFieldDescribedBy(props.id, props["aria-describedby"]);
   return (
-    <SelectPrimitive.Trigger {...props} aria-describedby={describedBy} className={cn(selectTriggerVariants({ size }), className)}>
+    <SelectPrimitive.Trigger
+      {...props}
+      aria-describedby={describedBy}
+      className={cn(selectTriggerVariants({ size }), className)}
+    >
       {children}
       <SelectPrimitive.Icon asChild>
         <ChevronDown className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
@@ -35,7 +39,11 @@ export function SelectTrigger({
   );
 }
 
-export function SelectContent({ className, children, ...props }: ComponentProps<typeof SelectPrimitive.Content>) {
+export function SelectContent({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof SelectPrimitive.Content>) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
@@ -44,7 +52,7 @@ export function SelectContent({ className, children, ...props }: ComponentProps<
         {...props}
         className={cn(
           "z-(--ui-z-popover) min-w-(--radix-select-trigger-width) overflow-hidden rounded-md border border-border bg-surface text-surface-foreground shadow-md",
-          className
+          className,
         )}
       >
         <SelectPrimitive.Viewport className="p-1">{children}</SelectPrimitive.Viewport>
@@ -53,13 +61,17 @@ export function SelectContent({ className, children, ...props }: ComponentProps<
   );
 }
 
-export function SelectItem({ className, children, ...props }: ComponentProps<typeof SelectPrimitive.Item>) {
+export function SelectItem({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof SelectPrimitive.Item>) {
   return (
     <SelectPrimitive.Item
       {...props}
       className={cn(
         "relative flex h-8 cursor-default select-none items-center rounded-sm pr-8 pl-2 text-sm outline-hidden data-[disabled]:opacity-50 data-[highlighted]:bg-muted",
-        className
+        className,
       )}
     >
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

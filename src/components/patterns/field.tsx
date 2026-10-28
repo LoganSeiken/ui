@@ -1,4 +1,11 @@
-import { Children, cloneElement, isValidElement, type ComponentProps, type ReactElement, type ReactNode } from "react";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ComponentProps,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn.js";
 import { FieldControlProvider } from "../../utils/field-context.js";
@@ -7,10 +14,10 @@ const fieldVariants = cva("grid content-start gap-2", {
   variants: {
     orientation: {
       vertical: "",
-      horizontal: "items-start gap-x-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]"
-    }
+      horizontal: "items-start gap-x-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]",
+    },
   },
-  defaultVariants: { orientation: "vertical" }
+  defaultVariants: { orientation: "vertical" },
 });
 
 export type FieldProps = Omit<ComponentProps<"div">, "children"> &
@@ -22,7 +29,16 @@ export type FieldProps = Omit<ComponentProps<"div">, "children"> &
     children: ReactNode;
   };
 
-export function Field({ label, htmlFor, description, error, orientation, className, children, ...props }: FieldProps) {
+export function Field({
+  label,
+  htmlFor,
+  description,
+  error,
+  orientation,
+  className,
+  children,
+  ...props
+}: FieldProps) {
   const descriptionId = htmlFor && description ? `${htmlFor}-description` : undefined;
   const errorId = htmlFor && error ? `${htmlFor}-error` : undefined;
   const describedBy = [descriptionId, errorId].filter(Boolean).join(" ") || undefined;
@@ -34,7 +50,9 @@ export function Field({ label, htmlFor, description, error, orientation, classNa
         const element = child as ReactElement<{ id?: string; "aria-describedby"?: string }>;
         if (element.props.id !== htmlFor) return child;
         const existing = element.props["aria-describedby"];
-        return cloneElement(element, { "aria-describedby": [existing, describedBy].filter(Boolean).join(" ") });
+        return cloneElement(element, {
+          "aria-describedby": [existing, describedBy].filter(Boolean).join(" "),
+        });
       })
     : children;
 
@@ -44,9 +62,19 @@ export function Field({ label, htmlFor, description, error, orientation, classNa
         {label}
       </label>
       <div className="grid gap-1.5">
-        <FieldControlProvider value={htmlFor && describedBy ? { htmlFor, describedBy } : null}>{content}</FieldControlProvider>
-        {description ? <p id={descriptionId} className="text-sm text-muted-foreground">{description}</p> : null}
-        {error ? <p id={errorId} role="alert" className="text-sm text-destructive-subtle-foreground">{error}</p> : null}
+        <FieldControlProvider value={htmlFor && describedBy ? { htmlFor, describedBy } : null}>
+          {content}
+        </FieldControlProvider>
+        {description ? (
+          <p id={descriptionId} className="text-sm text-muted-foreground">
+            {description}
+          </p>
+        ) : null}
+        {error ? (
+          <p id={errorId} role="alert" className="text-sm text-destructive-subtle-foreground">
+            {error}
+          </p>
+        ) : null}
       </div>
     </div>
   );

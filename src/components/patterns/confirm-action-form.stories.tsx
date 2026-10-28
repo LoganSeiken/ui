@@ -17,13 +17,17 @@ const meta = {
       close: "Close",
       pending: "Archiving…",
       success: "Archived",
-      error: "Could not archive"
-    }
-  }
+      error: "Could not archive",
+    },
+  },
 } satisfies Meta<typeof ConfirmActionForm>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const InlineFeedback: Story = {};
 export const ToastFeedback: Story = { args: { feedback: "toast" } };
-export const MultipleActions: Story = { args: { labels: { ...meta.args.labels, trigger: <Button variant="outline">Restore or archive</Button> } } };
+export const MultipleActions: Story = {
+  args: {
+    labels: { ...meta.args.labels, trigger: <Button variant="outline">Restore or archive</Button> },
+  },
+};

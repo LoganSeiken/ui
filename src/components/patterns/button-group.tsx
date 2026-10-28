@@ -8,7 +8,7 @@ export function ButtonGroup({ className, ...props }: ComponentProps<"div">) {
       {...props}
       className={cn(
         "inline-flex [&>*:not(:first-child)]:-ml-px [&>*:not(:first-child)]:rounded-l-none [&>*:not(:last-child)]:rounded-r-none",
-        className
+        className,
       )}
     />
   );

@@ -3,7 +3,11 @@ import { Field } from "./field.js";
 import { FocusOnInvalid } from "./focus-on-invalid.js";
 import { Input } from "../ui/input.js";
 
-const meta = { title: "patterns/FocusOnInvalid", component: FocusOnInvalid, args: { when: true } } satisfies Meta<typeof FocusOnInvalid>;
+const meta = {
+  title: "patterns/FocusOnInvalid",
+  component: FocusOnInvalid,
+  args: { when: true },
+} satisfies Meta<typeof FocusOnInvalid>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
@@ -18,5 +22,5 @@ export const Default: Story = {
         <Input id="email" defaultValue="not-an-email" aria-invalid />
       </Field>
     </form>
-  )
+  ),
 };

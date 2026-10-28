@@ -10,10 +10,17 @@ type Story = StoryObj<typeof meta>;
 export const Filters: Story = {
   render: () => (
     <Toolbar aria-label="Filters" className="w-[36rem]">
-      <Button variant="dashed" size="sm">All columns<ChevronDown className="size-3.5" aria-hidden="true" /></Button>
-      <Button variant="dashed" size="sm">Sorted by user ID</Button>
+      <Button variant="dashed" size="sm">
+        All columns
+        <ChevronDown className="size-3.5" aria-hidden="true" />
+      </Button>
+      <Button variant="dashed" size="sm">
+        Sorted by user ID
+      </Button>
       <ToolbarSpacer />
-      <Button variant="outline" size="icon" aria-label="Refresh" className="size-7"><RefreshCw className="size-3.5" aria-hidden="true" /></Button>
+      <Button variant="outline" size="icon" aria-label="Refresh" className="size-7">
+        <RefreshCw className="size-3.5" aria-hidden="true" />
+      </Button>
     </Toolbar>
-  )
+  ),
 };

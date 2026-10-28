@@ -7,7 +7,16 @@ export type { SpinnerProps } from "./spinner.js";
 export { Skeleton } from "./skeleton.js";
 export { Textarea } from "./textarea.js";
 export type { TextareaProps } from "./textarea.js";
-export { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./dialog.js";
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./dialog.js";
 export { Combobox } from "./combobox.js";
 export type { ComboboxOption, ComboboxProps } from "./combobox.js";
 export { AsyncCombobox } from "./async-combobox.js";
@@ -30,7 +39,7 @@ export {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "./dropdown-menu.js";
 export { Indicator } from "./indicator.js";
 export type { IndicatorProps } from "./indicator.js";
@@ -47,13 +56,30 @@ export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from "./popove
 export { RadioCard, RadioGroup, RadioGroupItem } from "./radio-group.js";
 export type { RadioCardProps } from "./radio-group.js";
 export { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select.js";
-export { Sheet, SheetBody, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./sheet.js";
+export {
+  Sheet,
+  SheetBody,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./sheet.js";
 export { StatusDot } from "./status-dot.js";
 export type { StatusDotProps } from "./status-dot.js";
 export { Slider } from "./slider.js";
 export type { SliderProps, SliderStep } from "./slider.js";
 export { Switch } from "./switch.js";
-export { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "./table.js";
+export {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./table.js";
 export { ToggleGroup, ToggleGroupItem } from "./toggle-group.js";
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs.js";
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip.js";
