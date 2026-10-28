@@ -11,10 +11,22 @@ export type AppShellProps = Omit<ComponentProps<"div">, "children"> & {
   children: ReactNode;
 };
 
-export function AppShell({ topBar, sidebar, subNav, aside, main = true, className, children, ...props }: AppShellProps) {
+export function AppShell({
+  topBar,
+  sidebar,
+  subNav,
+  aside,
+  main = true,
+  className,
+  children,
+  ...props
+}: AppShellProps) {
   const Content = main ? "main" : "div";
   return (
-    <div {...props} className={cn("flex h-screen flex-col bg-background text-foreground", className)}>
+    <div
+      {...props}
+      className={cn("flex h-screen flex-col bg-background text-foreground", className)}
+    >
       {topBar}
       <div className="flex min-h-0 flex-1">
         {sidebar}

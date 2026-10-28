@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Pagination } from "./pagination.js";
-const meta = { title: "patterns/Pagination", component: Pagination, args: { page: 3, pageCount: 8, hrefFor: (page) => `?page=${page}` } } satisfies Meta<typeof Pagination>;
+const meta = {
+  title: "patterns/Pagination",
+  component: Pagination,
+  args: { page: 3, pageCount: 8, hrefFor: (page) => `?page=${page}` },
+} satisfies Meta<typeof Pagination>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Middle: Story = {};

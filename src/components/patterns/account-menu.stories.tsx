@@ -7,11 +7,19 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const WithName: Story = {
-  render: () => <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4"><AccountMenu name="Alex Morgan" email="alex@example.com" label="Account menu" /></div>
+  render: () => (
+    <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4">
+      <AccountMenu name="Alex Morgan" email="alex@example.com" label="Account menu" />
+    </div>
+  ),
 };
 
 export const WithoutName: Story = {
-  render: () => <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4"><AccountMenu email="alex@example.com" label="Account menu" /></div>
+  render: () => (
+    <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4">
+      <AccountMenu email="alex@example.com" label="Account menu" />
+    </div>
+  ),
 };
 
 export const WithItems: Story = {
@@ -22,9 +30,15 @@ export const WithItems: Story = {
         <DropdownMenuItem>Sign out</DropdownMenuItem>
       </AccountMenu>
     </div>
-  )
+  ),
 };
 
 export const Open: Story = {
-  render: () => <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4"><AccountMenu label="Account menu" defaultOpen name="Alex Morgan" email="alex@example.com"><DropdownMenuItem>Profile</DropdownMenuItem></AccountMenu></div>,
+  render: () => (
+    <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4">
+      <AccountMenu label="Account menu" defaultOpen name="Alex Morgan" email="alex@example.com">
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+      </AccountMenu>
+    </div>
+  ),
 };

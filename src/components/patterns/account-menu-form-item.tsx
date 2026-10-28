@@ -6,7 +6,10 @@ import { DropdownMenuItem } from "../ui/dropdown-menu.js";
 
 export type AccountMenuFormAction = (formData: FormData) => unknown | Promise<unknown>;
 
-export type AccountMenuFormItemProps = Omit<ComponentProps<typeof DropdownMenuItem>, "children" | "onSelect" | "disabled"> & {
+export type AccountMenuFormItemProps = Omit<
+  ComponentProps<typeof DropdownMenuItem>,
+  "children" | "onSelect" | "disabled"
+> & {
   action: AccountMenuFormAction;
   label: string;
   pendingLabel: string;
@@ -14,9 +17,18 @@ export type AccountMenuFormItemProps = Omit<ComponentProps<typeof DropdownMenuIt
 };
 
 /** Runs a server action from a menu item while keeping the Radix menu mounted during submission. */
-export function AccountMenuFormItem({ action, label, pendingLabel, disabled = false, ...props }: AccountMenuFormItemProps) {
+export function AccountMenuFormItem({
+  action,
+  label,
+  pendingLabel,
+  disabled = false,
+  ...props
+}: AccountMenuFormItemProps) {
   const formId = useId();
-  const [, formAction, pending] = useActionState(async (_previous: unknown, formData: FormData) => action(formData), null);
+  const [, formAction, pending] = useActionState(
+    async (_previous: unknown, formData: FormData) => action(formData),
+    null,
+  );
 
   return (
     <>

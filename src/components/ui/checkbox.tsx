@@ -11,12 +11,15 @@ export function Checkbox({ className, ...props }: ComponentProps<typeof Checkbox
       {...props}
       className={cn(
         "flex size-4 shrink-0 items-center justify-center rounded-sm border border-input bg-surface text-primary-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary",
-        className
+        className,
       )}
     >
       <CheckboxPrimitive.Indicator className="group flex items-center justify-center">
         <Check className="size-3 group-data-[state=indeterminate]:hidden" aria-hidden="true" />
-        <Minus className="hidden size-3 group-data-[state=indeterminate]:block" aria-hidden="true" />
+        <Minus
+          className="hidden size-3 group-data-[state=indeterminate]:block"
+          aria-hidden="true"
+        />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   );

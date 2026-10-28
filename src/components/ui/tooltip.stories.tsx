@@ -12,10 +12,14 @@ export const Open: Story = {
     <TooltipProvider>
       <div className="flex h-24 items-end p-4">
         <Tooltip defaultOpen>
-          <TooltipTrigger asChild><Button variant="ghost" size="icon" aria-label="What is this"><HelpCircle className="size-4" aria-hidden="true" /></Button></TooltipTrigger>
+          <TooltipTrigger asChild>
+            <Button variant="ghost" size="icon" aria-label="What is this">
+              <HelpCircle className="size-4" aria-hidden="true" />
+            </Button>
+          </TooltipTrigger>
           <TooltipContent side="top">Helpful contextual text</TooltipContent>
         </Tooltip>
       </div>
     </TooltipProvider>
-  )
+  ),
 };

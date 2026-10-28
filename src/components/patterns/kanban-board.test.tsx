@@ -8,7 +8,7 @@ import {
   KanbanCard,
   type KanbanColumn,
   type KanbanLabels,
-  type KanbanMove
+  type KanbanMove,
 } from "../../index.js";
 
 type Lead = { id: string; name: string; company: string };
@@ -22,8 +22,8 @@ const columns: KanbanColumn<Lead>[] = [
     footer: <button type="button">Load more</button>,
     items: [
       { id: "alpha", name: "Alpha", company: "Northwind" },
-      { id: "beta", name: "Beta", company: "Contoso" }
-    ]
+      { id: "beta", name: "Beta", company: "Contoso" },
+    ],
   },
   {
     id: "qualified",
@@ -32,10 +32,10 @@ const columns: KanbanColumn<Lead>[] = [
     emptyText: "No qualified leads",
     items: [
       { id: "q1", name: "Gamma", company: "Fabrikam" },
-      { id: "q2", name: "Delta", company: "Adventure Works" }
-    ]
+      { id: "q2", name: "Delta", company: "Adventure Works" },
+    ],
   },
-  { id: "closed", title: "Closed", acceptsDrops: false, emptyText: "No closed leads", items: [] }
+  { id: "closed", title: "Closed", acceptsDrops: false, emptyText: "No closed leads", items: [] },
 ];
 
 const labels: KanbanLabels = {
@@ -44,31 +44,45 @@ const labels: KanbanLabels = {
   moveMenu: (item) => "Move " + item,
   moveMenuTitle: "Move to",
   announce: {
-    pickedUp: ({ item, column, position, total }) => "Picked up " + item + " in " + column + ", position " + position + " of " + total + ".",
-    movedWithin: ({ item, column, position, total }) => "Reordered " + item + " in " + column + ", position " + position + " of " + total + ".",
-    movedAcross: ({ item, column, position, total }) => "Moved " + item + " to " + column + ", position " + position + " of " + total + ".",
-    dropped: ({ item, column, position, total }) => "Dropped " + item + " in " + column + ", position " + position + " of " + total + ".",
-    cancelled: ({ item }) => "Cancelled " + item + "."
-  }
+    pickedUp: ({ item, column, position, total }) =>
+      "Picked up " + item + " in " + column + ", position " + position + " of " + total + ".",
+    movedWithin: ({ item, column, position, total }) =>
+      "Reordered " + item + " in " + column + ", position " + position + " of " + total + ".",
+    movedAcross: ({ item, column, position, total }) =>
+      "Moved " + item + " to " + column + ", position " + position + " of " + total + ".",
+    dropped: ({ item, column, position, total }) =>
+      "Dropped " + item + " in " + column + ", position " + position + " of " + total + ".",
+    cancelled: ({ item }) => "Cancelled " + item + ".",
+  },
 };
 
-function renderBoard(overrides: Partial<{
-  columns: KanbanColumn<Lead>[];
-  onMove: (move: KanbanMove) => void;
-  readOnly: boolean;
-  labels: KanbanLabels;
-  renderItem: (lead: Lead) => ReactNode;
-}> = {}) {
+function renderBoard(
+  overrides: Partial<{
+    columns: KanbanColumn<Lead>[];
+    onMove: (move: KanbanMove) => void;
+    readOnly: boolean;
+    labels: KanbanLabels;
+    renderItem: (lead: Lead) => ReactNode;
+  }> = {},
+) {
   return render(
     <KanbanBoard
       columns={overrides.columns ?? columns}
-      renderItem={overrides.renderItem ?? ((lead) => <><h3>{lead.name}</h3><p>{lead.company}</p></>)}
+      renderItem={
+        overrides.renderItem ??
+        ((lead) => (
+          <>
+            <h3>{lead.name}</h3>
+            <p>{lead.company}</p>
+          </>
+        ))
+      }
       getItemLabel={(lead) => lead.name}
       getColumnLabel={(column) => String(column.title)}
       onMove={overrides.onMove ?? (() => undefined)}
       labels={overrides.labels ?? labels}
       readOnly={overrides.readOnly}
-    />
+    />,
   );
 }
 
@@ -82,7 +96,7 @@ function setBounds(element: Element, left: number, top: number, width: number, h
     bottom: top + height,
     width,
     height,
-    toJSON: () => ({})
+    toJSON: () => ({}),
   });
 }
 
@@ -90,7 +104,9 @@ function setBoardBounds(container: HTMLElement, customColumns = columns) {
   const board = screen.getByRole("region", { name: labels.board });
   setBounds(board, 0, 0, 900, 500);
   customColumns.forEach((column, index) => {
-    const columnElement = container.querySelector<HTMLElement>('[data-kanban-column-id="' + column.id + '"]')!;
+    const columnElement = container.querySelector<HTMLElement>(
+      '[data-kanban-column-id="' + column.id + '"]',
+    )!;
     const list = columnElement.querySelector<HTMLElement>("[data-kanban-list]")!;
     const left = index * 280;
     setBounds(columnElement, left, 0, 260, 500);
@@ -100,17 +116,29 @@ function setBoardBounds(container: HTMLElement, customColumns = columns) {
 }
 
 function setCardBounds(container: HTMLElement, column: KanbanColumn<Lead>) {
-  const columnElement = container.querySelector<HTMLElement>('[data-kanban-column-id="' + column.id + '"]')!;
+  const columnElement = container.querySelector<HTMLElement>(
+    '[data-kanban-column-id="' + column.id + '"]',
+  )!;
   column.items.forEach((item, index) => {
-    const card = columnElement.querySelector<HTMLElement>('[data-kanban-card-id="' + item.id + '"]');
-    if (card) setBounds(card, columnElement.getBoundingClientRect().left + 10, 60 + index * 40, 220, 32);
+    const card = columnElement.querySelector<HTMLElement>(
+      '[data-kanban-card-id="' + item.id + '"]',
+    );
+    if (card)
+      setBounds(card, columnElement.getBoundingClientRect().left + 10, 60 + index * 40, 220, 32);
   });
 }
 
 function dispatchPointerEvent(
   target: Element | Window | Document,
   type: "pointerdown" | "pointermove" | "pointerup" | "pointercancel",
-  init: { pointerId: number; pointerType?: string; button?: number; isPrimary?: boolean; clientX?: number; clientY?: number }
+  init: {
+    pointerId: number;
+    pointerType?: string;
+    button?: number;
+    isPrimary?: boolean;
+    clientX?: number;
+    clientY?: number;
+  },
 ) {
   const event = new Event(type, { bubbles: true, cancelable: true });
   for (const [key, value] of Object.entries(init)) Object.defineProperty(event, key, { value });
@@ -124,7 +152,7 @@ function pointerDown(element: HTMLElement, pointerId = 7, pointerType = "mouse",
     pointerType,
     isPrimary: true,
     clientX: x,
-    clientY: y
+    clientY: y,
   });
 }
 
@@ -173,9 +201,11 @@ describe("KanbanBoard", () => {
       fromColumnId: "open",
       toColumnId: "qualified",
       beforeId: "q2",
-      afterId: null
+      afterId: null,
     });
-    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent("Moved Alpha to Qualified, position 3 of 3.");
+    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent(
+      "Moved Alpha to Qualified, position 3 of 3.",
+    );
   });
 
   it("starts mouse dragging from the card body after the four-pixel threshold and reports the correct neighbors", () => {
@@ -188,7 +218,10 @@ describe("KanbanBoard", () => {
     pointerDown(cardBody, 7, "mouse", 20, 70);
     dispatchPointerEvent(board, "pointermove", { pointerId: 7, clientX: 25, clientY: 70 });
     expect(document.body.querySelector("[data-kanban-preview]")).toBeInTheDocument();
-    expect(document.body.querySelector("[data-kanban-preview]")).toHaveAttribute("aria-hidden", "true");
+    expect(document.body.querySelector("[data-kanban-preview]")).toHaveAttribute(
+      "aria-hidden",
+      "true",
+    );
     expect(container.querySelector("[data-kanban-placeholder]")).toBeInTheDocument();
     dispatchPointerEvent(board, "pointermove", { pointerId: 7, clientX: 400, clientY: 105 });
     dispatchPointerEvent(board, "pointerup", { pointerId: 7, clientX: 400, clientY: 105 });
@@ -197,7 +230,7 @@ describe("KanbanBoard", () => {
       fromColumnId: "open",
       toColumnId: "qualified",
       beforeId: "q1",
-      afterId: "q2"
+      afterId: "q2",
     });
     expect(container.querySelector("[data-kanban-placeholder]")).not.toBeInTheDocument();
     expect(document.body.querySelector("[data-kanban-preview]")).not.toBeInTheDocument();
@@ -222,14 +255,20 @@ describe("KanbanBoard", () => {
 
   it("does not start below four pixels and keeps clicks on card controls working", () => {
     const onClick = vi.fn();
-    const withButton: KanbanColumn<Lead>[] = [{
-      id: "only",
-      title: "Only",
-      items: [{ id: "a", name: "Alpha", company: "Northwind" }]
-    }];
+    const withButton: KanbanColumn<Lead>[] = [
+      {
+        id: "only",
+        title: "Only",
+        items: [{ id: "a", name: "Alpha", company: "Northwind" }],
+      },
+    ];
     const { container } = renderBoard({
       columns: withButton,
-      renderItem: () => <button type="button" onClick={onClick}>Open record</button>
+      renderItem: () => (
+        <button type="button" onClick={onClick}>
+          Open record
+        </button>
+      ),
     });
     const board = screen.getByRole("region", { name: "Sales pipeline" });
     const button = screen.getByRole("button", { name: "Open record" });
@@ -255,10 +294,20 @@ describe("KanbanBoard", () => {
     expect(handle).toHaveClass("touch-none");
     expect(body.closest("[data-kanban-card-id]")).not.toHaveClass("touch-none");
     pointerDown(body, 10, "touch", 20, 70);
-    dispatchPointerEvent(board, "pointermove", { pointerId: 10, pointerType: "touch", clientX: 35, clientY: 70 });
+    dispatchPointerEvent(board, "pointermove", {
+      pointerId: 10,
+      pointerType: "touch",
+      clientX: 35,
+      clientY: 70,
+    });
     expect(document.body.querySelector("[data-kanban-preview]")).not.toBeInTheDocument();
     pointerDown(handle, 11, "touch", 20, 70);
-    dispatchPointerEvent(board, "pointermove", { pointerId: 11, pointerType: "touch", clientX: 35, clientY: 70 });
+    dispatchPointerEvent(board, "pointermove", {
+      pointerId: 11,
+      pointerType: "touch",
+      clientX: 35,
+      clientY: 70,
+    });
     expect(document.body.querySelector("[data-kanban-preview]")).toBeInTheDocument();
     dispatchPointerEvent(board, "pointercancel", { pointerId: 11, pointerType: "touch" });
     expect(document.body.querySelector("[data-kanban-preview]")).not.toBeInTheDocument();
@@ -273,13 +322,17 @@ describe("KanbanBoard", () => {
     dispatchPointerEvent(board, "pointermove", { pointerId: 12, clientX: 30, clientY: 70 });
     fireEvent.keyDown(window, { key: "Escape" });
     expect(onMove).not.toHaveBeenCalled();
-    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent("Cancelled Alpha.");
+    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent(
+      "Cancelled Alpha.",
+    );
     expect(document.body.querySelector("[data-kanban-preview]")).not.toBeInTheDocument();
     pointerDown(body, 13, "mouse", 20, 70);
     dispatchPointerEvent(board, "pointermove", { pointerId: 13, clientX: 30, clientY: 70 });
     dispatchPointerEvent(board, "pointercancel", { pointerId: 13 });
     expect(onMove).not.toHaveBeenCalled();
-    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent("Cancelled Alpha.");
+    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent(
+      "Cancelled Alpha.",
+    );
   });
 
   it("ignores a non-droppable column in pointer, keyboard, and menu movement", async () => {
@@ -288,7 +341,11 @@ describe("KanbanBoard", () => {
     const blockedAndAccepted: KanbanColumn<Lead>[] = [
       { id: "open", title: "Open", items: [{ id: "alpha", name: "Alpha", company: "Northwind" }] },
       { id: "blocked", title: "Blocked", acceptsDrops: false, items: [] },
-      { id: "qualified", title: "Qualified", items: [{ id: "q1", name: "Gamma", company: "Fabrikam" }] }
+      {
+        id: "qualified",
+        title: "Qualified",
+        items: [{ id: "q1", name: "Gamma", company: "Fabrikam" }],
+      },
     ];
     const { container } = renderBoard({ columns: blockedAndAccepted, onMove });
     const board = setBoardBounds(container, blockedAndAccepted);
@@ -307,7 +364,7 @@ describe("KanbanBoard", () => {
       fromColumnId: "open",
       toColumnId: "qualified",
       beforeId: "q1",
-      afterId: null
+      afterId: null,
     });
     onMove.mockClear();
     pointerDown(screen.getByText("Northwind"), 21, "mouse", 20, 70);
@@ -344,19 +401,25 @@ describe("KanbanBoard", () => {
     handle.focus();
     await user.keyboard(" ");
     expect(handle).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent("Picked up Beta in Open, position 2 of 2.");
+    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent(
+      "Picked up Beta in Open, position 2 of 2.",
+    );
     await user.keyboard("{ArrowUp}");
-    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent("Reordered Beta in Open, position 1 of 2.");
+    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent(
+      "Reordered Beta in Open, position 1 of 2.",
+    );
     await user.keyboard("{Enter}");
     expect(onMove).toHaveBeenCalledWith({
       itemId: "beta",
       fromColumnId: "open",
       toColumnId: "open",
       beforeId: null,
-      afterId: "alpha"
+      afterId: "alpha",
     });
     expect(handle).toHaveAttribute("aria-pressed", "false");
-    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent("Dropped Beta in Open, position 1 of 2.");
+    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent(
+      "Dropped Beta in Open, position 1 of 2.",
+    );
   });
 
   it("moves a keyboard-picked item across columns with arrow keys", async () => {
@@ -367,7 +430,9 @@ describe("KanbanBoard", () => {
     handle.focus();
     await user.keyboard(" ");
     await user.keyboard("{ArrowRight}");
-    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent("Moved Alpha to Qualified, position 3 of 3.");
+    expect(screen.getByRole("region", { name: "Sales pipeline" })).toHaveTextContent(
+      "Moved Alpha to Qualified, position 3 of 3.",
+    );
     await user.keyboard("{ArrowUp}");
     await user.keyboard("{Enter}");
     expect(onMove).toHaveBeenCalledWith({
@@ -375,7 +440,7 @@ describe("KanbanBoard", () => {
       fromColumnId: "open",
       toColumnId: "qualified",
       beforeId: "q1",
-      afterId: "q2"
+      afterId: "q2",
     });
   });
 
@@ -387,19 +452,25 @@ describe("KanbanBoard", () => {
       moveMenu: (item) => "Cambiar etapa de " + item,
       moveMenuTitle: "Mover a",
       announce: {
-        pickedUp: ({ item, column, position, total }) => item + " recogido en " + column + ", posición " + position + " de " + total + ".",
-        movedWithin: ({ item, column, position, total }) => item + " reordenado en " + column + ", posición " + position + " de " + total + ".",
-        movedAcross: ({ item, column, position, total }) => item + " movido a " + column + ", posición " + position + " de " + total + ".",
-        dropped: ({ item, column, position, total }) => item + " soltado en " + column + ", posición " + position + " de " + total + ".",
-        cancelled: ({ item }) => "Se canceló " + item + "."
-      }
+        pickedUp: ({ item, column, position, total }) =>
+          item + " recogido en " + column + ", posición " + position + " de " + total + ".",
+        movedWithin: ({ item, column, position, total }) =>
+          item + " reordenado en " + column + ", posición " + position + " de " + total + ".",
+        movedAcross: ({ item, column, position, total }) =>
+          item + " movido a " + column + ", posición " + position + " de " + total + ".",
+        dropped: ({ item, column, position, total }) =>
+          item + " soltado en " + column + ", posición " + position + " de " + total + ".",
+        cancelled: ({ item }) => "Se canceló " + item + ".",
+      },
     };
     renderBoard({ labels: spanish });
     const handle = screen.getByRole("button", { name: "Mover Alpha" });
     expect(screen.getByRole("button", { name: "Cambiar etapa de Alpha" })).toBeInTheDocument();
     handle.focus();
     await user.keyboard(" ");
-    expect(screen.getByRole("region", { name: "Canal de ventas" })).toHaveTextContent("Alpha recogido en Open, posición 1 de 2.");
+    expect(screen.getByRole("region", { name: "Canal de ventas" })).toHaveTextContent(
+      "Alpha recogido en Open, posición 1 de 2.",
+    );
     await user.keyboard("{Escape}");
     await user.click(screen.getByRole("button", { name: "Cambiar etapa de Alpha" }));
     expect(await screen.findByText("Mover a")).toBeInTheDocument();
@@ -430,17 +501,21 @@ describe("KanbanBoard", () => {
   });
 
   it("measures a 500-item six-column board without rerendering unrelated cards as targets change", () => {
-    const manyColumns: KanbanColumn<{ id: string; name: string }>[] = Array.from({ length: 6 }, (_, columnIndex) => ({
-      id: "column-" + columnIndex,
-      title: "Column " + columnIndex,
-      items: Array.from({ length: columnIndex === 5 ? 85 : 83 }, (_, itemIndex) => {
-        const ordinal = columnIndex * 83 + itemIndex;
-        return { id: "item-" + ordinal, name: "Item " + ordinal };
-      })
-    }));
+    const manyColumns: KanbanColumn<{ id: string; name: string }>[] = Array.from(
+      { length: 6 },
+      (_, columnIndex) => ({
+        id: "column-" + columnIndex,
+        title: "Column " + columnIndex,
+        items: Array.from({ length: columnIndex === 5 ? 85 : 83 }, (_, itemIndex) => {
+          const ordinal = columnIndex * 83 + itemIndex;
+          return { id: "item-" + ordinal, name: "Item " + ordinal };
+        }),
+      }),
+    );
     const renderItem = vi.fn((item: { id: string; name: string }) => <span>{item.name}</span>);
     const getItemLabel = (item: { id: string; name: string }) => item.name;
-    const getColumnLabel = (column: KanbanColumn<{ id: string; name: string }>) => String(column.title);
+    const getColumnLabel = (column: KanbanColumn<{ id: string; name: string }>) =>
+      String(column.title);
     const boardLabels: KanbanLabels = { ...labels, board: "Large board" };
     const { container } = render(
       <KanbanBoard
@@ -450,12 +525,14 @@ describe("KanbanBoard", () => {
         getColumnLabel={getColumnLabel}
         onMove={() => undefined}
         labels={boardLabels}
-      />
+      />,
     );
     const board = screen.getByRole("region", { name: "Large board" });
     setBounds(board, 0, 0, 1600, 500);
     manyColumns.forEach((column, index) => {
-      const element = container.querySelector<HTMLElement>('[data-kanban-column-id="' + column.id + '"]')!;
+      const element = container.querySelector<HTMLElement>(
+        '[data-kanban-column-id="' + column.id + '"]',
+      )!;
       setBounds(element, index * 250, 0, 240, 500);
       setBounds(element.querySelector("[data-kanban-list]")!, index * 250, 50, 220, 400);
     });
@@ -473,7 +550,12 @@ describe("KanbanBoard", () => {
 
   it("renders KanbanCard as a surface with a focus-within ring", () => {
     const { container } = render(<KanbanCard>Lead details</KanbanCard>);
-    expect(container.firstElementChild).toHaveClass("rounded-md", "border-border", "bg-surface", "focus-within:ring-2");
+    expect(container.firstElementChild).toHaveClass(
+      "rounded-md",
+      "border-border",
+      "bg-surface",
+      "focus-within:ring-2",
+    );
   });
 
   it("renders a busy board skeleton with an accessible label", () => {

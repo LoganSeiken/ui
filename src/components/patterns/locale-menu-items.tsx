@@ -13,11 +13,21 @@ export type LocaleMenuItemsProps = {
 };
 
 /** Framework-neutral locale choices for a DropdownMenu radio group. */
-export function LocaleMenuItems({ options, value, onSelect, pending = false }: LocaleMenuItemsProps) {
+export function LocaleMenuItems({
+  options,
+  value,
+  onSelect,
+  pending = false,
+}: LocaleMenuItemsProps) {
   return (
     <DropdownMenuRadioGroup value={value} onValueChange={onSelect} aria-busy={pending || undefined}>
       {options.map((option) => (
-        <DropdownMenuRadioItem key={option.value} value={option.value} disabled={pending} aria-label={typeof option.label === "string" ? option.label : undefined}>
+        <DropdownMenuRadioItem
+          key={option.value}
+          value={option.value}
+          disabled={pending}
+          aria-label={typeof option.label === "string" ? option.label : undefined}
+        >
           {option.label}
         </DropdownMenuRadioItem>
       ))}

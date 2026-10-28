@@ -18,11 +18,19 @@ export type ContextBreadcrumbProps = Omit<ComponentProps<"nav">, "children"> & {
 
 export function ContextBreadcrumb({ items, action, className, ...props }: ContextBreadcrumbProps) {
   return (
-    <nav aria-label="Context" {...props} className={cn("flex items-center gap-2 text-sm", className)}>
+    <nav
+      aria-label="Context"
+      {...props}
+      className={cn("flex items-center gap-2 text-sm", className)}
+    >
       <ol className="flex items-center gap-2">
         {items.map((item, index) => (
           <li key={item.key} className="flex items-center gap-2">
-            {index > 0 ? <span aria-hidden="true" className="text-border">/</span> : null}
+            {index > 0 ? (
+              <span aria-hidden="true" className="text-border">
+                /
+              </span>
+            ) : null}
             {item.icon ? <span className="text-muted-foreground">{item.icon}</span> : null}
             <span className="font-medium text-foreground">{item.label}</span>
             {item.badge}

@@ -13,7 +13,7 @@ export type FileInputProps = Omit<ComponentProps<"input">, "type" | "value"> & {
 
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(function FileInput(
   { chooseLabel, noFileLabel, help, inputClassName, className, id, onChange, ...props },
-  ref
+  ref,
 ) {
   const [files, setFiles] = useState<FileList | null>(null);
   const fileNames = files ? Array.from(files, (file) => file.name).join(", ") : noFileLabel;
@@ -22,9 +22,14 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(function F
 
   return (
     <div className={cn("grid gap-2", className)}>
-      <label htmlFor={id} className="flex min-w-0 items-center gap-3 rounded-md border border-input bg-surface px-3 py-2 text-sm text-foreground">
+      <label
+        htmlFor={id}
+        className="flex min-w-0 items-center gap-3 rounded-md border border-input bg-surface px-3 py-2 text-sm text-foreground"
+      >
         <span className={buttonVariants({ variant: "outline", size: "sm" })}>{chooseLabel}</span>
-        <span className="min-w-0 truncate text-muted-foreground" aria-live="polite">{fileNames}</span>
+        <span className="min-w-0 truncate text-muted-foreground" aria-live="polite">
+          {fileNames}
+        </span>
       </label>
       <input
         {...props}
@@ -38,7 +43,11 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(function F
           onChange?.(event);
         }}
       />
-      {help ? <p id={helpId} className="text-sm text-muted-foreground">{help}</p> : null}
+      {help ? (
+        <p id={helpId} className="text-sm text-muted-foreground">
+          {help}
+        </p>
+      ) : null}
     </div>
   );
 });

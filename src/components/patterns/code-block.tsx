@@ -11,10 +11,17 @@ export type CodeBlockProps = Omit<ComponentProps<"div">, "children"> & {
   tablistLabel: string;
   copyLabel: string;
   copiedLabel: string;
-} &
-  ({ code: string; tabs?: undefined } | { tabs: CodeBlockTab[]; code?: undefined });
+} & ({ code: string; tabs?: undefined } | { tabs: CodeBlockTab[]; code?: undefined });
 
-export function CodeBlock({ code, tabs, tablistLabel, copyLabel, copiedLabel, className, ...props }: CodeBlockProps) {
+export function CodeBlock({
+  code,
+  tabs,
+  tablistLabel,
+  copyLabel,
+  copiedLabel,
+  className,
+  ...props
+}: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const [active, setActive] = useState(0);
   const current = tabs ? (tabs[active] ?? tabs[0]) : undefined;
@@ -31,9 +38,16 @@ export function CodeBlock({ code, tabs, tablistLabel, copyLabel, copiedLabel, cl
   }
 
   return (
-    <div {...props} className={cn("relative rounded-md border border-border bg-surface", className)}>
+    <div
+      {...props}
+      className={cn("relative rounded-md border border-border bg-surface", className)}
+    >
       {tabs ? (
-        <div role="tablist" aria-label={tablistLabel} className="flex gap-4 border-b border-border px-4">
+        <div
+          role="tablist"
+          aria-label={tablistLabel}
+          className="flex gap-4 border-b border-border px-4"
+        >
           {tabs.map((tab, i) => (
             <button
               key={tab.label}
@@ -43,7 +57,9 @@ export function CodeBlock({ code, tabs, tablistLabel, copyLabel, copiedLabel, cl
               onClick={() => setActive(i)}
               className={cn(
                 "-mb-px border-b-2 py-2 text-sm focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",
-                i === active ? "border-primary text-foreground" : "border-transparent text-muted-foreground"
+                i === active
+                  ? "border-primary text-foreground"
+                  : "border-transparent text-muted-foreground",
               )}
             >
               {tab.label}
@@ -61,7 +77,11 @@ export function CodeBlock({ code, tabs, tablistLabel, copyLabel, copiedLabel, cl
         onClick={copy}
         className={cn("absolute right-2", tabs ? "top-1" : "top-2")}
       >
-        {copied ? <Check className="size-4" aria-hidden="true" /> : <Copy className="size-4" aria-hidden="true" />}
+        {copied ? (
+          <Check className="size-4" aria-hidden="true" />
+        ) : (
+          <Copy className="size-4" aria-hidden="true" />
+        )}
       </Button>
     </div>
   );

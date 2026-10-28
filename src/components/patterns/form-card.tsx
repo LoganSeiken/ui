@@ -14,7 +14,7 @@ export function FormCard({ className, variant = "default", ...props }: FormCardP
         variant === "plain"
           ? "text-surface-foreground"
           : "overflow-hidden rounded-md border border-border bg-surface text-surface-foreground",
-        className
+        className,
       )}
     />
   );

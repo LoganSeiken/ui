@@ -35,14 +35,16 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "../../index.js";
 
 describe("Select", () => {
   function Sample({ onValueChange }: { onValueChange?: (v: string) => void }) {
     return (
       <Select defaultValue="all" onValueChange={onValueChange}>
-        <SelectTrigger aria-label="Status"><SelectValue /></SelectTrigger>
+        <SelectTrigger aria-label="Status">
+          <SelectValue />
+        </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">All</SelectItem>
           <SelectItem value="active">Active</SelectItem>
@@ -66,9 +68,13 @@ describe("Select", () => {
   it("can be disabled and supports the compact height", () => {
     render(
       <Select disabled>
-        <SelectTrigger aria-label="Locked" size="sm"><SelectValue placeholder="Pick" /></SelectTrigger>
-        <SelectContent><SelectItem value="a">A</SelectItem></SelectContent>
-      </Select>
+        <SelectTrigger aria-label="Locked" size="sm">
+          <SelectValue placeholder="Pick" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="a">A</SelectItem>
+        </SelectContent>
+      </Select>,
     );
     const trigger = screen.getByRole("combobox", { name: "Locked" });
     expect(trigger).toBeDisabled();
@@ -87,7 +93,7 @@ describe("Tabs", () => {
         </TabsList>
         <TabsContent value="a">Panel A</TabsContent>
         <TabsContent value="b">Panel B</TabsContent>
-      </Tabs>
+      </Tabs>,
     );
     expect(screen.getByRole("tab", { name: "All" })).toHaveAttribute("aria-selected", "true");
     expect(screen.getByText("Panel A")).toBeVisible();
@@ -103,7 +109,7 @@ describe("Tabs", () => {
           <TabsTrigger value="a">Framework</TabsTrigger>
         </TabsList>
         <TabsContent value="a">Panel</TabsContent>
-      </Tabs>
+      </Tabs>,
     );
     const controls = screen.getByRole("tab", { name: "Framework" }).getAttribute("aria-controls");
     expect(controls && document.getElementById(controls)).toBeTruthy();
@@ -115,14 +121,18 @@ describe("DropdownMenu", () => {
     const user = userEvent.setup();
     render(
       <DropdownMenu>
-        <DropdownMenuTrigger asChild><Button>Menu</Button></DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
+          <Button>Menu</Button>
+        </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>user@example.com</DropdownMenuLabel>
           <DropdownMenuItem>
-            <span>Via CLI<DropdownMenuItemDescription>Deploy locally</DropdownMenuItemDescription></span>
+            <span>
+              Via CLI<DropdownMenuItemDescription>Deploy locally</DropdownMenuItemDescription>
+            </span>
           </DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu>,
     );
     await user.click(screen.getByRole("button", { name: "Menu" }));
     expect(await screen.findByRole("menu")).toBeInTheDocument();
@@ -137,7 +147,9 @@ describe("DropdownMenu", () => {
     function Sample() {
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild><Button>Theme</Button></DropdownMenuTrigger>
+          <DropdownMenuTrigger asChild>
+            <Button>Theme</Button>
+          </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuRadioGroup value="light">
               <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
@@ -157,14 +169,18 @@ describe("DropdownMenu", () => {
     const user = userEvent.setup();
     render(
       <DropdownMenu>
-        <DropdownMenuTrigger asChild><Button>More</Button></DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
+          <Button>More</Button>
+        </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>Timezone</DropdownMenuSubTrigger>
-            <DropdownMenuSubContent><DropdownMenuItem>UTC</DropdownMenuItem></DropdownMenuSubContent>
+            <DropdownMenuSubContent>
+              <DropdownMenuItem>UTC</DropdownMenuItem>
+            </DropdownMenuSubContent>
           </DropdownMenuSub>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu>,
     );
     await user.click(screen.getByRole("button", { name: "More" }));
     const sub = await screen.findByRole("menuitem", { name: "Timezone" });
@@ -177,9 +193,11 @@ describe("Popover", () => {
     const user = userEvent.setup();
     render(
       <Popover>
-        <PopoverTrigger asChild><Button>Org</Button></PopoverTrigger>
+        <PopoverTrigger asChild>
+          <Button>Org</Button>
+        </PopoverTrigger>
         <PopoverContent>Find organization</PopoverContent>
-      </Popover>
+      </Popover>,
     );
     await user.click(screen.getByRole("button", { name: "Org" }));
     expect(await screen.findByText("Find organization")).toBeVisible();
@@ -192,7 +210,9 @@ describe("Sheet", () => {
   function Sample() {
     return (
       <Sheet>
-        <SheetTrigger asChild><Button>Connect</Button></SheetTrigger>
+        <SheetTrigger asChild>
+          <Button>Connect</Button>
+        </SheetTrigger>
         <SheetContent closeLabel="Close">
           <SheetHeader>
             <SheetTitle>Connect to your project</SheetTitle>
@@ -217,11 +237,15 @@ describe("Sheet", () => {
     const user = userEvent.setup();
     render(
       <Sheet>
-        <SheetTrigger asChild><Button>Open sheet</Button></SheetTrigger>
+        <SheetTrigger asChild>
+          <Button>Open sheet</Button>
+        </SheetTrigger>
         <SheetContent closeLabel="Close panel">
-          <SheetHeader><SheetTitle>Sheet title</SheetTitle></SheetHeader>
+          <SheetHeader>
+            <SheetTitle>Sheet title</SheetTitle>
+          </SheetHeader>
         </SheetContent>
-      </Sheet>
+      </Sheet>,
     );
     await user.click(screen.getByRole("button", { name: "Open sheet" }));
     const dialog = await screen.findByRole("dialog", { name: "Sheet title" });
@@ -245,10 +269,12 @@ describe("Tooltip", () => {
     render(
       <TooltipProvider delayDuration={0}>
         <Tooltip>
-          <TooltipTrigger asChild><Button aria-label="Help">?</Button></TooltipTrigger>
+          <TooltipTrigger asChild>
+            <Button aria-label="Help">?</Button>
+          </TooltipTrigger>
           <TooltipContent>Helpful text</TooltipContent>
         </Tooltip>
-      </TooltipProvider>
+      </TooltipProvider>,
     );
     await user.hover(screen.getByRole("button", { name: "Help" }));
     expect(await screen.findByRole("tooltip")).toHaveTextContent("Helpful text");

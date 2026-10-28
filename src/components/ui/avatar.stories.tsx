@@ -5,5 +5,17 @@ const meta = { title: "ui/Avatar", component: Avatar } satisfies Meta<typeof Ava
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Initials: Story = { render: () => <Avatar><AvatarFallback>CB</AvatarFallback></Avatar> };
-export const Small: Story = { render: () => <Avatar className="size-7"><AvatarFallback>D</AvatarFallback></Avatar> };
+export const Initials: Story = {
+  render: () => (
+    <Avatar>
+      <AvatarFallback>CB</AvatarFallback>
+    </Avatar>
+  ),
+};
+export const Small: Story = {
+  render: () => (
+    <Avatar className="size-7">
+      <AvatarFallback>D</AvatarFallback>
+    </Avatar>
+  ),
+};

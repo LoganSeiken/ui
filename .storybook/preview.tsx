@@ -17,16 +17,16 @@ const preview: Preview = {
         icon: "circlehollow",
         items: [
           { value: "light", title: "Light" },
-          { value: "dark", title: "Dark" }
+          { value: "dark", title: "Dark" },
         ],
-        dynamicTitle: true
-      }
-    }
+        dynamicTitle: true,
+      },
+    },
   },
   parameters: {
     layout: "padded",
-    controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } }
-  }
+    controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
+  },
 };
 
 export default preview;

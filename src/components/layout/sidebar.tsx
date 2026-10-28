@@ -15,7 +15,7 @@ export function Sidebar({ mode = "expanded", className, ...props }: SidebarProps
         mode === "expanded" && "w-52",
         mode === "collapsed" && "w-14",
         mode === "hover" && "w-14 hover:w-52",
-        className
+        className,
       )}
     />
   );
@@ -32,7 +32,14 @@ export type SidebarItemProps = ComponentProps<"a"> & {
   linkComponent?: ElementType;
 };
 
-export function SidebarItem({ icon, active = false, linkComponent: Link = "a", className, children, ...props }: SidebarItemProps) {
+export function SidebarItem({
+  icon,
+  active = false,
+  linkComponent: Link = "a",
+  className,
+  children,
+  ...props
+}: SidebarItemProps) {
   return (
     <Link
       aria-current={active ? "page" : undefined}
@@ -40,7 +47,7 @@ export function SidebarItem({ icon, active = false, linkComponent: Link = "a", c
       className={cn(
         "flex h-8 items-center gap-3 rounded-md px-2.5 text-sm text-muted-foreground transition-colors duration-(--ui-duration-fast) hover:bg-muted hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",
         active && "bg-muted font-medium text-foreground",
-        className
+        className,
       )}
     >
       <span className="flex size-4 shrink-0 items-center justify-center">{icon}</span>
@@ -67,22 +74,41 @@ export type SidebarNavProps = {
 };
 
 /** Responsive navigation built from the shared Sidebar primitives. */
-export function SidebarNav({ items, pathname, linkComponent, ariaLabel, className }: SidebarNavProps) {
-  const renderItems = () => items.map((item) => {
-    const active = item.match === "exact"
-      ? pathname === item.href
-      : pathname === item.href || pathname.startsWith(`${item.href.replace(/\/$/, "")}/`);
-    return (
-      <SidebarItem key={item.href} href={item.href} icon={item.icon} active={active} linkComponent={linkComponent} aria-label={item.label}>
-        {item.label}
-      </SidebarItem>
-    );
-  });
+export function SidebarNav({
+  items,
+  pathname,
+  linkComponent,
+  ariaLabel,
+  className,
+}: SidebarNavProps) {
+  const renderItems = () =>
+    items.map((item) => {
+      const active =
+        item.match === "exact"
+          ? pathname === item.href
+          : pathname === item.href || pathname.startsWith(`${item.href.replace(/\/$/, "")}/`);
+      return (
+        <SidebarItem
+          key={item.href}
+          href={item.href}
+          icon={item.icon}
+          active={active}
+          linkComponent={linkComponent}
+          aria-label={item.label}
+        >
+          {item.label}
+        </SidebarItem>
+      );
+    });
 
   return (
     <>
-      <Sidebar aria-label={ariaLabel} className={cn("hidden md:flex", className)}>{renderItems()}</Sidebar>
-      <Sidebar aria-label={ariaLabel} mode="collapsed" className={cn("flex md:hidden", className)}>{renderItems()}</Sidebar>
+      <Sidebar aria-label={ariaLabel} className={cn("hidden md:flex", className)}>
+        {renderItems()}
+      </Sidebar>
+      <Sidebar aria-label={ariaLabel} mode="collapsed" className={cn("flex md:hidden", className)}>
+        {renderItems()}
+      </Sidebar>
     </>
   );
 }

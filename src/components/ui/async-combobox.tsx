@@ -3,7 +3,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Combobox, type ComboboxOption, type ComboboxProps } from "./combobox.js";
 
-export type AsyncComboboxProps = Omit<ComboboxProps, "options" | "onQueryChange" | "loading" | "errorText"> & {
+export type AsyncComboboxProps = Omit<
+  ComboboxProps,
+  "options" | "onQueryChange" | "loading" | "errorText"
+> & {
   fetcher: (query: string, signal: AbortSignal) => Promise<ComboboxOption[]>;
   debounceMs?: number;
   initialOptions?: ComboboxOption[];
@@ -44,14 +47,23 @@ export function AsyncCombobox({
       for (const option of initialOptions) merged.set(optionKey(option), option);
       if (selectedOption) merged.set(optionKey(selectedOption), selectedOption);
       const next = [...merged.values()];
-      return next.length === current.length && next.every((option, index) => option.value === current[index]?.value && option.label === current[index]?.label) ? current : next;
+      return next.length === current.length &&
+        next.every(
+          (option, index) =>
+            option.value === current[index]?.value && option.label === current[index]?.label,
+        )
+        ? current
+        : next;
     });
   }, [initialOptions, selectedOption]);
 
-  useEffect(() => () => {
-    if (timer.current) clearTimeout(timer.current);
-    controller.current?.abort();
-  }, []);
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+      controller.current?.abort();
+    },
+    [],
+  );
 
   const handleQueryChange = (nextQuery: string) => {
     setQuery(nextQuery);
@@ -74,7 +86,11 @@ export function AsyncCombobox({
           setLoading(false);
         })
         .catch((error: unknown) => {
-          if (nextController.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) return;
+          if (
+            nextController.signal.aborted ||
+            (error instanceof DOMException && error.name === "AbortError")
+          )
+            return;
           setFetchError(errorText);
           setLoading(false);
         });
@@ -89,11 +105,39 @@ export function AsyncCombobox({
       const known = knownOptions.current.get(selectedValue);
       if (known) merged.set(optionKey(known), known);
     }
-    if (allowCreate && createLabel && query.trim() && !loading && !fetchError && ![...merged.values()].some((option) => option.value === query || option.label.toLocaleLowerCase() === query.toLocaleLowerCase())) {
+    if (
+      allowCreate &&
+      createLabel &&
+      query.trim() &&
+      !loading &&
+      !fetchError &&
+      ![...merged.values()].some(
+        (option) =>
+          option.value === query || option.label.toLocaleLowerCase() === query.toLocaleLowerCase(),
+      )
+    ) {
       merged.set(query, { value: query, label: createLabel(query) });
     }
     return [...merged.values()];
-  }, [allowCreate, createLabel, fetchError, loading, options, query, selectedOption, selectedValue]);
+  }, [
+    allowCreate,
+    createLabel,
+    fetchError,
+    loading,
+    options,
+    query,
+    selectedOption,
+    selectedValue,
+  ]);
 
-  return <Combobox {...props} options={visibleOptions} onQueryChange={handleQueryChange} loading={loading} loadingLabel={loadingLabel} errorText={fetchError} />;
+  return (
+    <Combobox
+      {...props}
+      options={visibleOptions}
+      onQueryChange={handleQueryChange}
+      loading={loading}
+      loadingLabel={loadingLabel}
+      errorText={fetchError}
+    />
+  );
 }

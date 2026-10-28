@@ -10,14 +10,26 @@ export type SectionProps = {
   className?: string;
 };
 
-export function Section({ title, description, actions, separated = false, children, className }: SectionProps) {
+export function Section({
+  title,
+  description,
+  actions,
+  separated = false,
+  children,
+  className,
+}: SectionProps) {
   const titleId = useId();
 
   return (
-    <section aria-labelledby={titleId} className={cn("space-y-4", separated && "border-t border-border pt-6", className)}>
+    <section
+      aria-labelledby={titleId}
+      className={cn("space-y-4", separated && "border-t border-border pt-6", className)}
+    >
       <div className="flex items-center justify-between gap-4">
         <div className="grid gap-1">
-          <h2 id={titleId} className="text-lg font-semibold">{title}</h2>
+          <h2 id={titleId} className="text-lg font-semibold">
+            {title}
+          </h2>
           {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
         </div>
         {actions}

@@ -15,8 +15,10 @@ export function RadioGroup({
       data-variant={variant}
       className={cn(
         "group/radio grid",
-        variant === "joined" ? "divide-y divide-border overflow-hidden rounded-md border border-border" : "gap-2",
-        className
+        variant === "joined"
+          ? "divide-y divide-border overflow-hidden rounded-md border border-border"
+          : "gap-2",
+        className,
       )}
     />
   );
@@ -30,13 +32,16 @@ function Indicator() {
   );
 }
 
-export function RadioGroupItem({ className, ...props }: ComponentProps<typeof RadioGroupPrimitive.Item>) {
+export function RadioGroupItem({
+  className,
+  ...props
+}: ComponentProps<typeof RadioGroupPrimitive.Item>) {
   return (
     <RadioGroupPrimitive.Item
       {...props}
       className={cn(
         "group flex size-4 items-center justify-center rounded-pill focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50",
-        className
+        className,
       )}
     >
       <span className="flex size-4 items-center justify-center rounded-pill border border-input bg-surface group-data-[state=checked]:border-primary">
@@ -58,7 +63,7 @@ export function RadioCard({ title, description, icon, className, ...props }: Rad
       {...props}
       className={cn(
         "group flex w-full items-start gap-3 rounded-md border border-border bg-surface p-4 text-left group-data-[variant=joined]/radio:rounded-none group-data-[variant=joined]/radio:border-0 transition-colors duration-(--ui-duration-fast) hover:bg-surface-subtle focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 data-[state=checked]:border-primary data-[state=checked]:bg-surface-subtle",
-        className
+        className,
       )}
     >
       <Indicator />

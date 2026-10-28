@@ -12,12 +12,12 @@ export default defineConfig({
     viewport: { width: 1100, height: 640 },
     deviceScaleFactor: 1,
     locale: "en-US",
-    timezoneId: "UTC"
+    timezoneId: "UTC",
   },
   projects: [{ name: "chrome" }],
   webServer: {
     command: "node e2e/serve-static.mjs",
     url: "http://localhost:6007",
-    reuseExistingServer: true
-  }
+    reuseExistingServer: true,
+  },
 });

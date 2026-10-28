@@ -8,10 +8,10 @@ const statusDotVariants = cva("inline-block size-2 shrink-0 rounded-pill", {
       success: "bg-chart-success",
       danger: "bg-chart-danger",
       warning: "bg-warning-border",
-      neutral: "bg-input"
-    }
+      neutral: "bg-input",
+    },
   },
-  defaultVariants: { status: "neutral" }
+  defaultVariants: { status: "neutral" },
 });
 
 export type StatusDotProps = Omit<ComponentProps<"span">, "children"> &

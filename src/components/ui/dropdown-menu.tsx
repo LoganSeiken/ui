@@ -10,7 +10,12 @@ export const DropdownMenuTrigger = DropdownPrimitive.Trigger;
 export const DropdownMenuRadioGroup = DropdownPrimitive.RadioGroup;
 export const DropdownMenuSub = DropdownPrimitive.Sub;
 
-export function DropdownMenuContent({ className, align = "end", sideOffset = 4, ...props }: ComponentProps<typeof DropdownPrimitive.Content>) {
+export function DropdownMenuContent({
+  className,
+  align = "end",
+  sideOffset = 4,
+  ...props
+}: ComponentProps<typeof DropdownPrimitive.Content>) {
   return (
     <DropdownPrimitive.Portal>
       <DropdownPrimitive.Content
@@ -19,20 +24,23 @@ export function DropdownMenuContent({ className, align = "end", sideOffset = 4, 
         {...props}
         className={cn(
           "z-(--ui-z-popover) min-w-56 rounded-lg border border-border bg-surface p-1 text-sm text-surface-foreground shadow-md",
-          className
+          className,
         )}
       />
     </DropdownPrimitive.Portal>
   );
 }
 
-export function DropdownMenuItem({ className, ...props }: ComponentProps<typeof DropdownPrimitive.Item>) {
+export function DropdownMenuItem({
+  className,
+  ...props
+}: ComponentProps<typeof DropdownPrimitive.Item>) {
   return (
     <DropdownPrimitive.Item
       {...props}
       className={cn(
         "flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 outline-hidden data-[disabled]:opacity-50 data-[highlighted]:bg-muted",
-        className
+        className,
       )}
     />
   );
@@ -42,21 +50,41 @@ export function DropdownMenuItemDescription({ className, ...props }: ComponentPr
   return <span {...props} className={cn("block text-xs text-muted-foreground", className)} />;
 }
 
-export function DropdownMenuLabel({ className, ...props }: ComponentProps<typeof DropdownPrimitive.Label>) {
-  return <DropdownPrimitive.Label {...props} className={cn("px-2 py-1.5 text-xs text-muted-foreground", className)} />;
+export function DropdownMenuLabel({
+  className,
+  ...props
+}: ComponentProps<typeof DropdownPrimitive.Label>) {
+  return (
+    <DropdownPrimitive.Label
+      {...props}
+      className={cn("px-2 py-1.5 text-xs text-muted-foreground", className)}
+    />
+  );
 }
 
-export function DropdownMenuSeparator({ className, ...props }: ComponentProps<typeof DropdownPrimitive.Separator>) {
-  return <DropdownPrimitive.Separator {...props} className={cn("-mx-1 my-1 h-px bg-border", className)} />;
+export function DropdownMenuSeparator({
+  className,
+  ...props
+}: ComponentProps<typeof DropdownPrimitive.Separator>) {
+  return (
+    <DropdownPrimitive.Separator
+      {...props}
+      className={cn("-mx-1 my-1 h-px bg-border", className)}
+    />
+  );
 }
 
-export function DropdownMenuRadioItem({ className, children, ...props }: ComponentProps<typeof DropdownPrimitive.RadioItem>) {
+export function DropdownMenuRadioItem({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof DropdownPrimitive.RadioItem>) {
   return (
     <DropdownPrimitive.RadioItem
       {...props}
       className={cn(
         "flex cursor-default select-none items-center gap-2 rounded-sm py-1.5 pr-2 pl-7 outline-hidden relative data-[disabled]:opacity-50 data-[highlighted]:bg-muted",
-        className
+        className,
       )}
     >
       <DropdownPrimitive.ItemIndicator className="absolute left-2 flex items-center">
@@ -67,13 +95,17 @@ export function DropdownMenuRadioItem({ className, children, ...props }: Compone
   );
 }
 
-export function DropdownMenuSubTrigger({ className, children, ...props }: ComponentProps<typeof DropdownPrimitive.SubTrigger>) {
+export function DropdownMenuSubTrigger({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof DropdownPrimitive.SubTrigger>) {
   return (
     <DropdownPrimitive.SubTrigger
       {...props}
       className={cn(
         "flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 outline-hidden data-[disabled]:opacity-50 data-[highlighted]:bg-muted data-[state=open]:bg-muted",
-        className
+        className,
       )}
     >
       <span className="flex-1">{children}</span>
@@ -82,14 +114,17 @@ export function DropdownMenuSubTrigger({ className, children, ...props }: Compon
   );
 }
 
-export function DropdownMenuSubContent({ className, ...props }: ComponentProps<typeof DropdownPrimitive.SubContent>) {
+export function DropdownMenuSubContent({
+  className,
+  ...props
+}: ComponentProps<typeof DropdownPrimitive.SubContent>) {
   return (
     <DropdownPrimitive.Portal>
       <DropdownPrimitive.SubContent
         {...props}
         className={cn(
           "z-(--ui-z-popover) min-w-48 rounded-lg border border-border bg-surface p-1 text-sm text-surface-foreground shadow-md",
-          className
+          className,
         )}
       />
     </DropdownPrimitive.Portal>

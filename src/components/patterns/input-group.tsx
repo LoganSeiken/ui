@@ -8,7 +8,7 @@ export function InputGroup({ className, ...props }: ComponentProps<"div">) {
       {...props}
       className={cn(
         "flex h-8 w-full items-center rounded-md border border-input bg-surface focus-within:ring-2 focus-within:ring-ring",
-        className
+        className,
       )}
     />
   );
@@ -18,7 +18,10 @@ export function InputGroupAddon({ className, ...props }: ComponentProps<"div">) 
   return (
     <div
       {...props}
-      className={cn("flex h-full shrink-0 items-center gap-1 border-r border-border px-2.5 text-sm text-muted-foreground", className)}
+      className={cn(
+        "flex h-full shrink-0 items-center gap-1 border-r border-border px-2.5 text-sm text-muted-foreground",
+        className,
+      )}
     />
   );
 }

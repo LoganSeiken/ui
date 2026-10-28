@@ -12,12 +12,12 @@ export const badgeVariants = cva(
         warning: "border-warning-border bg-warning-subtle text-warning-subtle-foreground",
         danger: "border-transparent bg-destructive-subtle text-destructive-subtle-foreground",
         outline: "border-border bg-surface text-muted-foreground",
-        "success-outline": "border-chart-success bg-surface text-success-subtle-foreground"
+        "success-outline": "border-chart-success bg-surface text-success-subtle-foreground",
       },
-      shape: { pill: "rounded-pill", square: "rounded-sm" }
+      shape: { pill: "rounded-pill", square: "rounded-sm" },
     },
-    defaultVariants: { variant: "neutral", shape: "pill" }
-  }
+    defaultVariants: { variant: "neutral", shape: "pill" },
+  },
 );
 
 export type BadgeProps = ComponentProps<"span"> & VariantProps<typeof badgeVariants>;

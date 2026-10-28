@@ -6,7 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Field } from "./field.js";
 import { FilterCard } from "./filter-card.js";
 
-const meta = { title: "patterns/FilterCard", component: FilterCard } satisfies Meta<typeof FilterCard>;
+const meta = { title: "patterns/FilterCard", component: FilterCard } satisfies Meta<
+  typeof FilterCard
+>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
@@ -16,15 +18,40 @@ function CustomForm(props: ComponentProps<"form">) {
 
 export const WithFilters: Story = {
   render: () => (
-    <FilterCard className="w-full" onSubmit={(event) => event.preventDefault()} actions={<><Button variant="outline">Apply</Button><Button variant="ghost">Clear</Button></>}>
-      <Field label="Name" htmlFor="filter-name" className="min-w-48 flex-1"><Input id="filter-name" placeholder="Search name" /></Field>
+    <FilterCard
+      className="w-full"
+      onSubmit={(event) => event.preventDefault()}
+      actions={
+        <>
+          <Button variant="outline">Apply</Button>
+          <Button variant="ghost">Clear</Button>
+        </>
+      }
+    >
+      <Field label="Name" htmlFor="filter-name" className="min-w-48 flex-1">
+        <Input id="filter-name" placeholder="Search name" />
+      </Field>
       <Field label="Status" htmlFor="filter-status" className="min-w-48 flex-1">
-        <Select defaultValue="active"><SelectTrigger id="filter-status"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="active">Active</SelectItem><SelectItem value="archived">Archived</SelectItem></SelectContent></Select>
+        <Select defaultValue="active">
+          <SelectTrigger id="filter-status">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="active">Active</SelectItem>
+            <SelectItem value="archived">Archived</SelectItem>
+          </SelectContent>
+        </Select>
       </Field>
     </FilterCard>
-  )
+  ),
 };
 
 export const CustomFormComponent: Story = {
-  render: () => <FilterCard formComponent={CustomForm} aria-label="Custom filters"><Field label="Name" htmlFor="custom-filter-name"><Input id="custom-filter-name" /></Field></FilterCard>
+  render: () => (
+    <FilterCard formComponent={CustomForm} aria-label="Custom filters">
+      <Field label="Name" htmlFor="custom-filter-name">
+        <Input id="custom-filter-name" />
+      </Field>
+    </FilterCard>
+  ),
 };

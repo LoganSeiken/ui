@@ -11,11 +11,13 @@ const types = {
   ".json": "application/json; charset=utf-8",
   ".svg": "image/svg+xml",
   ".png": "image/png",
-  ".woff2": "font/woff2"
+  ".woff2": "font/woff2",
 };
 
 createServer((request, response) => {
-  const path = normalize(decodeURIComponent(new URL(request.url ?? "/", "http://localhost").pathname));
+  const path = normalize(
+    decodeURIComponent(new URL(request.url ?? "/", "http://localhost").pathname),
+  );
   let file = join(root, path);
   if (!file.startsWith(root)) {
     response.writeHead(403).end();

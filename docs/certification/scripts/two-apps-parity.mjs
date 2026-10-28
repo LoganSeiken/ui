@@ -2,8 +2,27 @@
 // Usage: node two-apps-parity.mjs [urlA] [urlB] [outDir]
 import { chromium } from "playwright-core";
 
-const [urlA = "http://localhost:3133/ui-gallery", urlB = "http://localhost:3134/ui-gallery", out = "."] = process.argv.slice(2);
-const props = ["color", "backgroundColor", "borderTopColor", "borderTopWidth", "borderTopLeftRadius", "fontFamily", "fontSize", "fontWeight", "lineHeight", "letterSpacing", "paddingTop", "paddingLeft", "height", "boxShadow"];
+const [
+  urlA = "http://localhost:3133/ui-gallery",
+  urlB = "http://localhost:3134/ui-gallery",
+  out = ".",
+] = process.argv.slice(2);
+const props = [
+  "color",
+  "backgroundColor",
+  "borderTopColor",
+  "borderTopWidth",
+  "borderTopLeftRadius",
+  "fontFamily",
+  "fontSize",
+  "fontWeight",
+  "lineHeight",
+  "letterSpacing",
+  "paddingTop",
+  "paddingLeft",
+  "height",
+  "boxShadow",
+];
 
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 
@@ -14,13 +33,15 @@ async function snapshot(url, name) {
   await page.screenshot({ path: `${out}/parity-${name}.png`, fullPage: true });
   const data = await page.evaluate((list) => {
     const root = document.querySelector('[data-testid="gallery-root"]');
-    const nodes = [root, ...root.querySelectorAll("*")].filter((el) => el.getBoundingClientRect().width > 0);
+    const nodes = [root, ...root.querySelectorAll("*")].filter(
+      (el) => el.getBoundingClientRect().width > 0,
+    );
     return {
       text: root.innerText,
       elements: nodes.map((el) => {
         const cs = getComputedStyle(el);
         return [el.tagName, cs.width, ...list.map((p) => cs[p])].join("|");
-      })
+      }),
     };
   }, props);
   await page.close();

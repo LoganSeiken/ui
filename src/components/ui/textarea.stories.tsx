@@ -1,10 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Textarea } from "./textarea.js";
-const meta = { title: "ui/Textarea", component: Textarea, args: { "aria-label": "Description" } } satisfies Meta<typeof Textarea>;
+const meta = {
+  title: "ui/Textarea",
+  component: Textarea,
+  args: { "aria-label": "Description" },
+} satisfies Meta<typeof Textarea>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 export const WithValue: Story = { args: { defaultValue: "A longer description" } };
 export const Invalid: Story = { args: { "aria-invalid": true } };
 export const Disabled: Story = { args: { disabled: true } };
-export const WithCount: Story = { args: { showCount: true, maxLength: 120, defaultValue: "Description" } };
+export const WithCount: Story = {
+  args: { showCount: true, maxLength: 120, defaultValue: "Description" },
+};

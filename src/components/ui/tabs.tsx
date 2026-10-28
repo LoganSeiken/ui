@@ -23,7 +23,7 @@ export function TabsList({
           variant === "underline"
             ? "flex gap-4 border-b border-border"
             : "grid grid-flow-col auto-cols-fr divide-x divide-border overflow-hidden rounded-md border border-border",
-          className
+          className,
         )}
       />
     </TabsVariantContext.Provider>
@@ -40,12 +40,17 @@ export function TabsTrigger({ className, ...props }: ComponentProps<typeof TabsP
         variant === "underline"
           ? "-mb-px border-b-2 border-transparent px-1 py-2 data-[state=active]:border-primary"
           : "flex flex-col items-center gap-2 bg-surface p-4 text-center hover:bg-surface-subtle data-[state=active]:bg-surface-subtle data-[state=active]:shadow-[inset_0_-2px_0_0_var(--ui-primary)]",
-        className
+        className,
       )}
     />
   );
 }
 
 export function TabsContent({ className, ...props }: ComponentProps<typeof TabsPrimitive.Content>) {
-  return <TabsPrimitive.Content {...props} className={cn("mt-4 focus-visible:outline-hidden", className)} />;
+  return (
+    <TabsPrimitive.Content
+      {...props}
+      className={cn("mt-4 focus-visible:outline-hidden", className)}
+    />
+  );
 }

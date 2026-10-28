@@ -6,10 +6,10 @@ const cardVariants = cva("rounded-md border text-surface-foreground", {
   variants: {
     variant: {
       default: "border-border bg-surface",
-      dashed: "border-dashed border-input bg-transparent"
-    }
+      dashed: "border-dashed border-input bg-transparent",
+    },
   },
-  defaultVariants: { variant: "default" }
+  defaultVariants: { variant: "default" },
 });
 
 export type CardProps = ComponentProps<"div"> & VariantProps<typeof cardVariants>;
@@ -19,7 +19,9 @@ export function Card({ variant, className, ...props }: CardProps) {
 }
 
 export function CardHeader({ className, ...props }: ComponentProps<"div">) {
-  return <div {...props} className={cn("flex flex-col gap-1 border-b border-border p-4", className)} />;
+  return (
+    <div {...props} className={cn("flex flex-col gap-1 border-b border-border p-4", className)} />
+  );
 }
 
 export function CardTitle({ className, ...props }: ComponentProps<"h3">) {
@@ -35,5 +37,10 @@ export function CardContent({ className, ...props }: ComponentProps<"div">) {
 }
 
 export function CardFooter({ className, ...props }: ComponentProps<"div">) {
-  return <div {...props} className={cn("flex items-center gap-2 border-t border-border p-4", className)} />;
+  return (
+    <div
+      {...props}
+      className={cn("flex items-center gap-2 border-t border-border p-4", className)}
+    />
+  );
 }
