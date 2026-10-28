@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.2 - 2026-10-28
+
+### Fixed
+
+- Kanban cards no longer capture the pointer for events that bubble from the portaled move menu, which made its items unclickable with a mouse.
+
 ## 0.9.1 - 2026-10-28
 
 ### Fixed

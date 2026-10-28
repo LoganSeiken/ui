@@ -878,10 +878,12 @@ export function KanbanBoard<T extends { id: string }>({
       if (latestRef.current.readOnly || event.button !== 0 || event.isPrimary === false) return;
       if (activeDragRef.current || pendingGestureRef.current) return;
       const target = event.target instanceof Element ? event.target : null;
-      const handle = target?.closest<HTMLElement>("[data-kanban-handle]");
+      // Portaled content (move menu) bubbles through React but is not part of the card.
+      if (!target || !event.currentTarget.contains(target)) return;
+      const handle = target.closest<HTMLElement>("[data-kanban-handle]");
       const isHandle = Boolean(handle);
       if (event.pointerType === "touch" && !isHandle) return;
-      if (!isHandle && target?.closest("a,button,input,textarea,select,[role='button']")) return;
+      if (!isHandle && target.closest("a,button,input,textarea,select,[role='button']")) return;
       const element = handle ?? event.currentTarget;
       try {
         element.setPointerCapture?.(event.pointerId);

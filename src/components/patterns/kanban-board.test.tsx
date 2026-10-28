@@ -286,6 +286,24 @@ describe("KanbanBoard", () => {
     expect(container.querySelector("[data-kanban-placeholder]")).not.toBeInTheDocument();
   });
 
+  it("does not capture the pointer for portaled menu items that bubble through the card", async () => {
+    const user = userEvent.setup();
+    const setPointerCapture = vi.fn();
+    Object.defineProperty(Element.prototype, "setPointerCapture", {
+      configurable: true,
+      value: setPointerCapture,
+    });
+    try {
+      renderBoard({});
+      await user.click(screen.getByRole("button", { name: "Move Alpha" }));
+      const item = await screen.findByRole("menuitem", { name: "Qualified" });
+      pointerDown(item, 9, "mouse", 20, 70);
+      expect(setPointerCapture).not.toHaveBeenCalled();
+    } finally {
+      delete (Element.prototype as { setPointerCapture?: unknown }).setPointerCapture;
+    }
+  });
+
   it("starts touch dragging only from the handle and keeps touch action there", () => {
     const { container } = renderBoard();
     const board = setBoardBounds(container);
