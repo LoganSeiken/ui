@@ -26,16 +26,16 @@ describe("U1 shared patterns", () => {
   });
 
   it("keeps action feedback mounted with the right announcement role", () => {
-    const { rerender } = render(<ActionFeedback status="pending" message="Saving" />);
-    expect(screen.getByText("Saving")).toBeInTheDocument();
-    rerender(<ActionFeedback status="success" message="Saved" />);
+    const { rerender } = render(<ActionFeedback status="pending" pendingLabel="Saving" successTitle="Saved" errorTitle="Failed" message="Saving" />);
+    expect(screen.getAllByText("Saving").length).toBeGreaterThan(0);
+    rerender(<ActionFeedback status="success" pendingLabel="Saving" successTitle="Saved" errorTitle="Failed" message="Saved" />);
     expect(screen.getByRole("status")).toHaveTextContent("Saved");
-    rerender(<ActionFeedback status="error" message="Failed" />);
+    rerender(<ActionFeedback status="error" pendingLabel="Saving" successTitle="Saved" errorTitle="Failed" message="Failed" />);
     expect(screen.getByRole("alert")).toHaveTextContent("Failed");
   });
 
   it("renders responsive navigation and avoids false prefix matches", () => {
-    render(<SidebarNav pathname="/services-archive" items={[
+    render(<SidebarNav ariaLabel="Primary" pathname="/services-archive" items={[
       { href: "/services", label: "Services", icon: <span aria-hidden="true">S</span>, match: "prefix" },
       { href: "/services-archive", label: "Archive", icon: <span aria-hidden="true">A</span>, match: "exact" }
     ]} />);
@@ -48,7 +48,7 @@ describe("U1 shared patterns", () => {
   it("submits the owner form from a menu action before the menu unmounts", async () => {
     const user = userEvent.setup();
     const submit = vi.fn((event: React.FormEvent) => event.preventDefault());
-    render(<><form id="sign-out" onSubmit={submit} /><AccountMenu email="owner@example.com"><AccountMenuActionItem formId="sign-out" label="Sign out" /></AccountMenu></>);
+    render(<><form id="sign-out" onSubmit={submit} /><AccountMenu label="Account menu" email="owner@example.com"><AccountMenuActionItem formId="sign-out" label="Sign out" /></AccountMenu></>);
     await user.click(screen.getByRole("button", { name: "Account menu" }));
     await user.click(screen.getByRole("menuitem", { name: "Sign out" }));
     expect(submit).toHaveBeenCalledTimes(1);
@@ -107,7 +107,7 @@ describe("AsyncCombobox", () => {
       signals.push(signal);
       return new Promise<{ value: string; label: string }[]>((resolve) => resolvers.push(resolve));
     });
-    render(<AsyncCombobox name="person" defaultValue="selected" selectedOption={{ value: "selected", label: "Selected" }} allowCreate debounceMs={250} defaultOpen fetcher={fetcher} />);
+    render(<AsyncCombobox placeholder="Select" searchPlaceholder="Search..." emptyText="No results" loadingLabel="Loading" name="person" defaultValue="selected" selectedOption={{ value: "selected", label: "Selected" }} allowCreate createLabel={(query) => `Create “${query}”`} debounceMs={250} defaultOpen fetcher={fetcher} />);
     const search = screen.getByPlaceholderText("Search...");
     fireEvent.change(search, { target: { value: "al" } });
     vi.advanceTimersByTime(249);
@@ -129,7 +129,7 @@ describe("AsyncCombobox", () => {
 
   it("surfaces fetch failures in the open list", async () => {
     const fetcher = vi.fn(async () => { throw new Error("network"); });
-    render(<AsyncCombobox defaultOpen fetcher={fetcher} />);
+    render(<AsyncCombobox placeholder="Select" searchPlaceholder="Search..." emptyText="No results" loadingLabel="Loading" defaultOpen errorText="Unable to load options" fetcher={fetcher} />);
     fireEvent.change(screen.getByPlaceholderText("Search..."), { target: { value: "x" } });
     await waitFor(() => expect(screen.getByRole("alert")).toHaveTextContent("Unable to load options"), { timeout: 1000 });
   });

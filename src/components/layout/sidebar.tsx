@@ -3,12 +3,11 @@ import { cn } from "../../utils/cn.js";
 
 export type SidebarMode = "expanded" | "collapsed" | "hover";
 
-export type SidebarProps = ComponentProps<"nav"> & { mode?: SidebarMode };
+export type SidebarProps = ComponentProps<"nav"> & { mode?: SidebarMode; "aria-label": string };
 
 export function Sidebar({ mode = "expanded", className, ...props }: SidebarProps) {
   return (
     <nav
-      aria-label="Primary"
       data-mode={mode}
       {...props}
       className={cn(
@@ -63,12 +62,12 @@ export type SidebarNavProps = {
   items: SidebarNavItem[];
   pathname: string;
   linkComponent?: ElementType;
-  ariaLabel?: string;
+  ariaLabel: string;
   className?: string;
 };
 
 /** Responsive navigation built from the shared Sidebar primitives. */
-export function SidebarNav({ items, pathname, linkComponent, ariaLabel = "Primary", className }: SidebarNavProps) {
+export function SidebarNav({ items, pathname, linkComponent, ariaLabel, className }: SidebarNavProps) {
   const renderItems = () => items.map((item) => {
     const active = item.match === "exact"
       ? pathname === item.href

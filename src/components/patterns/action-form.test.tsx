@@ -13,7 +13,7 @@ function TestForm({ action = async () => ({ status: "success" as const, message:
   validate?: (formData: FormData) => Record<string, string[] | undefined>;
 }) {
   return (
-    <ActionForm initialState={initialState} action={action} validate={validate} submitLabel="Save">
+    <ActionForm initialState={initialState} action={action} validate={validate} submitLabel="Save" pendingText="Working…" pendingLabel="Working…" successTitle="Saved" errorTitle="Error">
       {({ state }) => (
         <FormSection>
           <Field label="Name" htmlFor="name" error={state.fieldErrors?.name?.[0]}>

@@ -36,12 +36,12 @@ export type ActionFormProps<TState extends ActionFormState = ActionFormState> = 
   initialState: TState;
   children: ReactNode | ((context: ActionFormRenderContext<TState>) => ReactNode);
   validate?: (formData: FormData) => ActionFormFieldErrors | Promise<ActionFormFieldErrors>;
-  submitLabel?: ReactNode | null;
+  submitLabel: ReactNode | null;
   submitDisabled?: boolean;
-  pendingText?: ReactNode;
-  pendingLabel?: ReactNode;
-  successTitle?: ReactNode;
-  errorTitle?: ReactNode;
+  pendingText: ReactNode;
+  pendingLabel: ReactNode;
+  successTitle: ReactNode;
+  errorTitle: ReactNode;
   /** Content placed before the default submit button, such as a cancel link. */
   footer?: ReactNode | ((context: ActionFormRenderContext<TState>) => ReactNode);
 };
@@ -65,9 +65,9 @@ export function ActionForm<TState extends ActionFormState>({
   initialState,
   children,
   validate,
-  submitLabel = "Submit",
+  submitLabel,
   submitDisabled = false,
-  pendingText = "Working…",
+  pendingText,
   pendingLabel,
   successTitle,
   errorTitle,

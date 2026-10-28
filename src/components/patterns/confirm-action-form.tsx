@@ -18,10 +18,10 @@ export type ConfirmActionFormLabels = {
   description?: ReactNode;
   confirm: string;
   cancel: string;
-  close?: string;
-  pending?: ReactNode;
-  success?: ReactNode;
-  error?: ReactNode;
+  close: string;
+  pending: ReactNode;
+  success: ReactNode;
+  error: ReactNode;
 };
 
 export type ConfirmActionFormProps = {
@@ -51,7 +51,7 @@ export function ConfirmActionForm({
     const result = await action(previous, formData);
     if (result.status === "success") setOpen(false);
     if (feedback === "toast" && result.status !== "idle") {
-      toast({ title: result.message ?? (result.status === "success" ? "Action completed" : "Action failed"), variant: result.status === "success" ? "success" : "danger" });
+      toast({ title: result.message ?? String(result.status === "success" ? labels.success : labels.error), variant: result.status === "success" ? "success" : "danger" });
       return initialState;
     }
     return result;

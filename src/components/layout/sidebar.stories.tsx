@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Activity, Home, Settings, Table2 } from "lucide-react";
 import { Sidebar, SidebarItem, SidebarSeparator } from "./sidebar.js";
 
-const meta = { title: "layout/Sidebar", component: Sidebar, parameters: { layout: "fullscreen" } } satisfies Meta<typeof Sidebar>;
+const meta = { title: "layout/Sidebar", component: Sidebar, parameters: { layout: "fullscreen" }, args: { "aria-label": "Primary" } } satisfies Meta<typeof Sidebar>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 

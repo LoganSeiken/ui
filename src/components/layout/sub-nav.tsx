@@ -1,10 +1,10 @@
 import type { ComponentProps, ElementType, ReactNode } from "react";
 import { cn } from "../../utils/cn.js";
 
-export function SubNav({ className, ...props }: ComponentProps<"nav">) {
+export function SubNav({ className, "aria-label": ariaLabel, ...props }: ComponentProps<"nav"> & { "aria-label": string }) {
   return (
     <nav
-      aria-label="Section"
+      aria-label={ariaLabel}
       {...props}
       className={cn("flex w-64 shrink-0 flex-col gap-6 overflow-y-auto border-r border-border bg-surface p-4", className)}
     />

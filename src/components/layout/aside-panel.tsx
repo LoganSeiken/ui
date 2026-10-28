@@ -7,10 +7,10 @@ export type AsidePanelProps = Omit<ComponentProps<"aside">, "title"> & {
   title: ReactNode;
   headerExtra?: ReactNode;
   onClose?: () => void;
-  closeLabel?: string;
+  closeLabel: string;
 };
 
-export function AsidePanel({ title, headerExtra, onClose, closeLabel = "Close panel", className, children, ...props }: AsidePanelProps) {
+export function AsidePanel({ title, headerExtra, onClose, closeLabel, className, children, ...props }: AsidePanelProps) {
   return (
     <aside
       {...props}

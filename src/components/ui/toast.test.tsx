@@ -6,7 +6,7 @@ import { toast, Toaster } from "../../index.js";
 describe("Toaster", () => {
   it("uses the supplied provider label for announcements", async () => {
     const user = userEvent.setup();
-    render(<Toaster label="Notificación" closeLabel="Cerrar" />);
+    render(<Toaster label="Notificación" closeLabel="Cerrar" viewportLabel="Notificaciones ({hotkey})" />);
 
     toast({ title: "Registro guardado" });
     const announcement = await screen.findByRole("status");
@@ -16,7 +16,7 @@ describe("Toaster", () => {
 
   it("keeps the default provider label", async () => {
     const user = userEvent.setup();
-    render(<Toaster />);
+    render(<Toaster label="Notification" closeLabel="Close" viewportLabel="Notifications ({hotkey})" />);
 
     toast({ title: "Saved" });
     const announcement = await screen.findByRole("status");
@@ -25,10 +25,10 @@ describe("Toaster", () => {
   });
 
   it("localizes the viewport label and retains the default hotkey substitution", () => {
-    const { rerender } = render(<Toaster viewportLabel="Notificaciones ({hotkey})" />);
+    const { rerender } = render(<Toaster label="Notificación" closeLabel="Cerrar" viewportLabel="Notificaciones ({hotkey})" />);
     expect(screen.getByRole("region", { name: "Notificaciones (F8)" })).toBeInTheDocument();
 
-    rerender(<Toaster />);
+    rerender(<Toaster label="Notification" closeLabel="Close" viewportLabel="Notifications ({hotkey})" />);
     expect(screen.getByRole("region", { name: "Notifications (F8)" })).toBeInTheDocument();
   });
 });

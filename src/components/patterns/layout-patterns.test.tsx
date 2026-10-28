@@ -123,7 +123,7 @@ describe("FormCard patterns", () => {
 describe("AccountMenu", () => {
   it("opens on click and shows the account name, email, extra items and avatar initial", async () => {
     const user = userEvent.setup();
-    render(<AccountMenu name="Alex Morgan" email="alex@example.com"><DropdownMenuItem>Profile</DropdownMenuItem></AccountMenu>);
+    render(<AccountMenu name="Alex Morgan" email="alex@example.com" label="Account menu"><DropdownMenuItem>Profile</DropdownMenuItem></AccountMenu>);
     const trigger = screen.getByRole("button", { name: "Account menu" });
     expect(within(trigger).getByText("A")).toBeInTheDocument();
     expect(within(trigger).getByText("A").parentElement).toHaveClass("size-8", "border");
@@ -135,7 +135,7 @@ describe("AccountMenu", () => {
 
   it("opens with Enter, uses the email initial without a name, and restores focus after Escape", async () => {
     const user = userEvent.setup();
-    render(<AccountMenu email="zoe@example.com" />);
+    render(<AccountMenu email="zoe@example.com" label="Account menu" />);
     const trigger = screen.getByRole("button", { name: "Account menu" });
     expect(within(trigger).getByText("Z")).toBeInTheDocument();
     await user.tab();
@@ -147,7 +147,7 @@ describe("AccountMenu", () => {
   });
 
   it("uses the name initial when one is provided", () => {
-    render(<AccountMenu name="sam lee" email="sam@example.com" />);
+    render(<AccountMenu name="sam lee" email="sam@example.com" label="Account menu" />);
     const trigger = screen.getByRole("button", { name: "Account menu" });
     expect(within(trigger).getByText("S")).toBeInTheDocument();
     expect(trigger).toHaveClass("rounded-pill");

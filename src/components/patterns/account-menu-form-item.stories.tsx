@@ -6,7 +6,7 @@ const meta = {
   title: "patterns/AccountMenuFormItem",
   component: AccountMenuFormItem,
   parameters: { layout: "centered" },
-  render: (args) => <AccountMenu email="owner@example.com" defaultOpen><AccountMenuFormItem {...args} /></AccountMenu>
+  render: (args) => <AccountMenu label="Account menu" email="owner@example.com" defaultOpen><AccountMenuFormItem {...args} /></AccountMenu>
 } satisfies Meta<typeof AccountMenuFormItem>;
 export default meta;
 type Story = StoryObj<typeof meta>;

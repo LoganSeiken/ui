@@ -8,13 +8,13 @@ import { Button } from "../ui/button.js";
 export type CodeBlockTab = { label: string; code: string };
 
 export type CodeBlockProps = Omit<ComponentProps<"div">, "children"> & {
-  tablistLabel?: string;
-  copyLabel?: string;
-  copiedLabel?: string;
+  tablistLabel: string;
+  copyLabel: string;
+  copiedLabel: string;
 } &
   ({ code: string; tabs?: undefined } | { tabs: CodeBlockTab[]; code?: undefined });
 
-export function CodeBlock({ code, tabs, tablistLabel = "Code variants", copyLabel = "Copy code", copiedLabel = "Copied", className, ...props }: CodeBlockProps) {
+export function CodeBlock({ code, tabs, tablistLabel, copyLabel, copiedLabel, className, ...props }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const [active, setActive] = useState(0);
   const current = tabs ? (tabs[active] ?? tabs[0]) : undefined;

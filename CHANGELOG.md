@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.9.0 - 2026-10-28
+
+### Changed
+
+- Removed English accessibility and empty-state defaults from dialogs, sheets, aside panels, confirmation dialogs, comboboxes, code blocks and message threads.
+- Consumers must provide localized labels for every user-visible component string.
+
+### Migration
+
+- Pass `closeLabel` to `DialogContent`, `SheetContent` and `AsidePanel`.
+- Pass `confirmLabel`, `cancelLabel` and `closeLabel` to `ConfirmDialog`.
+- Pass `placeholder`, `searchPlaceholder`, `emptyText` and `loadingLabel` to `Combobox` and `AsyncCombobox`.
+- Pass `tablistLabel`, `copyLabel` and `copiedLabel` to `CodeBlock`, and `ariaLabel` to `MessageThread`.
+
+## 0.8.0 - 2026-10-28
+
+### Changed
+
+- Removed English defaults from action feedback, action forms, confirmation feedback, account menus, navigation labels and toast accessibility labels; consumers must provide localized copy.
+- `EmptyState` accepts `titleAs` (`p`, `h1`, `h2` or `h3`) while preserving the existing visual style.
+
+### Migration
+
+- Pass `pendingLabel`, `successTitle` and `errorTitle` to `ActionFeedback`.
+- Pass `submitLabel`, `pendingText`, `pendingLabel`, `successTitle` and `errorTitle` to `ActionForm`.
+- Pass all confirmation feedback labels (`close`, `pending`, `success`, `error`) to `ConfirmActionForm`.
+- Pass `label` to `AccountMenu`, `aria-label`/`ariaLabel` to navigation primitives, and `label`, `closeLabel` and `viewportLabel` to `Toaster`.
+
 ## 0.7.2 - 2026-10-25
 
 ### Added

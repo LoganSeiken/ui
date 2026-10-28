@@ -6,9 +6,9 @@ export type ActionFeedbackStatus = "idle" | "success" | "error" | "pending";
 export type ActionFeedbackProps = {
   status: ActionFeedbackStatus;
   message?: ReactNode;
-  pendingLabel?: ReactNode;
-  successTitle?: ReactNode;
-  errorTitle?: ReactNode;
+  pendingLabel: ReactNode;
+  successTitle: ReactNode;
+  errorTitle: ReactNode;
   className?: string;
 };
 
@@ -16,9 +16,9 @@ export type ActionFeedbackProps = {
 export function ActionFeedback({
   status,
   message,
-  pendingLabel = "Working…",
-  successTitle = "Success",
-  errorTitle = "Something went wrong",
+  pendingLabel,
+  successTitle,
+  errorTitle,
   className
 }: ActionFeedbackProps) {
   if (status === "idle") return null;

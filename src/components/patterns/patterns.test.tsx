@@ -197,7 +197,7 @@ describe("CodeBlock", () => {
   it("copies the code and confirms to the user", async () => {
     const user = userEvent.setup();
     const writeText = vi.spyOn(navigator.clipboard, "writeText");
-    render(<CodeBlock code="npm install prisma" />);
+    render(<CodeBlock tablistLabel="Code variants" copyLabel="Copy code" copiedLabel="Copied" code="npm install prisma" />);
     await user.click(screen.getByRole("button", { name: "Copy code" }));
     expect(writeText).toHaveBeenCalledWith("npm install prisma");
     expect(await screen.findByRole("button", { name: "Copied" })).toBeInTheDocument();
@@ -206,7 +206,7 @@ describe("CodeBlock", () => {
   it("switches between tabs and copies the selected variant", async () => {
     const user = userEvent.setup();
     const writeText = vi.spyOn(navigator.clipboard, "writeText");
-    render(<CodeBlock tabs={[{ label: "npm", code: "npm i x" }, { label: "pnpm", code: "pnpm add x" }]} />);
+    render(<CodeBlock tablistLabel="Code variants" copyLabel="Copy code" copiedLabel="Copied" tabs={[{ label: "npm", code: "npm i x" }, { label: "pnpm", code: "pnpm add x" }]} />);
     expect(screen.getByRole("tab", { name: "npm" })).toHaveAttribute("aria-selected", "true");
     await user.click(screen.getByRole("tab", { name: "pnpm" }));
     expect(screen.getByText("pnpm add x")).toBeInTheDocument();

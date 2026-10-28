@@ -13,12 +13,12 @@ import {
 export type AccountMenuProps = {
   email: string;
   name?: string;
-  label?: string;
+  label: string;
   defaultOpen?: boolean;
   children?: ReactNode;
 };
 
-export function AccountMenu({ email, name, label = "Account menu", defaultOpen = false, children }: AccountMenuProps) {
+export function AccountMenu({ email, name, label, defaultOpen = false, children }: AccountMenuProps) {
   const initial = (name || email).charAt(0).toUpperCase();
 
   return (

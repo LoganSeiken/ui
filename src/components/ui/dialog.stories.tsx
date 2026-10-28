@@ -10,7 +10,7 @@ export const Open: Story = {
   render: () => (
     <Dialog defaultOpen>
       <DialogTrigger asChild><Button>Open dialog</Button></DialogTrigger>
-      <DialogContent>
+      <DialogContent closeLabel="Close">
         <DialogHeader>
           <DialogTitle>Dialog title</DialogTitle>
           <DialogDescription>Dialog description with a short explanation of what happens next.</DialogDescription>

@@ -4,9 +4,9 @@ import { useRef, useState, type ReactNode } from "react";
 import { Button } from "../ui/button.js";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog.js";
 
-export type ConfirmDialogProps = { trigger: ReactNode; title: ReactNode; description?: ReactNode; confirmLabel?: string; cancelLabel?: string; variant?: "default" | "destructive"; onConfirm?: () => void | Promise<void>; confirmFormId?: string; pending?: boolean; open?: boolean; onOpenChange?: (open: boolean) => void; closeLabel?: string };
+export type ConfirmDialogProps = { trigger: ReactNode; title: ReactNode; description?: ReactNode; confirmLabel: string; cancelLabel: string; variant?: "default" | "destructive"; onConfirm?: () => void | Promise<void>; confirmFormId?: string; pending?: boolean; open?: boolean; onOpenChange?: (open: boolean) => void; closeLabel: string };
 
-export function ConfirmDialog({ trigger, title, description, confirmLabel = "Confirm", cancelLabel = "Cancel", variant = "default", onConfirm, confirmFormId, pending = false, open, onOpenChange, closeLabel }: ConfirmDialogProps) {
+export function ConfirmDialog({ trigger, title, description, confirmLabel, cancelLabel, variant = "default", onConfirm, confirmFormId, pending = false, open, onOpenChange, closeLabel }: ConfirmDialogProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
   const currentOpen = open ?? internalOpen;
