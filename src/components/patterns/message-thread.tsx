@@ -31,7 +31,12 @@ export function MessageBubble({
           outbound ? "border-primary/20 bg-primary/10" : "border-border bg-surface",
         )}
       >
-        <div className="mb-1 flex items-center gap-2 text-xs text-muted-foreground">
+        <div
+          className={cn(
+            "mb-1 flex items-center gap-2 text-xs",
+            outbound ? "text-primary-foreground" : "text-muted-foreground",
+          )}
+        >
           <span className="font-medium text-foreground">{author}</span>
           {timestamp ? <span>{timestamp}</span> : null}
           {deliveryStatus ? <Badge variant="outline">{deliveryStatus}</Badge> : null}
