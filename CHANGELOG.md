@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.2 - 2026-10-28
+
+### Fixed
+
+- Kanban cards no longer capture the pointer for events that bubble from the portaled move menu, which made its items unclickable with a mouse.
+- `KanbanBoard` `onMove` may return `false` to signal a deferred move (for example while a confirmation dialog is open); the board then skips the completed-move announcement.
+
 ## 0.9.1 - 2026-10-28
 
 ### Fixed

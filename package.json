@@ -1,6 +1,6 @@
 {
   "name": "@loganseiken/ui",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Framework-agnostic design tokens and React UI primitives.",
   "type": "module",
   "license": "MIT",
