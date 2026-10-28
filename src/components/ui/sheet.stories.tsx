@@ -10,7 +10,7 @@ export const Open: Story = {
   render: () => (
     <Sheet defaultOpen>
       <SheetTrigger asChild><Button>Open sheet</Button></SheetTrigger>
-      <SheetContent className="max-w-lg">
+      <SheetContent closeLabel="Close" className="max-w-lg">
         <SheetHeader>
           <SheetTitle>Connect to your project</SheetTitle>
           <SheetDescription>Choose how you want to use the service</SheetDescription>

@@ -193,7 +193,7 @@ describe("Sheet", () => {
     return (
       <Sheet>
         <SheetTrigger asChild><Button>Connect</Button></SheetTrigger>
-        <SheetContent>
+        <SheetContent closeLabel="Close">
           <SheetHeader>
             <SheetTitle>Connect to your project</SheetTitle>
             <SheetDescription>Choose how</SheetDescription>

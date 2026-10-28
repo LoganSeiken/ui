@@ -5,9 +5,12 @@ const meta = { title: "patterns/CodeBlock", component: CodeBlock } satisfies Met
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Single: Story = { args: { code: "npm install prisma --save-dev", className: "w-96" } };
+export const Single: Story = { args: { code: "npm install prisma --save-dev", className: "w-96", tablistLabel: "Code variants", copyLabel: "Copy code", copiedLabel: "Copied" } };
 export const WithTabs: Story = {
   args: {
+    tablistLabel: "Code variants",
+    copyLabel: "Copy code",
+    copiedLabel: "Copied",
     className: "w-96",
     tabs: [
       { label: "npm", code: "npm install @loganseiken/ui" },

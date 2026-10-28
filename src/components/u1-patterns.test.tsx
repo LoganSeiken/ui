@@ -107,7 +107,7 @@ describe("AsyncCombobox", () => {
       signals.push(signal);
       return new Promise<{ value: string; label: string }[]>((resolve) => resolvers.push(resolve));
     });
-    render(<AsyncCombobox name="person" defaultValue="selected" selectedOption={{ value: "selected", label: "Selected" }} allowCreate debounceMs={250} defaultOpen fetcher={fetcher} />);
+    render(<AsyncCombobox placeholder="Select" searchPlaceholder="Search..." emptyText="No results" loadingLabel="Loading" name="person" defaultValue="selected" selectedOption={{ value: "selected", label: "Selected" }} allowCreate createLabel={(query) => `Create “${query}”`} debounceMs={250} defaultOpen fetcher={fetcher} />);
     const search = screen.getByPlaceholderText("Search...");
     fireEvent.change(search, { target: { value: "al" } });
     vi.advanceTimersByTime(249);
@@ -129,7 +129,7 @@ describe("AsyncCombobox", () => {
 
   it("surfaces fetch failures in the open list", async () => {
     const fetcher = vi.fn(async () => { throw new Error("network"); });
-    render(<AsyncCombobox defaultOpen fetcher={fetcher} />);
+    render(<AsyncCombobox placeholder="Select" searchPlaceholder="Search..." emptyText="No results" loadingLabel="Loading" defaultOpen errorText="Unable to load options" fetcher={fetcher} />);
     fireEvent.change(screen.getByPlaceholderText("Search..."), { target: { value: "x" } });
     await waitFor(() => expect(screen.getByRole("alert")).toHaveTextContent("Unable to load options"), { timeout: 1000 });
   });

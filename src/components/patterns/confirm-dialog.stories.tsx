@@ -6,7 +6,7 @@ const meta = {
   title: "patterns/ConfirmDialog",
   component: ConfirmDialog,
   parameters: { layout: "fullscreen" },
-  args: { open: true, trigger: <Button>Open confirmation</Button>, title: "Confirm action", description: "This action will take effect immediately." }
+  args: { open: true, trigger: <Button>Open confirmation</Button>, title: "Confirm action", description: "This action will take effect immediately.", confirmLabel: "Confirm", cancelLabel: "Cancel", closeLabel: "Close" }
 } satisfies Meta<typeof ConfirmDialog>;
 export default meta;
 type Story = StoryObj<typeof meta>;

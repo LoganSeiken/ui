@@ -34,7 +34,7 @@ describe("AppShell", () => {
         topBar={<TopBar />}
         sidebar={<Sidebar aria-label="Primary"><SidebarItem href="#" icon={<i />}>Home</SidebarItem></Sidebar>}
         subNav={<SubNav aria-label="Section"><SubNavTitle>Observability</SubNavTitle></SubNav>}
-        aside={<AsidePanel title="Help">panel</AsidePanel>}
+        aside={<AsidePanel closeLabel="Close" title="Help">panel</AsidePanel>}
       >
         main
       </AppShell>
@@ -111,14 +111,14 @@ describe("AsidePanel", () => {
   it("is a complementary region with a close button that fires onClose", async () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
-    render(<AsidePanel title="Help & Support" onClose={onClose}>content</AsidePanel>);
+    render(<AsidePanel closeLabel="Close panel" title="Help & Support" onClose={onClose}>content</AsidePanel>);
     expect(screen.getByRole("complementary")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Close panel" }));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
   it("omits the close button when no handler is given", () => {
-    render(<AsidePanel title="Help">content</AsidePanel>);
+    render(<AsidePanel closeLabel="Close" title="Help">content</AsidePanel>);
     expect(screen.queryByRole("button", { name: "Close panel" })).not.toBeInTheDocument();
   });
 

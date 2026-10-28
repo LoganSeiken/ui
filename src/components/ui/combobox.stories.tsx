@@ -15,7 +15,7 @@ const meta = {
   component: Combobox,
   parameters: { layout: "padded" },
   decorators: [(Story) => <div className="min-h-80 max-w-md"><Story /></div>],
-  args: { options, placeholder: "Choose a country" }
+  args: { options, placeholder: "Choose a country", searchPlaceholder: "Search countries", emptyText: "No countries found", loadingLabel: "Loading" }
 } satisfies Meta<typeof Combobox>;
 export default meta;
 type Story = StoryObj<typeof meta>;

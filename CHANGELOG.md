@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.9.0 - 2026-10-28
+
+### Changed
+
+- Removed English accessibility and empty-state defaults from dialogs, sheets, aside panels, confirmation dialogs, comboboxes, code blocks and message threads.
+- Consumers must provide localized labels for every user-visible component string.
+
+### Migration
+
+- Pass `closeLabel` to `DialogContent`, `SheetContent` and `AsidePanel`.
+- Pass `confirmLabel`, `cancelLabel` and `closeLabel` to `ConfirmDialog`.
+- Pass `placeholder`, `searchPlaceholder`, `emptyText` and `loadingLabel` to `Combobox` and `AsyncCombobox`.
+- Pass `tablistLabel`, `copyLabel` and `copiedLabel` to `CodeBlock`, and `ariaLabel` to `MessageThread`.
+
 ## 0.8.0 - 2026-10-28
 
 ### Changed

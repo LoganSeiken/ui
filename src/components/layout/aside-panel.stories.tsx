@@ -12,6 +12,7 @@ type Story = StoryObj<typeof meta>;
 export const HelpAndSupport: Story = {
   args: {
     title: "Help & Support",
+    closeLabel: "Close panel",
     className: "h-[420px]",
     onClose: () => {},
     headerExtra: <Badge variant="outline"><StatusDot status="success" /> All systems operational</Badge>,

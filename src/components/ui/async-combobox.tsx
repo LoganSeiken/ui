@@ -8,7 +8,7 @@ export type AsyncComboboxProps = Omit<ComboboxProps, "options" | "onQueryChange"
   debounceMs?: number;
   initialOptions?: ComboboxOption[];
   selectedOption?: ComboboxOption | null;
-  loadingLabel?: string;
+  loadingLabel: string;
   errorText?: string;
   allowCreate?: boolean;
   createLabel?: (query: string) => string;
@@ -75,7 +75,7 @@ export function AsyncCombobox({
         })
         .catch((error: unknown) => {
           if (nextController.signal.aborted || (error instanceof DOMException && error.name === "AbortError")) return;
-          setFetchError(errorText ?? "Unable to load options");
+          setFetchError(errorText);
           setLoading(false);
         });
     }, debounceMs);
@@ -89,8 +89,8 @@ export function AsyncCombobox({
       const known = knownOptions.current.get(selectedValue);
       if (known) merged.set(optionKey(known), known);
     }
-    if (allowCreate && query.trim() && !loading && !fetchError && ![...merged.values()].some((option) => option.value === query || option.label.toLocaleLowerCase() === query.toLocaleLowerCase())) {
-      merged.set(query, { value: query, label: createLabel?.(query) ?? `Create “${query}”` });
+    if (allowCreate && createLabel && query.trim() && !loading && !fetchError && ![...merged.values()].some((option) => option.value === query || option.label.toLocaleLowerCase() === query.toLocaleLowerCase())) {
+      merged.set(query, { value: query, label: createLabel(query) });
     }
     return [...merged.values()];
   }, [allowCreate, createLabel, fetchError, loading, options, query, selectedOption, selectedValue]);

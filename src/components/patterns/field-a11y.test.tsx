@@ -65,14 +65,14 @@ describe("Field with a nested Select", () => {
 
 describe("Combobox feedback", () => {
   it("shows a localized loading label and a search error message", () => {
-    const { rerender } = render(<Combobox options={[]} loading loadingLabel="Buscando..." defaultOpen aria-label="Company" />);
+    const { rerender } = render(<Combobox placeholder="Select" searchPlaceholder="Search" emptyText="No results" options={[]} loading loadingLabel="Buscando..." defaultOpen aria-label="Company" />);
     expect(screen.getByRole("status")).toHaveTextContent("Buscando...");
-    rerender(<Combobox options={[]} errorText="No se pudo buscar" defaultOpen aria-label="Company" />);
+    rerender(<Combobox placeholder="Select" searchPlaceholder="Search" emptyText="No results" loadingLabel="Loading" options={[]} errorText="No se pudo buscar" defaultOpen aria-label="Company" />);
     expect(screen.getByRole("alert")).toHaveTextContent("No se pudo buscar");
   });
 
   it("forwards aria-describedby to the trigger", () => {
-    render(<Combobox options={[]} aria-label="Company" aria-describedby="company-error" />);
+    render(<Combobox placeholder="Select" searchPlaceholder="Search" emptyText="No results" loadingLabel="Loading" options={[]} aria-label="Company" aria-describedby="company-error" />);
     expect(screen.getByRole("combobox")).toHaveAttribute("aria-describedby", "company-error");
   });
 });

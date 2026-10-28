@@ -9,8 +9,8 @@ type Story = StoryObj<typeof meta>;
 export const Numbered: Story = {
   render: () => (
     <Steps className="w-[32rem]">
-      <Step number={1} title="Install package" description="Add the client library to your project."><CodeBlock code="npm install @loganseiken/ui" /></Step>
-      <Step number={2} title="Set environment variables" description="Copy these into your environment."><CodeBlock code="NEXT_PUBLIC_SUPABASE_URL=https://example.supabase.co" /></Step>
+      <Step number={1} title="Install package" description="Add the client library to your project."><CodeBlock tablistLabel="Code variants" copyLabel="Copy code" copiedLabel="Copied" code="npm install @loganseiken/ui" /></Step>
+      <Step number={2} title="Set environment variables" description="Copy these into your environment."><CodeBlock tablistLabel="Code variants" copyLabel="Copy code" copiedLabel="Copied" code="NEXT_PUBLIC_SUPABASE_URL=https://example.supabase.co" /></Step>
     </Steps>
   )
 };

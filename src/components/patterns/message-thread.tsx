@@ -37,11 +37,9 @@ export function SystemEventRow({ timestamp, children, className, ...props }: Sys
   );
 }
 
-export type MessageThreadProps = ComponentProps<"div"> & {
-  ariaLabel?: string;
-};
+export type MessageThreadProps = ComponentProps<"div"> & { ariaLabel: string };
 
-export function MessageThread({ ariaLabel = "Message thread", className, children, ...props }: MessageThreadProps) {
+export function MessageThread({ ariaLabel, className, children, ...props }: MessageThreadProps) {
   return (
     <div {...props} role="log" aria-live="polite" aria-label={ariaLabel} className={cn("grid gap-3", className)}>
       {children}
