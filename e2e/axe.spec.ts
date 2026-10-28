@@ -22,19 +22,20 @@ for (const target of targets) {
     if (!hasAxe) {
       await page.addScriptTag({ content: axe.source });
     }
-    await page.waitForFunction(
-      () => {
-        const runner = (window as unknown as { axe?: { run?: unknown; _running?: boolean } }).axe;
-        return Boolean(runner?.run) && !runner?._running;
-      },
-      undefined,
-      { timeout: 10_000 },
-    );
-    const result = await page.evaluate(async () =>
-      (window as unknown as { axe: typeof axe }).axe.run(document, {
-        runOnly: { type: "tag", values: ["wcag2a", "wcag2aa"] },
-      }),
-    );
+    const result = await page.evaluate(async () => {
+      const runner = (window as unknown as { axe: typeof axe }).axe;
+      for (let attempt = 0; attempt < 30; attempt += 1) {
+        try {
+          return await runner.run(document, {
+            runOnly: { type: "tag", values: ["wcag2a", "wcag2aa"] },
+          });
+        } catch (error) {
+          if (!String(error).includes("Axe is already running")) throw error;
+          await new Promise((resolve) => setTimeout(resolve, 100));
+        }
+      }
+      throw new Error("Axe did not become available within 3 seconds");
+    });
     expect(result.violations).toEqual([]);
   });
 }
