@@ -34,7 +34,7 @@ export function MessageBubble({
         <div
           className={cn(
             "mb-1 flex items-center gap-2 text-xs",
-            outbound ? "text-primary-foreground" : "text-muted-foreground",
+            outbound ? "text-foreground" : "text-muted-foreground",
           )}
         >
           <span className="font-medium text-foreground">{author}</span>
