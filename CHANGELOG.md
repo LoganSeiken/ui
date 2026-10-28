@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.1 - 2026-10-28
+
+### Fixed
+
+- Kept Kanban empty-state content outside `role="list"`.
+- Increased outbound message metadata contrast using the existing primary foreground token.
+
 ## 0.9.0 - 2026-10-28
 
 ### Changed

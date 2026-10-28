@@ -418,13 +418,11 @@ function KanbanColumnViewComponent<T extends { id: string }>({
         role="list"
         className="grid min-h-0 flex-1 content-start gap-3 overflow-y-auto"
       >
-        {column.items.length === 0 &&
-        column.emptyText !== undefined &&
-        column.emptyText !== null ? (
-          <div className="px-2 py-3 text-sm text-muted-foreground">{column.emptyText}</div>
-        ) : null}
         {listItems}
       </div>
+      {column.items.length === 0 && column.emptyText !== undefined && column.emptyText !== null ? (
+        <div className="px-2 py-3 text-sm text-muted-foreground">{column.emptyText}</div>
+      ) : null}
       {column.footer !== undefined && column.footer !== null ? (
         <footer className="shrink-0 border-t border-border pt-3">{column.footer}</footer>
       ) : null}
