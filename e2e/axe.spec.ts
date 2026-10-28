@@ -24,7 +24,7 @@ for (const target of targets) {
     }
     await page.waitForFunction(
       () => {
-        const runner = (window as unknown as { axe?: { _running?: boolean } }).axe;
+        const runner = (window as unknown as { axe?: { run?: unknown; _running?: boolean } }).axe;
         return Boolean(runner?.run) && !runner?._running;
       },
       undefined,
