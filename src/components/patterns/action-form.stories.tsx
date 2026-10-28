@@ -20,6 +20,9 @@ const meta = {
     }),
     submitLabel: "Save",
     pendingText: "Saving…",
+    pendingLabel: "Saving…",
+    successTitle: "Saved",
+    errorTitle: "Error",
     children: ({ state }) => (
       <FormSection title="Profile">
         <Field label="Name" htmlFor="name" error={state.fieldErrors?.name?.[0]}>
@@ -55,6 +58,7 @@ export const InsideCenteredPage: Story = {
         action={async () => ({ status: "success" as const, message: "Saved" })}
         submitLabel="Save"
         pendingText="Saving…"
+        pendingLabel="Saving…" successTitle="Saved" errorTitle="Error"
       >
         {({ state }) => (
           <>
@@ -77,6 +81,7 @@ function FooterStory() {
         initialState={initialState}
         submitLabel="Save"
         pendingText="Saving…"
+        pendingLabel="Saving…" successTitle="Saved" errorTitle="Error"
         action={async (_previous, formData) => {
           const result = {
             status: "success" as const,

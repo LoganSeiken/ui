@@ -7,17 +7,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const WithName: Story = {
-  render: () => <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4"><AccountMenu name="Alex Morgan" email="alex@example.com" /></div>
+  render: () => <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4"><AccountMenu name="Alex Morgan" email="alex@example.com" label="Account menu" /></div>
 };
 
 export const WithoutName: Story = {
-  render: () => <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4"><AccountMenu email="alex@example.com" /></div>
+  render: () => <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4"><AccountMenu email="alex@example.com" label="Account menu" /></div>
 };
 
 export const WithItems: Story = {
   render: () => (
     <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4">
-      <AccountMenu name="Alex Morgan" email="alex@example.com">
+      <AccountMenu name="Alex Morgan" email="alex@example.com" label="Account menu">
         <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuItem>Sign out</DropdownMenuItem>
       </AccountMenu>
@@ -26,5 +26,5 @@ export const WithItems: Story = {
 };
 
 export const Open: Story = {
-  render: () => <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4"><AccountMenu defaultOpen name="Alex Morgan" email="alex@example.com"><DropdownMenuItem>Profile</DropdownMenuItem></AccountMenu></div>,
+  render: () => <div className="flex h-20 items-center justify-end border-b border-border bg-surface px-4"><AccountMenu label="Account menu" defaultOpen name="Alex Morgan" email="alex@example.com"><DropdownMenuItem>Profile</DropdownMenuItem></AccountMenu></div>,
 };

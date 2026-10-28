@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.8.0 - 2026-10-28
+
+### Changed
+
+- Removed English defaults from action feedback, action forms, confirmation feedback, account menus, navigation labels and toast accessibility labels; consumers must provide localized copy.
+- `EmptyState` accepts `titleAs` (`p`, `h1`, `h2` or `h3`) while preserving the existing visual style.
+
+### Migration
+
+- Pass `pendingLabel`, `successTitle` and `errorTitle` to `ActionFeedback`.
+- Pass `submitLabel`, `pendingText`, `pendingLabel`, `successTitle` and `errorTitle` to `ActionForm`.
+- Pass all confirmation feedback labels (`close`, `pending`, `success`, `error`) to `ConfirmActionForm`.
+- Pass `label` to `AccountMenu`, `aria-label`/`ariaLabel` to navigation primitives, and `label`, `closeLabel` and `viewportLabel` to `Toaster`.
+
 ## 0.7.2 - 2026-10-25
 
 ### Added

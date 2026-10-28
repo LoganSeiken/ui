@@ -84,7 +84,7 @@ describe("form and feedback components", () => {
   it("keeps the action form outside the dialog and supports hidden fields", async () => {
     const user = userEvent.setup();
     const action = vi.fn(async (_previous, formData: FormData) => ({ status: "success" as const, message: formData.get("recordId") === "r1" ? "Archived" : "Wrong record" }));
-    render(<ConfirmActionForm action={action} hiddenFields={{ recordId: "r1" }} labels={{ trigger: <Button>Archive</Button>, title: "Archive?", confirm: "Confirm", cancel: "Cancel" }} />);
+    render(<ConfirmActionForm action={action} hiddenFields={{ recordId: "r1" }} labels={{ trigger: <Button type="button">Archive</Button>, title: "Archive?", confirm: "Confirm", cancel: "Cancel", close: "Close", pending: "Working…", success: "Success", error: "Error" }} />);
     await user.click(screen.getByRole("button", { name: "Archive" }));
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Confirm" }));
@@ -167,7 +167,7 @@ describe("form and feedback components", () => {
 
   it("announces, closes and stacks imperative toasts", async () => {
     const user = userEvent.setup();
-    render(<Toaster duration={Infinity} />);
+    render(<Toaster duration={Infinity} label="Notifications" closeLabel="Close" viewportLabel="Notifications ({hotkey})" />);
     toast({ title: "Saved" }); toast({ title: "Failed", variant: "danger" });
     expect(await screen.findByText("Saved")).toBeInTheDocument();
     expect(await screen.findByText("Failed")).toBeInTheDocument();

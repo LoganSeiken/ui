@@ -18,13 +18,13 @@ export const Dashboard: Story = {
     main: false,
     topBar: <TopBar size="sm" start={<span className="text-sm font-medium">Demo Org / Acme</span>} end={<Button variant="outline" size="sm">Connect</Button>} />,
     sidebar: (
-      <Sidebar className="w-[206px]">
+      <Sidebar aria-label="Primary" className="w-[206px]">
         <SidebarItem href="#" icon={<Home className="size-4" aria-hidden="true" />}>Project Overview</SidebarItem>
         <SidebarItem href="#" active icon={<Table2 className="size-4" aria-hidden="true" />}>Table Editor</SidebarItem>
       </Sidebar>
     ),
     subNav: (
-      <SubNav>
+      <SubNav aria-label="Section">
         <SubNavTitle>Observability</SubNavTitle>
         <SubNavSection title="General"><SubNavItem href="#" active>Overview</SubNavItem><SubNavItem href="#">Query Performance</SubNavItem></SubNavSection>
       </SubNav>

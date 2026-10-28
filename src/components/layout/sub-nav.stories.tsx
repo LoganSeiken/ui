@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Badge } from "../ui/badge.js";
 import { SubNav, SubNavItem, SubNavSection, SubNavTitle } from "./sub-nav.js";
 
-const meta = { title: "layout/SubNav", component: SubNav, parameters: { layout: "fullscreen" } } satisfies Meta<typeof SubNav>;
+const meta = { title: "layout/SubNav", component: SubNav, parameters: { layout: "fullscreen" }, args: { "aria-label": "Section" } } satisfies Meta<typeof SubNav>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 

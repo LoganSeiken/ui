@@ -32,8 +32,8 @@ describe("AppShell", () => {
     render(
       <AppShell
         topBar={<TopBar />}
-        sidebar={<Sidebar><SidebarItem href="#" icon={<i />}>Home</SidebarItem></Sidebar>}
-        subNav={<SubNav><SubNavTitle>Observability</SubNavTitle></SubNav>}
+        sidebar={<Sidebar aria-label="Primary"><SidebarItem href="#" icon={<i />}>Home</SidebarItem></Sidebar>}
+        subNav={<SubNav aria-label="Section"><SubNavTitle>Observability</SubNavTitle></SubNav>}
         aside={<AsidePanel title="Help">panel</AsidePanel>}
       >
         main
@@ -56,7 +56,7 @@ describe("TopBar", () => {
 describe("Sidebar", () => {
   it("marks the active item with aria-current and uses 32px items", () => {
     render(
-      <Sidebar>
+      <Sidebar aria-label="Primary">
         <SidebarItem href="#a" icon={<i />} active>Observability</SidebarItem>
         <SidebarItem href="#b" icon={<i />}>Logs</SidebarItem>
       </Sidebar>
@@ -68,7 +68,7 @@ describe("Sidebar", () => {
 
   it("exposes its mode and keeps labels available to screen readers when collapsed", () => {
     render(
-      <Sidebar mode="collapsed">
+      <Sidebar aria-label="Primary" mode="collapsed">
         <SidebarItem href="#" icon={<i />}>Table Editor</SidebarItem>
       </Sidebar>
     );
@@ -80,7 +80,7 @@ describe("Sidebar", () => {
 describe("SubNav", () => {
   it("renders titled sections and the active item", () => {
     render(
-      <SubNav>
+      <SubNav aria-label="Section">
         <SubNavTitle>Observability</SubNavTitle>
         <SubNavSection title="General"><SubNavItem href="#" active>Overview</SubNavItem></SubNavSection>
       </SubNav>
