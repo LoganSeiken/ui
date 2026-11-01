@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.3 - 2026-11-01
+
+### Changed
+
+- Node 24 only (`engines.node` is `>=24 <25`, `.nvmrc` 24, CI reads `.nvmrc`) and `@types/node` 24.
+- Every direct dependency is pinned to an exact version (suite baseline, ADR 0010 in platform-core); `lucide-react` 1.59.0.
+- Tests run on React 19.2.8, the version the apps run.
+- No API changes.
+
 ## 0.9.2 - 2026-10-28
 
 ### Fixed
