@@ -104,13 +104,17 @@ export function ActionForm<TState extends ActionFormState>({
     <FormCard {...formProps} action={formAction}>
       <FocusOnInvalid when={state.status === "error" ? state : null} />
       {renderedChildren}
-      <ActionFeedback
-        status={pending ? "pending" : state.status}
-        message={state.message}
-        pendingLabel={pendingLabel}
-        successTitle={successTitle}
-        errorTitle={errorTitle}
-      />
+      {(pending ||
+        state.status !== "error" ||
+        !Object.values(state.fieldErrors ?? {}).some((errors) => errors?.length)) && (
+        <ActionFeedback
+          status={pending ? "pending" : state.status}
+          message={state.message}
+          pendingLabel={pendingLabel}
+          successTitle={successTitle}
+          errorTitle={errorTitle}
+        />
+      )}
       {submitLabel !== null ? (
         <FormActions>
           {renderedFooter}

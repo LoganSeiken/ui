@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.5 - 2026-11-02
+
+### Fixed
+
+- Suppress generic error feedback when field-level errors are present.
+
 ## 0.9.4 - 2026-11-02
 
 ### Fixed

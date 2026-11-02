@@ -60,6 +60,29 @@ describe("ActionForm", () => {
     expect(action).not.toHaveBeenCalled();
   });
 
+  it("omits the generic error banner when a field has an error", async () => {
+    const user = userEvent.setup();
+    render(
+      <TestForm
+        action={async () => ({
+          status: "error",
+          message: "Check values",
+          fieldErrors: { name: ["Required"] },
+        })}
+      />,
+    );
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    expect(await screen.findByText("Required")).toBeInTheDocument();
+    expect(screen.queryByText("Error")).not.toBeInTheDocument();
+  });
+
+  it("retains the error banner for failures without field errors", async () => {
+    const user = userEvent.setup();
+    render(<TestForm action={async () => ({ status: "error", message: "Network error" })} />);
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent("Network error");
+  });
+
   it("exposes pending state and renders action feedback", async () => {
     const user = userEvent.setup();
     let resolve!: (value: ActionFormState) => void;
