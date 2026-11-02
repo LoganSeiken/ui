@@ -55,7 +55,14 @@ export function Callout({
         <div className="grid gap-1">
           <div>{title}</div>
           {description ? (
-            <div className="text-sm font-normal text-muted-foreground">{description}</div>
+            <div
+              className={cn(
+                "text-sm font-normal",
+                variant === "neutral" ? "text-muted-foreground" : "text-inherit",
+              )}
+            >
+              {description}
+            </div>
           ) : null}
         </div>
       </div>
