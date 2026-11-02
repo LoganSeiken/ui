@@ -1,0 +1,22 @@
+name: Visual baselines
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chrome
+      - run: npm run test:visual:update
+      - uses: actions/upload-artifact@v4
+        with:
+          name: visual-baselines-linux
+          path: e2e/**/*-linux.png
+          if-no-files-found: error
