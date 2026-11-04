@@ -1,5 +1,7 @@
 export { AppShell } from "./app-shell.js";
 export type { AppShellProps } from "./app-shell.js";
+export { AuthSplitLayout } from "./auth-split-layout.js";
+export type { AuthSplitLayoutProps } from "./auth-split-layout.js";
 export { AsidePanel } from "./aside-panel.js";
 export type { AsidePanelProps } from "./aside-panel.js";
 export { PageContainer } from "./page-container.js";

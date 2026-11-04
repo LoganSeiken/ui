@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Responsive split authentication layout with brand, form and corner slots.
+
 ## 0.9.5 - 2026-11-02
 
 ### Fixed
@@ -128,8 +134,6 @@
 - Shared form and navigation controls: `AsyncCombobox`, `LinkButton`, `FileInput`,
   and `Slider`.
 - `Callout` accepts an optional description while preserving its existing API.
-
-## Unreleased
 
 ## 0.2.0
 
