@@ -83,6 +83,28 @@ describe("ActionForm", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent("Network error");
   });
 
+  it("supports custom action-row and submit-button classes", () => {
+    render(
+      <ActionForm
+        initialState={initialState}
+        action={async (): Promise<ActionFormState> => ({ status: "success" })}
+        submitLabel="Save"
+        pendingText="Working…"
+        pendingLabel="Working…"
+        successTitle="Saved"
+        errorTitle="Error"
+        actionsClassName="w-full p-0"
+        submitButtonClassName="h-10 w-full"
+      >
+        <span>Fields</span>
+      </ActionForm>,
+    );
+
+    const button = screen.getByRole("button", { name: "Save" });
+    expect(button).toHaveClass("h-10", "w-full");
+    expect(button.parentElement).toHaveClass("w-full", "p-0");
+  });
+
   it("exposes pending state and renders action feedback", async () => {
     const user = userEvent.setup();
     let resolve!: (value: ActionFormState) => void;

@@ -42,6 +42,8 @@ export type ActionFormProps<TState extends ActionFormState = ActionFormState> = 
   pendingLabel: ReactNode;
   successTitle: ReactNode;
   errorTitle: ReactNode;
+  actionsClassName?: string;
+  submitButtonClassName?: string;
   /** Content placed before the default submit button, such as a cancel link. */
   footer?: ReactNode | ((context: ActionFormRenderContext<TState>) => ReactNode);
 };
@@ -76,6 +78,8 @@ export function ActionForm<TState extends ActionFormState>({
   pendingLabel,
   successTitle,
   errorTitle,
+  actionsClassName,
+  submitButtonClassName,
   footer,
   ...formProps
 }: ActionFormProps<TState>) {
@@ -116,14 +120,18 @@ export function ActionForm<TState extends ActionFormState>({
         />
       )}
       {submitLabel !== null ? (
-        <FormActions>
+        <FormActions className={actionsClassName}>
           {renderedFooter}
-          <SubmitButton disabled={submitDisabled} pendingText={pendingText}>
+          <SubmitButton
+            className={submitButtonClassName}
+            disabled={submitDisabled}
+            pendingText={pendingText}
+          >
             {submitLabel}
           </SubmitButton>
         </FormActions>
       ) : renderedFooter ? (
-        <FormActions>{renderedFooter}</FormActions>
+        <FormActions className={actionsClassName}>{renderedFooter}</FormActions>
       ) : null}
     </FormCard>
   );

@@ -5,6 +5,7 @@
 ### Added
 
 - Responsive split authentication layout with brand, form and corner slots.
+- `ActionForm` accepts classes for its action row and submit button.
 
 ## 0.9.5 - 2026-11-02
 
