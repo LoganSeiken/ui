@@ -108,6 +108,17 @@ describe("Card", () => {
     );
     expect(screen.getByTestId("card")).toHaveClass("border-dashed");
   });
+
+  it("renders the title as an h3 unless another level is requested", () => {
+    render(
+      <>
+        <CardTitle>Default</CardTitle>
+        <CardTitle as="h2">Section</CardTitle>
+      </>,
+    );
+    expect(screen.getByRole("heading", { name: "Default", level: 3 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Section", level: 2 })).toBeInTheDocument();
+  });
 });
 
 describe("StatTile and ChartTile", () => {

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.7 - 2026-11-05
+
+### Added
+
+- `CardTitle` accepts `as` (`h2`, `h3` or `h4`; default `h3`) so a card title can follow the heading structure of its page.
+
 ## 0.9.6 - 2026-11-04
 
 ### Added

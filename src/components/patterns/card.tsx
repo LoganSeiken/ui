@@ -24,8 +24,13 @@ export function CardHeader({ className, ...props }: ComponentProps<"div">) {
   );
 }
 
-export function CardTitle({ className, ...props }: ComponentProps<"h3">) {
-  return <h3 {...props} className={cn("text-base font-medium text-foreground", className)} />;
+export type CardTitleProps = ComponentProps<"h3"> & {
+  /** Heading level; pick the one that follows the page structure (default `h3`). */
+  as?: "h2" | "h3" | "h4";
+};
+
+export function CardTitle({ as: Heading = "h3", className, ...props }: CardTitleProps) {
+  return <Heading {...props} className={cn("text-base font-medium text-foreground", className)} />;
 }
 
 export function CardDescription({ className, ...props }: ComponentProps<"p">) {
