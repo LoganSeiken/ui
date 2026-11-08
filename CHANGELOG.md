@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.8 - 2026-11-08
+
+### Fixed
+
+- Fixed: kanban column headers keep equal height when the summary wraps.
+
 ## 0.9.7 - 2026-11-05
 
 ### Added

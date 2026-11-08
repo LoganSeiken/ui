@@ -409,7 +409,7 @@ function KanbanColumnViewComponent<T extends { id: string }>({
     >
       <Section
         title={column.title}
-        description={column.summary}
+        description={<span className="block min-h-[2lh]">{column.summary}</span>}
         actions={column.actions}
         className="shrink-0 space-y-0"
       />

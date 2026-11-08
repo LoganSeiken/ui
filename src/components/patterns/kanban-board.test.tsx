@@ -175,6 +175,18 @@ describe("KanbanBoard", () => {
     expect(screen.getByText("Northwind")).toBeInTheDocument();
   });
 
+  it("reserves the same two-line summary height for every column", () => {
+    renderBoard({
+      columns: [
+        { id: "short", title: "Short", summary: "One line", items: [] },
+        { id: "long", title: "Long", summary: "A summary that wraps to two lines", items: [] },
+      ],
+    });
+
+    expect(screen.getByText("One line")).toHaveClass("min-h-[2lh]");
+    expect(screen.getByText("A summary that wraps to two lines")).toHaveClass("min-h-[2lh]");
+  });
+
   it("omits all movement controls and body dragging in read-only mode", () => {
     const { container } = renderBoard({ readOnly: true });
     const body = screen.getByText("Northwind");
