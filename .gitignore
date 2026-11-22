@@ -5,3 +5,7 @@ dist/
 storybook-static/
 test-results/
 playwright-report/
+
+# Local environment files
+.env*
+!.env.example
